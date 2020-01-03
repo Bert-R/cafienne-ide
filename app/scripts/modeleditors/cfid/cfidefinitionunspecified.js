@@ -1,5 +1,83 @@
 ﻿'use strict';
 
+const PROPERTY_MAP = {
+    'http://www.omg.org/spec/CMMN/PropertyType/string': {
+        type: 'string',
+        defaultValue: 'string'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/boolean': {
+        type: 'boolean',
+        defaultValue: true
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/integer': {
+        type: 'integer'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/float': {
+        type: 'number',
+        format: 'float'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/time': {
+        type: 'string',
+        format: 'time'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/date':  {
+        type: 'string',
+        format: 'date'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/dateTime': {
+        type: 'string',
+        format: 'dateTime'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/anyURI': {
+        type: 'string',
+        defaultValue: 'anyURI'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/QName': {
+        type: 'string',
+        defaultValue: 'QName'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/double': {
+        type: 'number',
+        format: 'double'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/duration': {
+        type: 'string',
+        defaultValue: 'duration'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/gYearMonth': {
+        type: 'string',
+        defaultValue: 'gYearMonth'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/gYear': {
+        type: 'string',
+        defaultValue: 'gYear'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/gMonthDay': {
+        type: 'string',
+        defaultValue: 'gMonthDay'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/gDay': {
+        type: 'string',
+        defaultValue: 'gDay'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/hexBinary': {
+        type: 'string',
+        defaultValue: 'hexBinary'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/base64Binary': {
+        type: 'string',
+        defaultValue: 'base64Binary'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/decimal': {
+        type: 'number',
+        format: 'decimal'
+    },
+    'http://www.omg.org/spec/CMMN/PropertyType/Unspecified': {
+        type: 'object',
+        defaultValue: {}
+    },
+}
+
 class CFIDefinitionUnspecified {
     /**
      * 
@@ -11,11 +89,65 @@ class CFIDefinitionUnspecified {
         this.container = container;
         this.html = $(`<div class="cfiDefinitionUnspecPropertyTreeTable">
                 <label>Properties</label>
-                <div class="divTable">
+                <div class="divTable" style="border:1px solid black">
+                </div>
+                <div style="margin-top:10px;" >
+                    <button class="buttonSchemaGenerator">Generate JSON Schema</button>
+                    <button class="buttonCopySchema">Copy to clipboard</button>
+                </div>
+                <div style="position:relative;top:10px;height:200px;bottom:1px;border:1px solid green">
+                    <textarea style="display:block;width:100%;height:100%;font-family:courier new" class="textareaJSONSchema"></textarea>
                 </div>
             </div>`);
-        this.tableDiv =  this.html.find('.divTable');
+        this.tableDiv = this.html.find('.divTable');
+        this.jsonSchemaDiv = this.html.find('.textareaJSONSchema');
+        this.html.find('.buttonSchemaGenerator').on('click', e => this.generateJSONSchema());
+        this.html.find('.buttonCopySchema').on('click', e => this.copyJSONSchema());
         this.container.append(this.html);
+    }
+
+    generateJSONSchema() {
+        /** @type {CaseFileDefinitionDefinition} */
+        const definition = this.data;
+        const propertyNames = definition.properties.map(p => p.name)
+        const result = {
+            title: definition.name,
+            description: definition.description,
+            type: "object",
+            required: propertyNames,
+            properties: {
+
+            }
+        };
+        definition.properties.forEach(property => {
+            const name = property.name;
+            result.properties[name] = this.convertProperty(property);
+        });
+        const schema = {
+            schema: result,
+            uiSchema: {}
+        }
+        // console.log("Generated json schema: ", schema);
+
+        this.html.find('.textareaJSONSchema').val(JSON.stringify(schema, null, 2));
+    }
+
+    copyJSONSchema() {
+        this.html.find('.textareaJSONSchema').select();
+        document.execCommand("copy");
+        this.html.find('.textareaJSONSchema').blur();
+        ide.info("Copied schema to clipboard", 2000);
+
+    }
+
+    /**
+     * Converts an XSD property into a JSON schema type
+     * @returns {*}
+     * @param {PropertyDefinition} property 
+     */
+    convertProperty(property) {
+        const defaults = PROPERTY_MAP[property.type] || { type: 'string' };
+        return Object.assign({ title: property.name }, defaults);
     }
 
     /**
@@ -23,6 +155,7 @@ class CFIDefinitionUnspecified {
      * @param {CaseFileDefinitionDefinition} data 
      */
     show(data) {
+        this.jsonSchemaDiv.val('');
         Util.clearHTML(this.tableDiv);
         this.tableDiv.html(`<table>
                                 <colgroup>
@@ -112,8 +245,8 @@ class CFIDefinitionUnspecified {
         }
         parameter.name = name;
         parameter.type = type;
-        if (! parameter.id) parameter.id = Util.createID('_', 4) + '_' + name.replace(/\s/g, '');
-        if (! parameter.name) parameter.name = parameter.id;
+        if (!parameter.id) parameter.id = Util.createID('_', 4) + '_' + name.replace(/\s/g, '');
+        if (!parameter.name) parameter.name = parameter.id;
         // Make sure a newly generated id is rendered as well.
         html.find('.inputParameterName').val(parameter.name);
         html.find('.inputParameterId').val(parameter.id);

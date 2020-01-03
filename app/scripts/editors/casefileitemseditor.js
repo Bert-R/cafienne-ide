@@ -14,7 +14,7 @@ class CaseFileItemsEditor {
 
         this.divCaseFileDefinitions = this.html.find('.divCaseFileDefinitions');
         this.caseFileItemDefinitionEditor = new CaseFileItemDefinitionEditor(this, this.divCaseFileDefinitions);
-        this.splitter = new BottomSplitter(htmlParent, '70%', 175);        
+        this.splitter = new BottomSplitter(htmlParent, '45%', 175);        
         
         //get the tree table which will contain the data from the html
         this.tree = this.html.find('table');
