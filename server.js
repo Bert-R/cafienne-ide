@@ -22,7 +22,7 @@ app.use(cookieParser());
 // Do not add static content when running in a docker container.
 // The docker container serves static content via nginx
 if (app.get('env') !== 'docker') {
-  app.use(express.static(path.join(__dirname, 'app')));
+  app.use(express.static(path.join(__dirname, 'dist')));
 }
 
 app.use('/repository', repositoryRouter);

@@ -1,17 +1,14 @@
-class IDEHeader {
+exports.IDEHeader = class IDEHeader {
     /**
      * Constructs the footer of the IDE element.
-     * @param {IDE} ide 
+     * @param {IDE} ide
      */
     constructor(ide) {
         this.ide = ide;
         this.html = $(
-    `<!-- Define the header containing the UI control buttons -->
-    <div class="ide-header basicbox">
-        <div class="btn-toolbar" role="toolbar">
-            <div class="btn-group appname">
-                <label>Cafienne IDE</label>
-            </div>
+    `<div class="ide-header basicbox">
+        <div class="btn-group">
+          <label>Cafienne IDE - stripped version for "to-webpack"</label>
         </div>
     </div>`);
         this.ide.html.append(this.html);
