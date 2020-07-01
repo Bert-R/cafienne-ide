@@ -1,12 +1,12 @@
-class ServerFile {
+export class ServerFile {
     /**
      * Creates a new local reference of the server file, based on the json structure given
      * by the server (serverData).
-     * When created the reference does not yet hold the content. This can be loaded on 
+     * When created the reference does not yet hold the content. This can be loaded on
      * demand through the load method, which can be invoked with a callback.
-     * @param {Repository} repository 
-     * @param {String} fileName 
-     * @param {*} serverMetadata 
+     * @param {Repository} repository
+     * @param {String} fileName
+     * @param {*} serverMetadata
      */
     constructor(repository, fileName, serverMetadata = {}) {
         this.repository = repository;
@@ -17,7 +17,7 @@ class ServerFile {
 
     /**
      * Refreshes the metadata of the model, based on the server side content.
-     * @param {*} serverMetadata 
+     * @param {*} serverMetadata
      */
     refreshMetadata(serverMetadata) {
         const dotSplitter = this.fileName.split('.');
@@ -51,8 +51,8 @@ class ServerFile {
 
     /**
      * Simple method that logs in the console where all this file is used according to the server side repository.
-     * 
-     * @param {Function} callback 
+     *
+     * @param {Function} callback
      */
     usage(callback) {
         const url = '/repository/usage/' + this.fileName;
@@ -99,7 +99,7 @@ class ServerFile {
 
     /**
      * Loads the data of file, and invokes the callback there-after.
-     * @param {Function} callback 
+     * @param {Function} callback
      */
     load(callback) {
         if (this.content) {
@@ -137,7 +137,7 @@ class ServerFile {
     /**
      * Uploads the XML content to the server, and invokes the callback after it.
      * Uploading to server gives also a new file list back, which we use to update the repository contents.
-     * @param {Function} callback 
+     * @param {Function} callback
      */
     save(callback = undefined) {
         const xmlString = XML.prettyPrint(this.data);

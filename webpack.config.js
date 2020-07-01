@@ -14,7 +14,8 @@ module.exports = {
       "./app/styles/ide/ide.css"
     ],
     repository: [
-      "./app/scripts/repository/repository.js"
+      "./app/scripts/repository/repository.js",
+      "./app/scripts/repository/serverfile.js"
     ]
   },
   output: {

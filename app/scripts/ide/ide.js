@@ -12,6 +12,13 @@ class IDE {
         this.html = $('body');
 
         this.header = new IDEHeader(this);
+        // this.main = new IDEMain(this);
+
+        this.repository.listModels(() => {
+          this.repository.list.forEach(l => {
+            this.html.append("<div>" + l.name + "</div>")
+          });
+        });
     }
 
 }

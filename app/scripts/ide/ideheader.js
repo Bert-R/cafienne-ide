@@ -1,4 +1,4 @@
-exports.IDEHeader = class IDEHeader {
+export class IDEHeader {
     /**
      * Constructs the footer of the IDE element.
      * @param {IDE} ide
