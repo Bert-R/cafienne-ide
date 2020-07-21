@@ -1,21 +1,23 @@
 'use strict';
 
-class ArrayToken {
+import {UNSPECIFIED_URI} from "../definition/cfid/casefileitemdefinitiondefinition";
+
+export class ArrayToken {
     constructor(text) {
         this.text = text;
     }
 }
 
-class DotToken {
+export class DotToken {
 }
 
-class Token {
+export class Token {
     constructor(text) {
         this.text = text;
     }
 }
 
-class SimpleCaseFileItem {
+export class SimpleCaseFileItem {
     constructor() {
         this.id = null;
         this.name = null;
@@ -30,7 +32,7 @@ class SimpleCaseFileItem {
 /**
  * This class implements autocomplete logic for CaseFileItems using the SPEL expression syntax.
  */
-class IntelliSenseSpel {
+export class IntelliSenseSpel {
 
   /**
    * Constuctor.
@@ -181,12 +183,12 @@ class IntelliSenseSpel {
  * that is used for generation of IntelliSense.
  * See intellisense_test.js for a example of the generated object structure.
  */
-class SimpleCaseFileBuilder {
+export class SimpleCaseFileBuilder {
 
     /**
-     * 
-     * @param {*} caseFileItemDefinition 
-     * @param {CaseFileDefinition} cfiData 
+     *
+     * @param {*} caseFileItemDefinition
+     * @param {CaseFileDefinition} cfiData
      */
     build(caseFileItemDefinition, cfiData) {
         const caseFileItemDefinitionObjects = SimpleCaseFileBuilder._createCaseFileItemDefinitionObjects(caseFileItemDefinition);
@@ -197,10 +199,10 @@ class SimpleCaseFileBuilder {
     }
 
     /**
-     * 
-     * @param {Array<CaseFileItemDef>} caseFileItemChildren 
-     * @param {*} caseFileItemDefinitionObjects 
-     * @param {*} rootCaseFileItem 
+     *
+     * @param {Array<CaseFileItemDef>} caseFileItemChildren
+     * @param {*} caseFileItemDefinitionObjects
+     * @param {*} rootCaseFileItem
      */
     _buildObjectTree(caseFileItemChildren, caseFileItemDefinitionObjects, rootCaseFileItem) {
         const simpleCaseFileItems = {};
@@ -232,7 +234,7 @@ class SimpleCaseFileBuilder {
             const name = cfiDefData.name;
             let properties = null;
 
-        /*TODO After case file item definition change (save in separate files), 
+        /*TODO After case file item definition change (save in separate files),
         the unspecified data must be retrieved from the cfid file*. Skip for now*/
 
             //switch (cfiDefData.definitionType) {

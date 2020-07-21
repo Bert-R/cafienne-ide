@@ -1,4 +1,7 @@
-class Problem {
+import {CMMNWarning} from "./problemtype";
+import {CMMNError} from "./problemtype";
+
+export class Problem {
     /**
      * Creates a new problem that can render itself as HTML
      * @param {String} contextId The context in which this problem occurs. Together with the problemType.number and parameters this must be unique.

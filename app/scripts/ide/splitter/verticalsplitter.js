@@ -1,4 +1,6 @@
-class VerticalSplitter extends Splitter {
+import {Splitter} from "./splitter";
+
+export class VerticalSplitter extends Splitter {
     // Vertical splitter does not support minimize and restore as of now.
 
 
@@ -15,7 +17,7 @@ class VerticalSplitter extends Splitter {
     }
 }
 
-class BottomSplitter extends VerticalSplitter {
+export class BottomSplitter extends VerticalSplitter {
     get direction() {
         return 'bottom';
     }
@@ -29,7 +31,7 @@ class BottomSplitter extends VerticalSplitter {
     }
 }
 
-class TopSplitter extends VerticalSplitter {
+export class TopSplitter extends VerticalSplitter {
     get direction() {
         return 'top';
     }

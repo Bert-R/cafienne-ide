@@ -1,9 +1,16 @@
-class ModelDocument extends DefinitionParser {
+import {DefinitionParser} from "./definitionparser";
+import {DefinitionDocument} from "./definitiondocument";
+import {ProcessModelDefinition} from "./process/processmodeldefinition";
+import {HumanTaskModelDefinition} from "./humantask/humantaskmodeldefinition";
+import {CaseFileDefinitionDefinition} from "./cfid/casefileitemdefinitiondefinition";
+import {XML} from "../util/xml";
+
+export class ModelDocument extends DefinitionParser {
     /**
-     * 
-     * @param {IDE} ide 
-     * @param {String} fileName 
-     * @param {String} source 
+     *
+     * @param {IDE} ide
+     * @param {String} fileName
+     * @param {String} source
      */
     constructor(ide, fileName, source) {
         super(ide);
@@ -14,16 +21,16 @@ class ModelDocument extends DefinitionParser {
     /**
      * Parses the source into XML, and returns an instance of the constructor.
      * @returns {ModelDefinition}
-     * @param {Function} constructor 
+     * @param {Function} constructor
      */
     parseModel(constructor) {
         return new constructor(XML.parseXML(this.source).documentElement, this);
     }
 
     /**
-     * 
-     * @param {IDE} ide 
-     * @param {ServerFile} serverFile 
+     *
+     * @param {IDE} ide
+     * @param {ServerFile} serverFile
      */
     static parse(ide, serverFile) {
         const source = serverFile.data;

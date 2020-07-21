@@ -1,4 +1,7 @@
-class CMMNElementDefinition extends XMLElementDefinition {
+import {XMLElementDefinition} from "../../xmlelementdefinition";
+import {ShapeDefinition} from "../dimensions/shape";
+
+export class CMMNElementDefinition extends XMLElementDefinition {
     /**
      * Creates a new, abstract CMMNElementDefinition object based on the given XML element 'importNode'.
      * Also parses 'id', 'name' and 'description' attributes, and adds the element to the case definition.
@@ -8,7 +11,7 @@ class CMMNElementDefinition extends XMLElementDefinition {
      * ParentDefinition is mandatory (except for CaseDefinition); it is used to take the case definition from.
      * CaseDefinition and shape are optional parameters. CaseDefinition is taken from parentDefinition, and shape, if
      * not given, is looked up in the dimensions array of the casedefinition.
-     * @param {Element} importNode 
+     * @param {Element} importNode
      * @param {CaseDefinition} caseDefinition
      * @param {CMMNElementDefinition} parent optional
      */

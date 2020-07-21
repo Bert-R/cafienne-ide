@@ -1,3 +1,5 @@
+import {Settings} from "../../settings/settings";
+
 /**
  * Grid class contains some statics to arrange for the global settings of the grid.
  * Grid settings (size and whether visible or not) are stored in LocalStorage of the browser.
@@ -7,7 +9,7 @@
 
 const grids = []; // List of all grid objects; forms a memory leak, in anticipation of keeping only one canvas for all cases, instead of a canvas per case.
 
-class Grid {
+export class Grid {
 
     static initialize() {
         if (this.initialized) {
@@ -110,7 +112,7 @@ class Grid {
     /**
      * Helper class that adds grid structure to the jointjs paper element.
      * We can set the .size and the .visible property.
-     * @param {*} paper 
+     * @param {*} paper
      */
     constructor(paper) {
         this.paper = paper;

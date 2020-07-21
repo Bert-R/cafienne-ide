@@ -1,11 +1,15 @@
-class ProcessTask extends Task {
+import {Task} from "./task";
+import {ProcessTaskDefinition} from "../definition/cmmn/definitions/caseplan/task/processtaskdefinition";
+import {CMMNElement} from "./cmmnelement";
+
+export class ProcessTask extends Task {
     static get definitionClass() {
         return ProcessTaskDefinition;
     }
 
     /**
      * Creates a new ProcessTask element.
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {
@@ -27,4 +31,5 @@ class ProcessTask extends Task {
         return 'process';
     }
 }
+
 CMMNElement.registerType(ProcessTask, 'Process Task', 'images/svg/processtaskmenu.svg', 'images/processtaskmenu_32.png');

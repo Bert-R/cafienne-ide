@@ -1,7 +1,15 @@
-class Edge extends DiagramElement {
+import {DiagramElement} from "./diagramelement";
+import {Vertex} from "./vertex";
+import {Util} from "../../../util/util";
+import {SOURCECMMNELEMENTREF} from "./dimensions";
+import {TARGETCMMNELEMENTREF} from "./dimensions";
+import {WAYPOINT} from "./dimensions";
+import {CMMNEDGE} from "./dimensions";
+
+export class Edge extends DiagramElement {
     /**
      * Create a new Edge shape that binds the two CMMNElements.
-     * @param {CMMNElement} source 
+     * @param {CMMNElement} source
      * @param {CMMNElement} target
      * @returns {Edge}
      */
@@ -15,9 +23,9 @@ class Edge extends DiagramElement {
 
     /**
      * Representation of a <CMMNEdge> element
-     * @param {Element} importNode 
-     * @param {Dimensions} dimensions 
-     * @param {XMLElementDefinition} parent 
+     * @param {Element} importNode
+     * @param {Dimensions} dimensions
+     * @param {XMLElementDefinition} parent
      */
     constructor(importNode, dimensions, parent = dimensions) {
         super(importNode, dimensions, parent);

@@ -1,7 +1,9 @@
-class CaseRoleReference {
+import {Util} from "../../../../util/util";
+
+export class CaseRoleReference {
     /**
      * Simple wrapper around a case role, helps in holding a references instead of the actual role.
-     * @param {CaseRoleDefinition} role 
+     * @param {CaseRoleDefinition} role
      * @param {PlanItem|UserEventDefinition} parent
      */
     constructor(role, parent = undefined) {
@@ -38,7 +40,7 @@ class CaseRoleReference {
 
     /**
      * Creates a temporary wrapper
-     * @param {CaseDefinition} caseDefinition 
+     * @param {CaseDefinition} caseDefinition
      * @returns {CaseRoleReference}
      */
     static createEmptyCaseRoleReference(caseDefinition) {

@@ -1,7 +1,9 @@
+import {UnnamedCMMNElementDefinition} from "./unnamedcmmnelementdefinition";
+import {IMPLEMENTATION_TAG} from "../../../elements/elements";
 /**
- * Simple helper class to support specific extensions to CMMN   
+ * Simple helper class to support specific extensions to CMMN
  */
-class CafienneExtension extends UnnamedCMMNElementDefinition {
+export class CafienneExtension extends UnnamedCMMNElementDefinition {
     constructor(element, caseDefinition, parent) {
         super(element, caseDefinition, parent);
     }

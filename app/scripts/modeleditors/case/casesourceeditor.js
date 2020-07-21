@@ -1,9 +1,12 @@
-class CaseSourceEditor {
+import {DefinitionDocument} from "../../definition/definitiondocument";
+import {Util} from "../../util/util";
+
+export class CaseSourceEditor {
     /**
-     * 
-     * @param {Case} cs 
-     * @param {JQuery<HTMLElement>} parentHTML 
-     * @param {DefinitionDocument} definition 
+     *
+     * @param {Case} cs
+     * @param {JQuery<HTMLElement>} parentHTML
+     * @param {DefinitionDocument} definition
      */
     constructor(cs, parentHTML, definition) {
         this.case = cs;

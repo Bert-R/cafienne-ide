@@ -1,7 +1,9 @@
+import {CMMNElementDefinition} from "./cmmnelementdefinition";
+
 /**
- * Simple helper class to support specific extensions to CMMN   
+ * Simple helper class to support specific extensions to CMMN
  */
-class UnnamedCMMNElementDefinition extends CMMNElementDefinition {
+export class UnnamedCMMNElementDefinition extends CMMNElementDefinition {
     isNamedElement() {
         return false;
     }

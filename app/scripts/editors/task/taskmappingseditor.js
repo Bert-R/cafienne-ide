@@ -1,6 +1,22 @@
-class TaskMappingsEditor extends StandardForm {
+import {StandardForm} from "../standardform";
+import {BottomSplitter} from "../../ide/splitter/verticalsplitter";
+import {TableRenderer} from "../table/tablerenderer";
+import {ColumnRenderer} from "../table/columnrenderer";
+import {InputMappingDeleter} from "./mappingcomponents";
+import {MappingCFI} from "./mappingcomponents";
+import {InputParameterNameChanger} from "./mappingcomponents";
+import {MappingExpression} from "./mappingcomponents";
+import {InputParameterSelector} from "./mappingcomponents";
+import {MappingOrderChanger} from "./mappingcomponents";
+import {OutputMappingDeleter} from "./mappingcomponents";
+import {OutputParameterSelector} from "./mappingcomponents";
+import {OutputParameterNameChanger} from "./mappingcomponents";
+import {RequiredChanger} from "./mappingcomponents";
+import {RowRenderer} from "../table/rowrenderer";
+
+export class TaskMappingsEditor extends StandardForm {
     /**
-     * @param {Task} task 
+     * @param {Task} task
      */
     constructor(task) {
         super(task.case, 'Edit mappings of task ' + task.definition.name, 'tableeditorform', 'mappingform');
@@ -65,11 +81,11 @@ class TaskMappingsEditor extends StandardForm {
     }
 }
 
-class MappingControl extends TableRenderer {
+export class MappingControl extends TableRenderer {
     /**
-     * 
-     * @param {TaskMappingsEditor} editor 
-     * @param {JQuery<HTMLElement>} htmlParent 
+     *
+     * @param {TaskMappingsEditor} editor
+     * @param {JQuery<HTMLElement>} htmlParent
      */
     constructor(editor, htmlParent) {
         super(editor.task.case, htmlParent);
@@ -86,7 +102,7 @@ class MappingControl extends TableRenderer {
     }
 }
 
-class InputMappingControl extends MappingControl {
+export class InputMappingControl extends MappingControl {
     constructor(editor, htmlParent) {
         super(editor, htmlParent);
     }
@@ -114,8 +130,8 @@ class InputMappingControl extends MappingControl {
     }
 
     /**
-     * 
-     * @param {ParameterMappingDefinition} mapping 
+     *
+     * @param {ParameterMappingDefinition} mapping
      */
     addRenderer(mapping = undefined) {
         if (mapping) {
@@ -124,7 +140,7 @@ class InputMappingControl extends MappingControl {
     }
 }
 
-class OutputMappingControl extends MappingControl {
+export class OutputMappingControl extends MappingControl {
     constructor(editor, htmlParent) {
         super(editor, htmlParent);
     }
@@ -153,8 +169,8 @@ class OutputMappingControl extends MappingControl {
     }
 
     /**
-     * 
-     * @param {ParameterMappingDefinition} mapping 
+     *
+     * @param {ParameterMappingDefinition} mapping
      */
     addRenderer(mapping = undefined) {
         if (mapping == undefined) {
@@ -168,10 +184,10 @@ class OutputMappingControl extends MappingControl {
     }
 }
 
-class MappingRow extends RowRenderer {
+export class MappingRow extends RowRenderer {
     /**
-     * @param {MappingControl} control 
-     * @param {ParameterMappingDefinition} mapping 
+     * @param {MappingControl} control
+     * @param {ParameterMappingDefinition} mapping
      */
     constructor(control, mapping) {
         super(control, mapping);
@@ -207,7 +223,7 @@ class MappingRow extends RowRenderer {
 
     /**
      * Moves the item and it's corresponding HTML up in the list (if it is not the first one)
-     * @param {ParameterMappingDefinition} mapping 
+     * @param {ParameterMappingDefinition} mapping
      */
     up(mapping) {
         if (this.isEmpty()) {
@@ -228,7 +244,7 @@ class MappingRow extends RowRenderer {
 
     /**
      * Moves the item and it's corresponding HTML down in the list (if it is not the last one)
-     * @param {ParameterMappingDefinition} mapping 
+     * @param {ParameterMappingDefinition} mapping
      */
     down(mapping) {
         if (this.isEmpty()) {
@@ -244,8 +260,8 @@ class MappingRow extends RowRenderer {
     }
 
     /**
-     * @param {ParameterMappingDefinition} mapping1 
-     * @param {ParameterMappingDefinition} mapping2 
+     * @param {ParameterMappingDefinition} mapping1
+     * @param {ParameterMappingDefinition} mapping2
      */
     swap(mapping1, mapping2) {
         /** @type {TaskDefinition} */

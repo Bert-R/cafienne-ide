@@ -1,11 +1,15 @@
-class CaseTask extends Task {
+import {Task} from "./task";
+import {CaseTaskDefinition} from "../definition/cmmn/definitions/caseplan/task/casetaskdefinition";
+import {CMMNElement} from "./cmmnelement";
+
+export class CaseTask extends Task {
     static get definitionClass() {
         return CaseTaskDefinition;
     }
 
     /**
      * Creates a new CaseTask element.
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {

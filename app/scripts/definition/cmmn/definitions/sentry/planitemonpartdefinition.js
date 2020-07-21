@@ -1,4 +1,7 @@
-class PlanItemOnPartDefinition extends OnPartDefinition {
+import {OnPartDefinition} from "./onpartdefinition";
+import {PlanItem} from "../caseplan/planitem";
+
+export class PlanItemOnPartDefinition extends OnPartDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent, PlanItem);
         const cmmn10Ref = this.parseAttribute('sentryRef');

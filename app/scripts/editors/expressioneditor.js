@@ -1,16 +1,20 @@
 'use strict';
 
+import {SimpleCaseFileBuilder} from "./intellisense";
+import {Sentry} from "../elements/sentry";
+import {IntelliSenseSpel} from "./intellisense";
+
 let g_element = undefined;
 
 /**
  * Wrapper for CodeMirror editor with autosuggest support for SPEL expressions.
  */
-class ExpressionEditor {
+export class ExpressionEditor {
 
     /**
-     * 
-     * @param {*} textarea 
-     * @param {CMMNElement} element 
+     *
+     * @param {*} textarea
+     * @param {CMMNElement} element
      */
     static init(textarea, element) {
         g_element = element;

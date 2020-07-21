@@ -1,5 +1,14 @@
+import {StageDefinition} from "./stagedefinition";
+import {ExitCriterionDefinition} from "../sentry/exitcriteriondefinition";
+import {HumanTaskDefinition} from "./task/humantaskdefinition";
+import {CaseTaskDefinition} from "./task/casetaskdefinition";
+import {ProcessTaskDefinition} from "./task/processtaskdefinition";
+import {MilestoneDefinition} from "./milestonedefinition";
+import {UserEventDefinition} from "./usereventdefinition";
+import {TimerEventDefinition} from "./timereventdefinition";
+import {SentryDefinition} from "../sentry/sentrydefinition";
 
-class CasePlanDefinition extends StageDefinition {
+export class CasePlanDefinition extends StageDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.definition = this; // Case plan is both plan item and plan item definition (yes, it is little weird)

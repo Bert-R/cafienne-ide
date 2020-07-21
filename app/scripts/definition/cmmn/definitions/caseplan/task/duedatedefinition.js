@@ -1,4 +1,7 @@
-class DueDateDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "../../unnamedcmmnelementdefinition";
+import {ExpressionDefinition} from "../../constraintdefinition";
+
+export class DueDateDefinition extends UnnamedCMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.expression = this.parseElement('condition', ExpressionDefinition);
@@ -46,4 +49,5 @@ class DueDateDefinition extends UnnamedCMMNElementDefinition {
         return this.expression ? this.expression.body : '';
     }
 }
+
 DueDateDefinition.TAG = 'duedate';

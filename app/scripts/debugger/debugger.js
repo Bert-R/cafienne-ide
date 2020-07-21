@@ -1,11 +1,14 @@
 'use strict';
 
+import {StandardForm} from "../editors/standardform";
+import {Util} from "../util/util";
+
 /**
  * This class implements the logic to call the repository REST service to debug a case instance.
  *
  * @constructor
  */
-class Debugger extends StandardForm {
+export class Debugger extends StandardForm {
     constructor(cs) {
         super(cs, 'Debugger', 'debug-form');
     }
@@ -79,8 +82,8 @@ class Debugger extends StandardForm {
     }
 
     /**
-     * 
-     * @param {JQuery.KeyDownEvent} e 
+     *
+     * @param {JQuery.KeyDownEvent} e
      */
     handleKeyDown(e) {
         if (e.keyCode == 38) { // arrow up
@@ -162,7 +165,7 @@ class Debugger extends StandardForm {
     }
 
     /**
-     * @param {Array<*>} events 
+     * @param {Array<*>} events
      */
     set events(events) {
         this._events = events;

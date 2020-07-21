@@ -1,9 +1,18 @@
-﻿const MINTEXTWIDTHCPM = 200;
-const CPM_WIDTH = 800;
-const CPM_HEIGHT = 500;
-const CPM_TAB_HEIGHT = 22;
+import {Stage} from "./stage";
+import {CasePlanDefinition} from "../definition/cmmn/definitions/caseplan/caseplandefinition";
+import {CasePlanProperties} from "./properties/caseplanproperties";
+import {CasePlanHalo} from "./halo/caseplanhalo";
+import {EntryCriterion} from "./sentry";
+import {ExitCriterion} from "./sentry";
+import {CMMNElement} from "./cmmnelement";
+import {AUTOCOMPLETE_IMG} from "./elements";
 
-class CasePlanModel extends Stage {
+export const MINTEXTWIDTHCPM = 200;
+export const CPM_WIDTH = 800;
+export const CPM_HEIGHT = 500;
+export const CPM_TAB_HEIGHT = 22;
+
+export class CasePlanModel extends Stage {
     static get definitionClass() {
         return CasePlanDefinition;
     }
@@ -11,7 +20,7 @@ class CasePlanModel extends Stage {
     /**
      * Creates a new CasePlan model
      * @param {*} parent Must be the Case object itself.
-     * @param {CasePlanDefinition} definition 
+     * @param {CasePlanDefinition} definition
      */
     constructor(parent, definition) {
         super(parent, definition);
@@ -92,8 +101,8 @@ class CasePlanModel extends Stage {
 
     /**
      * Override of basic resize method.
-     * @param {*} w 
-     * @param {*} h 
+     * @param {*} w
+     * @param {*} h
      */
     __resize(w, h) {
         super.__resize(w, h);
@@ -124,4 +133,5 @@ class CasePlanModel extends Stage {
         }
     }
 }
+
 CMMNElement.registerType(CasePlanModel, 'Case Plan', 'images/svg/caseplanmodel.svg');

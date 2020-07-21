@@ -1,9 +1,11 @@
-class ModelListPanel {
+import {Util} from "../util/util";
+
+export class ModelListPanel {
     /**
-     * 
+     *
      * @param {RepositoryBrowser} repositoryBrowser
-     * @param {JQuery<HTMLElement>} accordion 
-     * @param {ModelEditorMetadata} type 
+     * @param {JQuery<HTMLElement>} accordion
+     * @param {ModelEditorMetadata} type
      */
     constructor(repositoryBrowser, accordion, type) {
         this.accordion = accordion;
@@ -14,7 +16,7 @@ class ModelListPanel {
         this.htmlPanel = $(
             `<h3 filetype="${type.modelType}" createMessage="Create ${type.description}">${type.description}</h3>
              <div class="file-list-${type.modelType}"></div>`);
-        
+
         this.accordion.append(this.htmlPanel);
         this.accordion.accordion('refresh');
         this.container = this.accordion.find('.file-list-'+type.modelType);
@@ -22,9 +24,9 @@ class ModelListPanel {
 
     /**
      * Re-creates the items in the accordion for this panel
-     * 
-     * @param {Array<ServerFile>} models 
-     * @param {Function} shapeType 
+     *
+     * @param {Array<ServerFile>} models
+     * @param {Function} shapeType
      */
     setModelList(models, shapeType) {
         // First create a big HTML string with for each model an <a> element
@@ -48,7 +50,7 @@ class ModelListPanel {
                 const tip = "Used in:\n" + data.map(e => '- ' + e.id).join('\n')
                 html.attr('title', tip)
             });
-            
+
             this.container.append(html);
             // Add event handler for dragging.
             html.on('pointerdown', e => {

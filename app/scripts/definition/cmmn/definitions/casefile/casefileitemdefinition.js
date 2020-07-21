@@ -1,4 +1,7 @@
-class CaseFileItemDef extends CaseFileItemCollection {
+import {CaseFileItemCollection} from "./casefileitemcollection";
+import {XML} from "../../../../util/xml";
+
+export class CaseFileItemDef extends CaseFileItemCollection {
     /**
      * @returns {Array<String>} List of the possible events/transitions on a case file item
      */

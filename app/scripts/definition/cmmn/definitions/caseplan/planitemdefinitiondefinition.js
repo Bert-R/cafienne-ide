@@ -1,4 +1,7 @@
-class PlanItemDefinitionDefinition extends CMMNElementDefinition {
+import {CMMNElementDefinition} from "../cmmnelementdefinition";
+import {PlanningTableDefinition} from "../planningtabledefinition";
+
+export class PlanItemDefinitionDefinition extends CMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
     }
@@ -15,7 +18,7 @@ class PlanItemDefinitionDefinition extends CMMNElementDefinition {
 /**
  * Simple helper class to re-use logic across stages and tasks
  */
-class TaskStageDefinition extends PlanItemDefinitionDefinition {
+export class TaskStageDefinition extends PlanItemDefinitionDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         /** @type{PlanningTableDefinition} */
@@ -25,7 +28,7 @@ class TaskStageDefinition extends PlanItemDefinitionDefinition {
     getPlanningTable() {
         if (!this.planningTable) {
             /** @type{PlanningTableDefinition} */
-            this.planningTable = super.createShapedDefinition(PlanningTableDefinition, 0, 0); 
+            this.planningTable = super.createShapedDefinition(PlanningTableDefinition, 0, 0);
             // Note: we position planning table at 0,0. Actual positioning is handled in TaskStage.__planningTablePosition
         }
         return this.planningTable;
@@ -39,7 +42,7 @@ class TaskStageDefinition extends PlanItemDefinitionDefinition {
 /**
  * Simple helper class to re-use logic across milestones and event listeners
  */
-class MilestoneEventListenerDefinition extends PlanItemDefinitionDefinition {
+export class MilestoneEventListenerDefinition extends PlanItemDefinitionDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
     }

@@ -1,4 +1,8 @@
-class StageDefinition extends TaskStageDefinition {
+import {TaskStageDefinition} from "./planitemdefinitiondefinition";
+import {PlanItem} from "./planitem";
+import {SentryDefinition} from "../sentry/sentrydefinition";
+
+export class StageDefinition extends TaskStageDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.autoComplete = this.parseBooleanAttribute('autoComplete', true);
@@ -16,7 +20,7 @@ class StageDefinition extends TaskStageDefinition {
      * @returns {PlanItem}
      */
     createPlanItem(type, x, y) {
-        // For now, plan item definitions are always kept inside the case plan 
+        // For now, plan item definitions are always kept inside the case plan
         const planItemDefinition = this.caseDefinition.getCasePlan().createPlanItemDefinition(type);
         const planItem = super.createShapedDefinition(PlanItem, x, y, 'pi_' + planItemDefinition.id, planItemDefinition.name);
         planItem.definition = planItemDefinition;

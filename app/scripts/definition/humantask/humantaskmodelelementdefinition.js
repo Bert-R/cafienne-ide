@@ -1,6 +1,8 @@
-class HumanTaskModelElementDefinition extends XMLElementDefinition {
+import {XMLElementDefinition} from "../xmlelementdefinition";
+
+export class HumanTaskModelElementDefinition extends XMLElementDefinition {
     /**
-     * @param {Element} importNode 
+     * @param {Element} importNode
      * @param {HumanTaskModelDefinition} modelDefinition
      * @param {HumanTaskModelElementDefinition} parent optional
      */

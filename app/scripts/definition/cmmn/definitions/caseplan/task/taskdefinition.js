@@ -1,4 +1,8 @@
-class TaskDefinition extends TaskStageDefinition {
+import {TaskStageDefinition} from "../planitemdefinitiondefinition";
+import {ParameterDefinition} from "../../parameterdefinition";
+import {ParameterMappingDefinition} from "../../parametermappingdefinition";
+
+export class TaskDefinition extends TaskStageDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.isBlocking = this.parseBooleanAttribute('isBlocking', true);
@@ -51,7 +55,7 @@ class TaskDefinition extends TaskStageDefinition {
     /**
      * Checks whether an input parameter with the given name exists, and, if not,
      * creates a new one with the specified name.
-     * @param {String} name 
+     * @param {String} name
      */
     getInputParameterWithName(name) {
         return this.getParameterWithName(name, this.inputs);
@@ -60,16 +64,16 @@ class TaskDefinition extends TaskStageDefinition {
     /**
      * Checks whether an output parameter with the given name exists, and, if not,
      * creates a new one with the specified name.
-     * @param {String} name 
+     * @param {String} name
      */
     getOutputParameterWithName(name) {
         return this.getParameterWithName(name, this.outputs);
     }
 
     /**
-     * 
-     * @param {String} name 
-     * @param {Array<ParameterDefinition>} collection 
+     *
+     * @param {String} name
+     * @param {Array<ParameterDefinition>} collection
      * @returns {ParameterDefinition}
      */
     getParameterWithName(name, collection) {
@@ -85,11 +89,11 @@ class TaskDefinition extends TaskStageDefinition {
 
     /**
      * Creates a new mapping
-     * 
-     * @param {String} sourceRef 
-     * @param {String} targetRef 
-     * @param {ParameterDefinition} taskParameter 
-     * @param {ImplementationParameterDefinition} implementationParameter 
+     *
+     * @param {String} sourceRef
+     * @param {String} targetRef
+     * @param {ParameterDefinition} taskParameter
+     * @param {ImplementationParameterDefinition} implementationParameter
      * @returns {ParameterMappingDefinition}
      */
     createMapping(sourceRef, targetRef, taskParameter, implementationParameter) {
@@ -116,9 +120,9 @@ class TaskDefinition extends TaskStageDefinition {
     }
 
     /**
-     * 
-     * @param {ParameterDefinition} taskParameter 
-     * @param {ImplementationParameterDefinition} implementationParameter 
+     *
+     * @param {ParameterDefinition} taskParameter
+     * @param {ImplementationParameterDefinition} implementationParameter
      */
     createInputMapping(taskParameter, implementationParameter) {
         const sourceRef = taskParameter ? taskParameter.id : '';
@@ -127,9 +131,9 @@ class TaskDefinition extends TaskStageDefinition {
     }
 
     /**
-     * 
-     * @param {ParameterDefinition} taskParameter 
-     * @param {ImplementationParameterDefinition} implementationParameter 
+     *
+     * @param {ParameterDefinition} taskParameter
+     * @param {ImplementationParameterDefinition} implementationParameter
      */
     createOutputMapping(taskParameter, implementationParameter) {
         const sourceRef = implementationParameter ? implementationParameter.id : '';
@@ -140,8 +144,8 @@ class TaskDefinition extends TaskStageDefinition {
     /**
      * Generates new mappings and task input/output parameters based on the
      * given xml node that represents the contract of the task implementation.
-     * @param {String} implementationRef 
-     * @param {ModelDefinition} implementationModel 
+     * @param {String} implementationRef
+     * @param {ModelDefinition} implementationModel
      */
     changeTaskImplementation(implementationRef, implementationModel) {
         console.log("Associating new implementation ref (current is " + this.implementationRef + ", new is " + implementationRef + ")");
@@ -180,8 +184,8 @@ class TaskDefinition extends TaskStageDefinition {
 
     /**
      * Sets the task implementation, and optionally updates the implementationRef.
-     * @param {String} implementationRef 
-     * @param {ModelDefinition} implementationModel 
+     * @param {String} implementationRef
+     * @param {ModelDefinition} implementationModel
      */
     setImplementation(implementationRef, implementationModel) {
         this.hasImplementation = true;

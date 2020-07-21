@@ -1,4 +1,7 @@
-class AssignmentDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "../../unnamedcmmnelementdefinition";
+import {ExpressionDefinition} from "../../constraintdefinition";
+
+export class AssignmentDefinition extends UnnamedCMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.expression = this.parseElement('condition', ExpressionDefinition);
@@ -46,4 +49,5 @@ class AssignmentDefinition extends UnnamedCMMNElementDefinition {
         return this.expression ? this.expression.body : '';
     }
 }
+
 AssignmentDefinition.TAG = 'assignment';

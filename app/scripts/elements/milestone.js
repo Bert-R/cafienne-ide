@@ -1,12 +1,20 @@
-﻿
-class Milestone extends PlanItemView {
+import ﻿{PlanItemView} from "./planitemview";
+import ﻿{MilestoneDefinition} from "../definition/cmmn/definitions/caseplan/milestonedefinition";
+import ﻿{MilestoneProperties} from "./properties/milestoneproperties";
+import ﻿{Decorator} from "./planitemview";
+import ﻿{EntryCriterion} from "./sentry";
+import ﻿{CMMNElement} from "./cmmnelement";
+import {REQUIRED_IMG} from "./elements";
+import {REPETITION_IMG} from "./elements";
+
+export class Milestone extends PlanItemView {
     static get definitionClass() {
         return MilestoneDefinition;
     }
 
     /**
      * Creates a new Milestone object
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {
@@ -46,10 +54,11 @@ class Milestone extends PlanItemView {
 
     /**
      * returns true when an element of type 'elementType' can be added as a child to this element
-     * @param {*} elementType 
+     * @param {*} elementType
      */
     __canHaveAsChild(elementType) {
         return elementType == EntryCriterion.name;
     }
 }
+
 CMMNElement.registerType(Milestone, 'Milestone', 'images/svg/milestone.svg');

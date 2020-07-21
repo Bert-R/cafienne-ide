@@ -1,12 +1,14 @@
+import {BindingRefinementEditor} from "./bindingrefinementeditor";
+
 /**
  * This file hosts a series of classes for renderers of the cells inside the taskparameter's input- and outputmappings
  */
 
-class InputMappingDeleter {
+export class InputMappingDeleter {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         column.html(`<button class="btnDelete"><img src="images/delete_32.png" /></button>`).on('click', () => {
@@ -29,11 +31,11 @@ class InputMappingDeleter {
     }
 }
 
-class OutputMappingDeleter {
+export class OutputMappingDeleter {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         column.html(`<button class="btnDelete"><img src="images/delete_32.png" /></button>`).on('click', () => {
@@ -51,11 +53,11 @@ class OutputMappingDeleter {
     }
 }
 
-class InputParameterNameChanger {
+export class InputParameterNameChanger {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         const html = column.html(`<input class="mappingParameterName" type="text" value="${row.taskParameterName}" />`);
@@ -119,17 +121,18 @@ class InputParameterNameChanger {
         });
     }
 }
-class OutputParameterNameChanger {
+
+export class OutputParameterNameChanger {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         column.html(`<input class="mappingParameterName" type="text" value="${row.taskParameterName}" />`).on('change', e => {
             const newOutputParameterName = e.target.value;
             // OUTPUT task parameter must be unique. Check output task parameters if exists.
-            // If not create the task parameter and add to task parameters                
+            // If not create the task parameter and add to task parameters
             if (newOutputParameterName == '') {
                 // Remove the current task output parameter
                 delete row.mapping.targetRef;
@@ -155,11 +158,11 @@ class OutputParameterNameChanger {
     }
 }
 
-class MappingExpression {
+export class MappingExpression {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         //add textarea for transformation field and listen to changes
@@ -170,22 +173,22 @@ class MappingExpression {
     }
 }
 
-class InputParameterSelector {
+export class InputParameterSelector {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         column.html(`<input type="text" class="mappingParameterName" value="${row.mapping.implementationParameterName}" readonly />`)
     }
 }
 
-class OutputParameterSelector {
+export class OutputParameterSelector {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         const taskImplementation = row.editor.taskDefinition.implementationModel;
@@ -215,11 +218,11 @@ class OutputParameterSelector {
     }
 }
 
-class MappingOrderChanger {
+export class MappingOrderChanger {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         const html = column.html(
@@ -232,11 +235,11 @@ class MappingOrderChanger {
     }
 }
 
-class RequiredChanger {
+export class RequiredChanger {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         const isRequired = row.mapping && row.mapping.target && row.mapping.target.required ? ' checked' : '';
@@ -253,11 +256,12 @@ class RequiredChanger {
 
     }
 }
-class MappingCFI {
+
+export class MappingCFI {
     /**
-     * 
-     * @param {MappingRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {MappingRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
 
@@ -292,7 +296,7 @@ class MappingCFI {
 
     /**
      * Remove the bindingRef from the task parameter (if one is available)
-     * @param {MappingRow} row 
+     * @param {MappingRow} row
      */
     removeBindingRef(row) {
         if (row.mapping.taskParameter) {
@@ -307,7 +311,7 @@ class MappingCFI {
     /**
      * Changing the binding ref also sets the new binding.
      * Passing undefined will delete the existing bindingRef.
-     * @param {CaseFileItemDef} newBinding 
+     * @param {CaseFileItemDef} newBinding
      * @param {MappingRow} row
      */
     changeBindingRef(newBinding, row) {

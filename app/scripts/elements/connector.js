@@ -1,8 +1,13 @@
-﻿class Connector {
+import {SentryDefinition} from "../definition/cmmn/definitions/sentry/sentrydefinition";
+import {CriterionDefinition} from "../definition/cmmn/definitions/sentry/criteriondefinition";
+import {Edge} from "../definition/cmmn/dimensions/edge";
+import {Sentry} from "./sentry";
+
+export ﻿class Connector {
     /**
-     * 
-     * @param {Case} cs 
-     * @param {Edge} edge 
+     *
+     * @param {Case} cs
+     * @param {Edge} edge
      */
     static createConnectorFromEdge(cs, edge) {
         const findItem = (cs, edge, propertyName) => {
@@ -43,8 +48,8 @@
 
     /**
      * Creates a connector object and an edge between the source and the target element.
-     * @param {CMMNElement} source 
-     * @param {CMMNElement} target 
+     * @param {CMMNElement} source
+     * @param {CMMNElement} target
      */
     static createConnector(source, target) {
         const edge = Edge.create(source, target);
@@ -53,10 +58,10 @@
 
     /**
      * Creates a connector (=link in jointJS) between a source and a target.
-     * @param {Case} cs 
-     * @param {CMMNElement} source 
-     * @param {CMMNElement} target 
-     * @param {Edge} edge 
+     * @param {Case} cs
+     * @param {CMMNElement} source
+     * @param {CMMNElement} target
+     * @param {Edge} edge
      */
     constructor(cs, source, target, edge) {
         this.case = cs;
@@ -145,7 +150,7 @@
     /**
      * Returns true if the connector is connected to a cmmn element with the specified id (either as source or target).
      * Note: this does not indicate whether it is connected at the source or the target end of the connector.
-     * @param {String} id 
+     * @param {String} id
      * @returns {Boolean} Whether or not one of the sides of the connector is an element having the specified id.
      */
     hasElementWithId(id) {
@@ -160,11 +165,11 @@
     }
 }
 
-class TemporaryConnector {
+export class TemporaryConnector {
     /**
      * Creates a temporary connector (=link in jointJS) from the source to a set of target coordinates
-     * @param {CMMNElement} source 
-     * @param {*} coordinates 
+     * @param {CMMNElement} source
+     * @param {*} coordinates
      */
     constructor(source, coordinates) {
         this.source = source;

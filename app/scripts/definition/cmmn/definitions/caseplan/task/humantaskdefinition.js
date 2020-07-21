@@ -1,5 +1,11 @@
+import {TaskDefinition} from "./taskdefinition";
+import {ParameterMappingDefinition} from "../../parametermappingdefinition";
+import {AssignmentDefinition} from "./assignmentdefinition";
+import {DueDateDefinition} from "./duedatedefinition";
+import {XML} from "../../../../../util/xml";
+import {IMPLEMENTATION_TAG} from "../../../../../elements/elements";
 
-class HumanTaskDefinition extends TaskDefinition {
+export class HumanTaskDefinition extends TaskDefinition {
     static get prefix() {
         return 'ht';
     }
@@ -24,7 +30,7 @@ class HumanTaskDefinition extends TaskDefinition {
     get performer() {
         return this.caseDefinition.getElement(this.performerRef);
     }
-    
+
     createExportNode(parentNode) {
         super.createExportNode(parentNode, 'humanTask', 'planningTable', 'performerRef');
         if (this.mappings.length > 0 || this.humanTaskRef || this.assignment || this.validatorRef) {

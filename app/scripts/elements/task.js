@@ -1,14 +1,25 @@
-﻿class Task extends TaskStage {
+import {TaskStage} from "./taskstage";
+import {TaskMappingsEditor} from "../editors/task/taskmappingseditor";
+import {TaskProperties} from "./properties/taskproperties";
+import {TaskHalo} from "./halo/taskhalo";
+import {Decorator} from "./planitemview";
+import {EntryCriterion} from "./sentry";
+import {ExitCriterion} from "./sentry";
+import {MANUALACTIVATION_IMG} from "./elements";
+import {REQUIRED_IMG} from "./elements";
+import {REPETITION_IMG} from "./elements";
+
+export ﻿class Task extends TaskStage {
 
     /**
      * Creates a new Task element.
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {
         super(parent, definition);
 
-        //Define the mapping form to link task parameters with model parameters (case process humantask) 
+        //Define the mapping form to link task parameters with model parameters (case process humantask)
         this.mappingsEditor = new TaskMappingsEditor(this);
 
         // Now read the parameters of the model implementing this task
@@ -70,8 +81,8 @@
      * Changes the task implementation if the model's fileName differs from the current implementationRef.
      * If it is a newly added task, then the description maybe filled with the name of the task implementation.
      * This can be indicated by passing the "updateTaskDescription" flag to true.
-     * @param {DragData | ServerFile} model 
-     * @param {Boolean} updateTaskDescription 
+     * @param {DragData | ServerFile} model
+     * @param {Boolean} updateTaskDescription
      */
     changeTaskImplementation(model, updateTaskDescription = false) {
         if (this.planItemDefinition.implementationRef == model.fileName) {
@@ -84,7 +95,7 @@
     /**
      * Fetches the file with the specified name from the repository, and associates it with this task through
      * the specified callback function
-     * @param {Boolean} saveChanges - Indicates whether any newly generated information must be stored immediately or not. 
+     * @param {Boolean} saveChanges - Indicates whether any newly generated information must be stored immediately or not.
      * @param {String} fileName The (relative) URL to the file to be loaded
      * @param {Boolean} updateTaskDescription Indicates whether the Task description should be modified to match the information inside the implementation.
      * @param {Boolean} showProperties Indicates to open the properties view after the new information is rendered and received.

@@ -1,9 +1,9 @@
-class ColumnRenderer {
+export class ColumnRenderer {
     /**
      * Base class for describing a column in a row in the table renderer
-     * @param {String} label 
-     * @param {String} width 
-     * @param {String} title 
+     * @param {String} label
+     * @param {String} width
+     * @param {String} title
      * @param {Function} renderer
      */
     constructor(label, width, title = label, renderer) {
@@ -22,8 +22,8 @@ class ColumnRenderer {
     }
 
     /**
-     * @param {JQuery<HTMLTableCellElement>} column 
-     * @param {RowRenderer} row 
+     * @param {JQuery<HTMLTableCellElement>} column
+     * @param {RowRenderer} row
      */
     render(column, row) {
         const f = this.renderer;

@@ -1,6 +1,8 @@
-class CasePlanProperties extends StageProperties {
+import {StageProperties} from "./stageproperties";
+
+export class CasePlanProperties extends StageProperties {
     /**
-     * @param {CasePlanModel} casePlan 
+     * @param {CasePlanModel} casePlan
      */
     constructor(casePlan) {
         super(casePlan);

@@ -1,10 +1,13 @@
-﻿class ProblemType {
+import {ValidateForm} from "./validateform";
+import {Problem} from "./problem";
+
+﻿export class ProblemType {
     /**
      * Returns the problem type with the specified number
      * @returns {ProblemType}
      */
     static get(number) {
-        return ProblemType.list.find(n => n.number == number);        
+        return ProblemType.list.find(n => n.number == number);
     }
 
     static showAll() {
@@ -30,8 +33,8 @@
 
     /**
      * Creates a validation problem within the context of this case.
-     * @param {String} contextId 
-     * @param {Array<String>} parameters 
+     * @param {String} contextId
+     * @param {Array<String>} parameters
      */
     createProblem(contextId, parameters) {
         return new Problem(contextId, this, parameters);
@@ -106,13 +109,13 @@
     }
 }
 
-class CMMNWarning extends ProblemType {
+export class CMMNWarning extends ProblemType {
     constructor(number, description) {
         super(number, description, 'images/warningproblem_32.png');
     }
 }
 
-class CMMNError extends ProblemType {
+export class CMMNError extends ProblemType {
     constructor(number, description) {
         super(number, description, 'images/errorproblem_32.png');
     }

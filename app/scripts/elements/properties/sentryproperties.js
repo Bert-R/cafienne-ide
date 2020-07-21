@@ -1,6 +1,10 @@
-class SentryProperties extends Properties {
+import {Properties} from "./properties";
+import {PlanItem} from "../../definition/cmmn/definitions/caseplan/planitem";
+import {CaseFileItemDef} from "../../definition/cmmn/definitions/casefile/casefileitemdefinition";
+
+export class SentryProperties extends Properties {
     /**
-     * @param {Sentry} sentry 
+     * @param {Sentry} sentry
      */
     constructor(sentry) {
         super(sentry);
@@ -97,9 +101,9 @@ class SentryProperties extends Properties {
 
     /**
      * Changes the standard event within the onPart (if one is given)
-     * @param {JQuery.ChangeEvent} e 
-     * @param {OnPartDefinition} onPart 
-     * @param {Connector} connector 
+     * @param {JQuery.ChangeEvent} e
+     * @param {OnPartDefinition} onPart
+     * @param {Connector} connector
      */
     changeStandardEvent(e, onPart, connector) {
         if (onPart) {
@@ -112,11 +116,11 @@ class SentryProperties extends Properties {
             this.change(onPart, 'standardEvent', newStandardEvent);
         }
     }
-    
+
     /**
      * Removes the onPart
-     * @param {OnPartDefinition} onPart 
-     * @param {Connector} connector 
+     * @param {OnPartDefinition} onPart
+     * @param {Connector} connector
      */
     deleteOnPart(onPart, connector) {
         if (onPart) {
@@ -160,8 +164,8 @@ class SentryProperties extends Properties {
     }
 
     /**
-     * 
-     * @param {PlanItemOnPartDefinition} onPart 
+     *
+     * @param {PlanItemOnPartDefinition} onPart
      */
     getPlanItemsSelect(onPart) {
         const thisPlanItem = this.cmmnElement.parent.definition;
@@ -174,8 +178,8 @@ class SentryProperties extends Properties {
     };
 
     /**
-     * 
-     * @param {PlanItemOnPartDefinition} planItem 
+     *
+     * @param {PlanItemOnPartDefinition} planItem
      */
     getPlanItemStandardEvents(onPart) {
         if (!onPart || !onPart.source) {
@@ -187,9 +191,9 @@ class SentryProperties extends Properties {
     }
 
     /**
-     * 
-     * @param {JQuery<HTMLElement>} parentHTML 
-     * @param {PlanItemOnPartDefinition} onPart 
+     *
+     * @param {JQuery<HTMLElement>} parentHTML
+     * @param {PlanItemOnPartDefinition} onPart
      */
     addPlanItemOnPart(parentHTML, onPart = undefined) {
         const planItemSelection = this.getPlanItemsSelect(onPart);
@@ -305,7 +309,7 @@ class SentryProperties extends Properties {
 
     /**
      * Returns a HTML string with all possible options, and also the selected one.
-     * @param {CaseFileItemOnPartDefinition} onPart 
+     * @param {CaseFileItemOnPartDefinition} onPart
      */
     getCaseFileItemStandardEvents(onPart) {
         if (onPart && onPart.source) {
@@ -317,9 +321,9 @@ class SentryProperties extends Properties {
     }
 
     /**
-     * 
-     * @param {JQuery<HTMLElement>} parentHTML 
-     * @param {CaseFileItemOnPartDefinition} onPart 
+     *
+     * @param {JQuery<HTMLElement>} parentHTML
+     * @param {CaseFileItemOnPartDefinition} onPart
      */
     addCaseFileItemOnPart(parentHTML, onPart = undefined) {
         const caseFileItemName = onPart && onPart.source ? onPart.source.name : '';
@@ -399,11 +403,11 @@ class SentryProperties extends Properties {
     }
 
     /**
-     * 
-     * @param {OnPartDefinition} onPart 
-     * @param {Connector} connector 
-     * @param {JQuery<HTMLElement>} html 
-     * @param {CaseFileItemDef} cfi 
+     *
+     * @param {OnPartDefinition} onPart
+     * @param {Connector} connector
+     * @param {JQuery<HTMLElement>} html
+     * @param {CaseFileItemDef} cfi
      */
     changeCaseFileItemOnPart(onPart, connector, html, cfi) {
         const currentSourceRef = onPart ? onPart.sourceRef : '';

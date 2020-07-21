@@ -1,5 +1,10 @@
-﻿﻿
-class ValidateForm extends StandardForm {
+﻿﻿import {StandardForm} from "../editors/standardform";
+import {ValidationSettings} from "./validationsettings";
+import {Settings} from "../settings/settings";
+import {Util} from "../util/util";
+import {ProblemType} from "./problemtype";
+
+export class ValidateForm extends StandardForm {
     /** @returns {ValidationSettings} */
     static get Settings() {
         if (!ValidateForm._settings) {
@@ -58,7 +63,7 @@ class ValidateForm extends StandardForm {
                     <div class="problemcontainer"></div>
                 </div>
             </div>`);
-        this.htmlParent.append(this.html);            
+        this.htmlParent.append(this.html);
         this.containers = this.html.find('.problemcontainer');
 
         //set header handlers
@@ -82,7 +87,7 @@ class ValidateForm extends StandardForm {
         if (!this.visible) {
             this.renderForm();
         }
-        
+
         this.showProblemsInForm();
         //check whether hidden problems still relevant (not when user has fixed the problem)
         this.resetHiddenProblems();
@@ -110,7 +115,7 @@ class ValidateForm extends StandardForm {
         const wForm = this.html.width();
         const hForm = this.html.height();
 
-        
+
         const wBody = this.case.editor.html.width();
         const hBody = this.case.editor.html.height();
 
@@ -160,7 +165,7 @@ class ValidateForm extends StandardForm {
         this.html.find('.problemrow input[hidetype~="all"]').on('change', e => this.checkAllProblemsOfType(e.currentTarget));
     }
 
-    /** 
+    /**
      * handle change "hide all problem of this type" checkbox
      * When this is checked all rows with same problem type must be checked
      */

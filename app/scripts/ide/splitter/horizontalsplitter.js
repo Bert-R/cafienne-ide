@@ -1,9 +1,10 @@
+import {Splitter} from "./splitter";
 
-class HorizontalSplitter extends Splitter {
+export class HorizontalSplitter extends Splitter {
     /**
-     * 
-     * @param {JQuery<HTMLElement>} container 
-     * @param {String|Number} offset 
+     *
+     * @param {JQuery<HTMLElement>} container
+     * @param {String|Number} offset
      * @param {Number} minimumSize Indicates to how far the splitter can be moved into the direction (whether all the way or there must always remain space)
      */
     constructor(container, offset, minimumSize = 0) {
@@ -122,4 +123,3 @@ class HorizontalSplitter extends Splitter {
         return this.restoreImg.css('display') == 'block';
     }
 }
-

@@ -1,7 +1,7 @@
-class HaloItem {
+export class HaloItem {
     /**
      * 
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     constructor(halo, imgURL, title, html = $(`<img class="haloitem" src="${imgURL}" title="${title}" />`)) {
         this.halo = halo;

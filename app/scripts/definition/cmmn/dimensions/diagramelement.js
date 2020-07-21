@@ -1,9 +1,11 @@
-class DiagramElement extends XMLElementDefinition {
+import {XMLElementDefinition} from "../../xmlelementdefinition";
+
+export class DiagramElement extends XMLElementDefinition {
     /**
      * Creates a new XMLElementDefinition that belongs to the Definition object.
-     * @param {Element} importNode 
-     * @param {Dimensions} dimensions 
-     * @param {XMLElementDefinition} parent 
+     * @param {Element} importNode
+     * @param {Dimensions} dimensions
+     * @param {XMLElementDefinition} parent
      */
     constructor(importNode, dimensions, parent) {
         super(importNode, dimensions, parent);
@@ -14,7 +16,7 @@ class DiagramElement extends XMLElementDefinition {
     get caseDefinition() {
         return this.dimensions.definitionDocument.caseDefinition;
     }
-    
+
     writeAttribute(name, optionalValue) {
         if (optionalValue == undefined) {
             optionalValue = this[name];

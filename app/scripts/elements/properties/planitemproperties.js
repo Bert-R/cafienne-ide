@@ -1,7 +1,13 @@
-class PlanItemProperties extends Properties {
+import {Properties} from "./properties";
+import {CaseRoleReference} from "../../definition/cmmn/definitions/caseteam/caserolereference";
+import {REPETITION_IMG} from "../elements";
+import {REQUIRED_IMG} from "../elements";
+import {MANUALACTIVATION_IMG} from "../elements";
+
+export class PlanItemProperties extends Properties {
     /**
-     * 
-     * @param {PlanItemView} planItem 
+     *
+     * @param {PlanItemView} planItem
      */
     constructor(planItem) {
         super(planItem);
@@ -10,11 +16,11 @@ class PlanItemProperties extends Properties {
 
     /**
      * Adds a block to render the item control rule with the specified name
-     * @param {String} ruleName 
-     * @param {String} imageURL 
-     * @param {String} label1 
-     * @param {String} label2 
-     * @param {String} defaultValue 
+     * @param {String} ruleName
+     * @param {String} imageURL
+     * @param {String} label1
+     * @param {String} label2
+     * @param {String} defaultValue
      */
     addRuleBlock(ruleName, imageURL, label1, label2 = label1, defaultValue = 'true') {
         const element = this.cmmnElement.definition;
@@ -100,7 +106,7 @@ class PlanItemProperties extends Properties {
     /**
      * Returns a HTML string with a select that has all case roles in it.
      * Sets the role with currentRoleId as selected if it is set.
-     * @param {String} currentRoleId 
+     * @param {String} currentRoleId
      * @param {String} buttonClass
      */
     getRolesAsHTMLSelect(currentRoleId, buttonClass) {
@@ -119,9 +125,9 @@ class PlanItemProperties extends Properties {
     /**
      * Adds a role. Can be undefined, in which case an empty row is added.
      * Also adds the required event handlers to the html.
-     * @param {Array<CaseRoleReference>} authorizedRoles 
-     * @param {JQuery<HTMLElement>} parentHTML 
-     * @param {CaseRoleReference} role 
+     * @param {Array<CaseRoleReference>} authorizedRoles
+     * @param {JQuery<HTMLElement>} parentHTML
+     * @param {CaseRoleReference} role
      */
     addAuthorizedRoleField(authorizedRoles, parentHTML, role = undefined) {
         if (role && !role.name) {
@@ -145,7 +151,7 @@ class PlanItemProperties extends Properties {
             const currentRoleReference = currentRoleID ? authorizedRoles.find(role => role.id == currentRoleID) : undefined;
             if (!currentRoleReference) {
                 authorizedRoles.push(new CaseRoleReference(newRole, this.cmmnElement.definition));
-                this.addAuthorizedRoleField(authorizedRoles, parentHTML); // Add a new role field    
+                this.addAuthorizedRoleField(authorizedRoles, parentHTML); // Add a new role field
             } else {
                 // this.change(currentRoleReference, 'role', newRole);
                 currentRoleReference.role = newRole;

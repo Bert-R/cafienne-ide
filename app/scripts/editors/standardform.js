@@ -1,11 +1,14 @@
 ﻿'use strict';
 
-class StandardForm extends MovableEditor {
+import {MovableEditor} from "./movableeditor";
+import {Util} from "../util/util";
+
+export class StandardForm extends MovableEditor {
 
     /**
-     * @param {Case} cs 
-     * @param {String} label 
-     * @param {Array<String>} classNames      * 
+     * @param {Case} cs
+     * @param {String} label
+     * @param {Array<String>} classNames      *
      */
     constructor(cs, label, ...classNames) {
         super(cs);

@@ -1,11 +1,13 @@
-class CaseValidationSettings {
+import {Settings} from "../settings/settings";
+
+export class CaseValidationSettings {
     constructor(hiddenProblemsList) {
         this.date = new Date();
         this.list = hiddenProblemsList;
     }
 }
 
-class ValidationSettings {
+export class ValidationSettings {
     constructor() {
         this._hiddenProblemTypes = [];
         this._hiddenProblems = {};
@@ -13,7 +15,7 @@ class ValidationSettings {
 
     /**
      * Returns the settings for the ProblemType with the specified number
-     * @param {Number} number 
+     * @param {Number} number
      * @returns {Boolean}
      */
     isHiddenProblemType(number) {
@@ -35,7 +37,7 @@ class ValidationSettings {
 
     /**
      * Returns the list of problems in this case instance that can be hidden
-     * @param {Case} cs 
+     * @param {Case} cs
      * @returns {Array<String>}
      */
     getHiddenProblems(cs) {
@@ -48,8 +50,8 @@ class ValidationSettings {
 
     /**
      * Sets the list of problems to hide for this case
-     * @param {Case} cs 
-     * @param {Array<String>} hiddenProblems 
+     * @param {Case} cs
+     * @param {Array<String>} hiddenProblems
      */
     setHiddenProblems(cs, hiddenProblems) {
         const caseId = cs.id;

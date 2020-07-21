@@ -1,15 +1,16 @@
+import {HaloItem} from "./haloitem";
 
-class HaloClickItem extends HaloItem {
+export class HaloClickItem extends HaloItem {
     constructor(halo, imgURL, title, clickHandler, html) {
         super(halo, imgURL, title, html);
         this.html.on('click', e => clickHandler(e));
     }
 }
 
-class PropertiesHaloItem extends HaloClickItem {
+export class PropertiesHaloItem extends HaloClickItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.leftBar;
@@ -20,10 +21,10 @@ class PropertiesHaloItem extends HaloClickItem {
     }
 }
 
-class DeleteHaloItem extends HaloClickItem {
+export class DeleteHaloItem extends HaloClickItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.leftBar;
@@ -34,10 +35,10 @@ class DeleteHaloItem extends HaloClickItem {
     }
 }
 
-class InputParametersHaloItem extends HaloClickItem {
+export class InputParametersHaloItem extends HaloClickItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.leftBar;
@@ -48,10 +49,10 @@ class InputParametersHaloItem extends HaloClickItem {
     }
 }
 
-class OutputParametersHaloItem extends HaloClickItem {
+export class OutputParametersHaloItem extends HaloClickItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.rightBar;
@@ -62,10 +63,10 @@ class OutputParametersHaloItem extends HaloClickItem {
     }
 }
 
-class ZoomTaskImplementationHaloItem extends HaloClickItem {
+export class ZoomTaskImplementationHaloItem extends HaloClickItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.leftBar;
@@ -80,10 +81,10 @@ class ZoomTaskImplementationHaloItem extends HaloClickItem {
     }
 }
 
-class NewTaskImplemenationHaloItem extends HaloClickItem {
+export class NewTaskImplemenationHaloItem extends HaloClickItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.leftBar;

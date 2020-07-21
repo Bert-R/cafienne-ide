@@ -1,7 +1,13 @@
-class XMLModelEditor extends ModelEditor {
+import {ModelEditor} from "../modeleditor";
+import {ModelParameters} from "../../editors/modelparameters";
+import {ModelSourceEditor} from "./modelsourceeditor";
+import {ModelDocument} from "../../definition/modeldocument";
+import {XML} from "../../util/xml";
+
+export class XMLModelEditor extends ModelEditor {
     /**
      * Base editor for humantask and process, rendered in tabs with sourceview and parameters view
-     * @param {IDE} ide 
+     * @param {IDE} ide
      * @param {String} fileName The full file name to be loaded, e.g. 'helloworld.case', 'sendresponse.humantask'
      * @param {String} modelName The file name without the extension, e.g. 'helloworld'
      * @param {String} modelType  The extension of the filename, e.g. 'case', 'process', 'humantask'
@@ -80,7 +86,7 @@ class XMLModelEditor extends ModelEditor {
         The model should only be saved when there is a change and the codemirror is blurred.
         The onchange event of codemirror fires after every keydown, this is not wanted.
         So only save after blur, but only when there is a change in content.
-        To avoid missing the blur event and therewith loosing work, 
+        To avoid missing the blur event and therewith loosing work,
         the editor automatically saves 10 seconds after last change.
         */
         // Add event handlers on code mirror to track changes
@@ -98,9 +104,9 @@ class XMLModelEditor extends ModelEditor {
     }
 
     /**
-     * 
-     * @param {String} propertyName 
-     * @param {String} propertyValue 
+     *
+     * @param {String} propertyName
+     * @param {String} propertyValue
      */
     change(propertyName, propertyValue) {
         this.model[propertyName] = propertyValue;

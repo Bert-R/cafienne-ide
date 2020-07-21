@@ -1,8 +1,8 @@
-class CFIZoom {
+export class CFIZoom {
     /**
-     * 
-     * @param {ParameterRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {ParameterRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         const td = column.html(

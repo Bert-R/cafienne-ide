@@ -1,11 +1,17 @@
-class ShapeDefinition extends DiagramElement {
+import {DiagramElement} from "./diagramelement";
+import {Bounds} from "./bounds";
+import {CMMNELEMENTREF} from "./dimensions";
+import {BOUNDS} from "./dimensions";
+import {CMMNSHAPE} from "./dimensions";
+
+export class ShapeDefinition extends DiagramElement {
     /**
-     * 
-     * @param {CMMNElementDefinition} cmmnElement 
-     * @param {Number} x 
-     * @param {Number} y 
-     * @param {Number} w 
-     * @param {Number} h 
+     *
+     * @param {CMMNElementDefinition} cmmnElement
+     * @param {Number} x
+     * @param {Number} y
+     * @param {Number} w
+     * @param {Number} h
      * @returns {ShapeDefinition}
      */
     static createShape(cmmnElement, x, y, w, h) {
@@ -21,9 +27,9 @@ class ShapeDefinition extends DiagramElement {
 
     /**
      * Representation of a <CMMNShape> element
-     * 
-     * @param {Element} importNode 
-     * @param {Dimensions} dimensions 
+     *
+     * @param {Element} importNode
+     * @param {Dimensions} dimensions
      */
     constructor(importNode, dimensions) {
         super(importNode, dimensions, dimensions);
@@ -88,7 +94,7 @@ class ShapeDefinition extends DiagramElement {
 
     /**
      * Determines whether this shape surrounds the other shape
-     * @param {ShapeDefinition} other 
+     * @param {ShapeDefinition} other
      */
     surrounds(other) {
         return this != other && this.x <= other.x && this.y <= other.y && this.width + this.x >= other.width + other.x && this.height + this.y >= other.height + other.y;
@@ -131,7 +137,7 @@ class ShapeDefinition extends DiagramElement {
     }
 }
 
-class CustomShape extends ShapeDefinition {
+export class CustomShape extends ShapeDefinition {
     constructor(importNode, dimensions) {
         super(importNode, dimensions);
         this.parentId = this.parseAttribute('parentId');
@@ -179,7 +185,7 @@ class CustomShape extends ShapeDefinition {
     }
 }
 
-class CaseFileItemShape extends CustomShape {
+export class CaseFileItemShape extends CustomShape {
     constructor(importNode, dimensions) {
         super(importNode, dimensions);
         this.contextRef = this.parseAttribute('contextRef');
@@ -198,10 +204,10 @@ class CaseFileItemShape extends CustomShape {
     }
 
     /**
-     * 
-     * @param {CMMNElementDefinition} cmmnParent 
-     * @param {Number} x 
-     * @param {Number} y 
+     *
+     * @param {CMMNElementDefinition} cmmnParent
+     * @param {Number} x
+     * @param {Number} y
      */
     static create(cmmnParent, x, y) {
         return new CaseFileItemShape(undefined, cmmnParent.caseDefinition.dimensions).generateDefaultContent(cmmnParent, x, y, 25, 40);
@@ -212,12 +218,12 @@ class CaseFileItemShape extends CustomShape {
     }
 }
 
-class TextBoxShape extends CustomShape {
+export class TextBoxShape extends CustomShape {
     /**
-     * 
-     * @param {CMMNElementDefinition} cmmnParent 
-     * @param {Number} x 
-     * @param {Number} y 
+     *
+     * @param {CMMNElementDefinition} cmmnParent
+     * @param {Number} x
+     * @param {Number} y
      */
     static create(cmmnParent, x, y) {
         return new TextBoxShape(undefined, cmmnParent.caseDefinition.dimensions).generateDefaultContent(cmmnParent, x, y, 100, 60, 'TextBox');

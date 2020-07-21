@@ -1,11 +1,16 @@
-class TimerEvent extends EventListener {
+import {EventListener} from "./eventlistener";
+import {TimerEventDefinition} from "../definition/cmmn/definitions/caseplan/timereventdefinition";
+import {TimerEventProperties} from "./properties/timereventproperties";
+import {CMMNElement} from "./cmmnelement";
+
+export class TimerEvent extends EventListener {
     static get definitionClass() {
         return TimerEventDefinition;
     }
 
     /**
      * Creates a new TimerEventListener
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {
@@ -22,7 +27,7 @@ class TimerEvent extends EventListener {
     }
 
     get imageURL() {
-        return 'images/svg/timerevent.svg';       
+        return 'images/svg/timerevent.svg';
     }
 
     referencesDefinitionElement(definitionId) {
@@ -31,6 +36,7 @@ class TimerEvent extends EventListener {
             return true;
         }
         return super.referencesDefinitionElement(definitionId);
-    }    
+    }
 }
+
 CMMNElement.registerType(TimerEvent, 'Timer Event', 'images/svg/timerevent.svg');

@@ -1,8 +1,8 @@
-class RowRenderer {
+export class RowRenderer {
     /**
      * Base class for rendering a row in a table control
-     * @param {TableRenderer} control 
-     * @param {CMMNElementDefinition} element 
+     * @param {TableRenderer} control
+     * @param {CMMNElementDefinition} element
      */
     constructor(control, element = undefined) {
         this.control = control;
@@ -23,7 +23,7 @@ class RowRenderer {
     }
 
     /**
-     * Setting the html will also add it to the table  
+     * Setting the html will also add it to the table
      * @returns {JQuery<HTMLElement>}
      */
     set html(html) {
@@ -48,8 +48,8 @@ class RowRenderer {
 
     /**
      * Change a property of the element into the new value
-     * @param {String} propertyName 
-     * @param {*} propertyValue 
+     * @param {String} propertyName
+     * @param {*} propertyValue
      */
     change(propertyName, propertyValue) {
         this.control.change(this.element, propertyName, propertyValue);
@@ -57,7 +57,7 @@ class RowRenderer {
 
     /**
      * Deletes this row and the associated definition.
-     * @param {*} e 
+     * @param {*} e
      */
     delete(e) {
         e.stopPropagation();
@@ -106,7 +106,7 @@ class RowRenderer {
 
     /**
      * Refreshes the visualizers relating to the definition element
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {}
 }

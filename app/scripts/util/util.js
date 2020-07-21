@@ -1,7 +1,7 @@
-﻿class Util {
+﻿export class Util {
     /**
      * Detaches all event handlers from a JQuery selected HTML element.
-     * @param {JQuery<HTMLElement>} html 
+     * @param {JQuery<HTMLElement>} html
      */
     static detachEventHandlers(html) {
         // First clear all javascript listeners to avoid memory leakings because of cross-references between js and rendering engine
@@ -11,7 +11,7 @@
 
     /**
      * Clears the html content of the element and detaches all underlying event handlers
-     * @param {JQuery<HTMLElement>} html 
+     * @param {JQuery<HTMLElement>} html
      */
     static clearHTML(html) {
         Util.detachEventHandlers(html);
@@ -20,7 +20,7 @@
 
     /**
      * Deletes the html content of the element and detaches all underlying event handlers
-     * @param {JQuery<HTMLElement>} html 
+     * @param {JQuery<HTMLElement>} html
      */
     static removeHTML(html) {
         Util.detachEventHandlers(html);
@@ -70,8 +70,8 @@
     /**
      * Simple helper function that removes an element from an array, if it is in the array.
      * Returns the arrayIndex the element had in the array, or -1.
-     * @param {Array} array 
-     * @param {*} element 
+     * @param {Array} array
+     * @param {*} element
      */
     static removeFromArray(array, element) {
         const arrayIndex = array.indexOf(element);
@@ -83,8 +83,8 @@
 
     /**
      * Returns true if sub class extends superclass somewhere in the type chain.
-     * @param {Function} superClass 
-     * @param {Function} subClass 
+     * @param {Function} superClass
+     * @param {Function} subClass
      */
     static isSubClassOf(superClass, subClass) {
         if (!subClass) {

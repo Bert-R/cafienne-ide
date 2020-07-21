@@ -1,6 +1,8 @@
-class UndoManager {
+import {Action} from "./action";
+
+export class UndoManager {
     /**
-     * @param {CaseModelEditor} editor 
+     * @param {CaseModelEditor} editor
      */
     constructor(editor) {
         this.editor = editor;
@@ -19,7 +21,7 @@ class UndoManager {
     resetActionBuffer(definition) {
         this.performingBufferAction = false;
         this.currentAction = null;
-        
+
         // First action is to add what we have to the undo/redo buffer.
         this.addCaseAction(definition);
     }
@@ -79,7 +81,7 @@ class UndoManager {
 
     undo() {
         if (!this.editor.case) return; // Function currently only enabled in CaseModelEditor
-        
+
         if (this.currentAction) {
             this.currentAction = this.currentAction.undo();
         } else {
@@ -93,12 +95,12 @@ class UndoManager {
             return this.currentAction.redoCount;
         } else {
             return 0;
-        }        
+        }
     }
 
     redo() {
         if (!this.editor.case) return; // Function currently only enabled in CaseModelEditor
-        
+
         if (this.currentAction && this.currentAction.nextAction) {
             this.currentAction = this.currentAction.nextAction.redo();
         } else {
@@ -106,14 +108,14 @@ class UndoManager {
         }
         this.updateUndoRedoButtons();
     }
-    
+
 }
 
-class UndoRedoBox {
+export class UndoRedoBox {
     /**
-     * 
-     * @param {Case} cs 
-     * @param {JQuery<HTMLElement>} html 
+     *
+     * @param {Case} cs
+     * @param {JQuery<HTMLElement>} html
      */
     constructor(cs, html) {
         this.case = cs;
@@ -124,7 +126,7 @@ $(`<div class="formheader">
         <div class="undo" type="button" title="Undo">
             <span></span>
             <img src="images/undo_128.png" />
-        </div>                
+        </div>
         <div class="redo" type="button" title="Redo">
             <img src="images/redo_128.png" />
             <span></span>
@@ -148,5 +150,5 @@ $(`<div class="formheader">
     updateButtons(undoCount, redoCount) {
         this.spanUndoCounter.html(undoCount);
         this.spanRedoCounter.html(redoCount);
-    }    
+    }
 }

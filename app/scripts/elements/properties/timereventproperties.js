@@ -1,7 +1,12 @@
-class TimerEventProperties extends PlanItemProperties {
+import {PlanItemProperties} from "./planitemproperties";
+import {CasePlanDefinition} from "../../definition/cmmn/definitions/caseplan/caseplandefinition";
+import {PlanItem} from "../../definition/cmmn/definitions/caseplan/planitem";
+import {CaseFileItemDef} from "../../definition/cmmn/definitions/casefile/casefileitemdefinition";
+
+export class TimerEventProperties extends PlanItemProperties {
     /**
-     * 
-     * @param {TimerEvent} timerEvent 
+     *
+     * @param {TimerEvent} timerEvent
      */
     constructor(timerEvent) {
         super(timerEvent);

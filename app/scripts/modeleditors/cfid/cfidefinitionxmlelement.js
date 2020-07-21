@@ -1,10 +1,12 @@
 ﻿'use strict';
 
-class CFIDefinitionXMLElement {
+import {Util} from "../../util/util";
+
+export class CFIDefinitionXMLElement {
     /**
-     * 
-     * @param {CaseFileItemDefinitionEditor} editor 
-     * @param {JQuery<HTMLElement>} container 
+     *
+     * @param {CaseFileItemDefinitionEditor} editor
+     * @param {JQuery<HTMLElement>} container
      */
     constructor(editor, container) {
         this.editor = editor;
@@ -15,8 +17,8 @@ class CFIDefinitionXMLElement {
 
     /**
      * Recreates and shows the html of the cfi definition type XMLElement
-     * 
-     * @param {CaseFileDefinitionDefinition} data 
+     *
+     * @param {CaseFileDefinitionDefinition} data
      */
     show(data) {
         Util.clearHTML(this.html);
@@ -28,7 +30,7 @@ class CFIDefinitionXMLElement {
                         <label>Import Ref</label>
                         <input class="inputImportRef" value="${data.importRef}" />
                 </div>`);
-        // Attach event handlers for changing the properties                            
+        // Attach event handlers for changing the properties
         this.html.find('.inputStructureRef').on('change', e => {
             data.structureRef = e.currentTarget.value;
             this.editor.saveModel();

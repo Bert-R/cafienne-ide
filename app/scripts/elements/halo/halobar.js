@@ -1,8 +1,9 @@
+import {Util} from "../../util/util";
 
-class HaloBar {
+export class HaloBar {
     /**
-     * @param {Halo} halo 
-     * @param {JQuery<HTMLElement>} html 
+     * @param {Halo} halo
+     * @param {JQuery<HTMLElement>} html
      */
     constructor(halo, html) {
         this.halo = halo;
@@ -16,7 +17,7 @@ class HaloBar {
     /**
      * Adds halo items to this specific bar of the halo.
      * It is sufficient to pass a comma separated list of the HaloItem constructors.
-     * @param {Array<Function>} haloItemConstructors 
+     * @param {Array<Function>} haloItemConstructors
      * @returns {Array<HaloItem>}
      */
     addItems(...haloItemConstructors) {
@@ -29,7 +30,7 @@ class HaloBar {
 
     /**
      * Adds a halo item to the bar
-     * @param {HaloItem} item 
+     * @param {HaloItem} item
      */
     add(item) {
         this.html.append(item.html);

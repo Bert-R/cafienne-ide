@@ -1,11 +1,16 @@
+import {HaloItem} from "./haloitem";
+import {TemporaryConnector} from "../../connector";
+import {CasePlanModel} from "../../caseplanmodel";
+import {EntryCriterion} from "../../sentry";
+import {ExitCriterion} from "../../sentry";
 
-class HaloDragItem extends HaloItem {
+export class HaloDragItem extends HaloItem {
     constructor(halo, imgURL, title) {
         super(halo, imgURL, title);
         this.html.on('pointerdown', e => this.handleMouseDown(e));
     }
 
-    /** 
+    /**
      * Handles mousedown in a halo image (the images to drag e.g connector from element),
      * depending on the halo type a different action is required
      */
@@ -43,7 +48,7 @@ class HaloDragItem extends HaloItem {
         this.tempConnector.remove();
     }
 
-    /** 
+    /**
      * Handles mousemove after halo mousedown
      */
     handleMouseMove(e) {
@@ -53,7 +58,7 @@ class HaloDragItem extends HaloItem {
 
     /**
      * Handles mousup after mousedown on halo
-     * @param {*} e 
+     * @param {*} e
      * @param {String} haloType
      * @param {Function} action
      */
@@ -64,10 +69,10 @@ class HaloDragItem extends HaloItem {
     }
 }
 
-class ConnectorHaloItem extends HaloDragItem {
+export class ConnectorHaloItem extends HaloDragItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.rightBar;
@@ -94,10 +99,10 @@ class ConnectorHaloItem extends HaloDragItem {
     }
 }
 
-class SentryHaloItem extends HaloDragItem {
+export class SentryHaloItem extends HaloDragItem {
     /**
      * Returns the default bar in which this item appears
-     * @param {Halo} halo 
+     * @param {Halo} halo
      */
     static defaultBar(halo) {
         return halo.rightBar;
@@ -153,7 +158,7 @@ class SentryHaloItem extends HaloDragItem {
     }
 }
 
-class EntryCriterionHaloItem extends SentryHaloItem {
+export class EntryCriterionHaloItem extends SentryHaloItem {
     constructor(halo) {
         super(halo, EntryCriterion.smallImage, EntryCriterion.typeDescription);
     }
@@ -163,7 +168,7 @@ class EntryCriterionHaloItem extends SentryHaloItem {
     }
 }
 
-class ExitCriterionHaloItem extends SentryHaloItem {
+export class ExitCriterionHaloItem extends SentryHaloItem {
     constructor(halo) {
         super(halo, ExitCriterion.smallImage, ExitCriterion.typeDescription);
     }

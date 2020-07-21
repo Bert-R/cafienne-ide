@@ -1,11 +1,14 @@
+import {XMLElementDefinition} from "./xmlelementdefinition";
+import {TypeCounter} from "./typecounter";
+
 /**
- * A ModelDefinition is the base class of a model, such as CaseDefinition, ProcessDefinition, HumanTaskDefinition, CaseFileDefinitionDefinition 
+ * A ModelDefinition is the base class of a model, such as CaseDefinition, ProcessDefinition, HumanTaskDefinition, CaseFileDefinitionDefinition
  */
-class ModelDefinition extends XMLElementDefinition {
+export class ModelDefinition extends XMLElementDefinition {
     /**
      * Imports an XML element and parses it into a in-memory definition structure.
-     * @param {Element} importNode 
-     * @param {DefinitionParser} definitionDocument 
+     * @param {Element} importNode
+     * @param {DefinitionParser} definitionDocument
      */
     constructor(importNode, definitionDocument) {
         super(importNode, undefined);
@@ -54,7 +57,7 @@ class ModelDefinition extends XMLElementDefinition {
 
     /**
      * Informs all elements in the case definition about the removal of the element
-     * @param {XMLElementDefinition} removedElement 
+     * @param {XMLElementDefinition} removedElement
      */
     removeDefinitionElement(removedElement) {
         // Go through other elements and tell them to say goodbye to removedElement;
@@ -65,7 +68,7 @@ class ModelDefinition extends XMLElementDefinition {
     /**
      * Returns the element that has the specified identifier, or undefined.
      * If the constructor argument is specified, the element is checked against the constructor with 'instanceof'
-     * @param {String} id 
+     * @param {String} id
      * @param {Function} constructor
      * @returns {XMLElementDefinition}
      */
@@ -95,8 +98,8 @@ class ModelDefinition extends XMLElementDefinition {
      * In CMMN some of the references are string based, and sometimes there are multiple references within the same
      * string, limited by space. This function analyzes such a string, and adds all references that could be found into the array.
      * If constructor is specified, the found elements must match (element instanceof constructor).
-     * @param {String} idString 
-     * @param {Array} collection 
+     * @param {String} idString
+     * @param {Array} collection
      * @param {*} constructor
      */
     findElements(idString, collection, constructor) {

@@ -1,7 +1,11 @@
-class PlanningTableHalo extends Halo {
+import {Halo} from "./halo";
+import {PropertiesHaloItem} from "./item/haloclickitems";
+import {DeleteHaloItem} from "./item/haloclickitems";
+
+export class PlanningTableHalo extends Halo {
     /**
      * Create the halo for the planning table.
-     * @param {PlanningTable} element 
+     * @param {PlanningTable} element
      */
     constructor(element) {
         super(element);

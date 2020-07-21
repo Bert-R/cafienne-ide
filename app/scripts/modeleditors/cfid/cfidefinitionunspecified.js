@@ -1,10 +1,13 @@
 ﻿'use strict';
 
-class CFIDefinitionUnspecified {
+import {Util} from "../../util/util";
+import {PropertyDefinition} from "../../definition/cfid/propertydefinition";
+
+export class CFIDefinitionUnspecified {
     /**
-     * 
-     * @param {CaseFileItemDefinitionEditor} editor 
-     * @param {JQuery<HTMLElement>} container 
+     *
+     * @param {CaseFileItemDefinitionEditor} editor
+     * @param {JQuery<HTMLElement>} container
      */
     constructor(editor, container) {
         this.editor = editor;
@@ -20,8 +23,8 @@ class CFIDefinitionUnspecified {
     }
 
     /**
-     * 
-     * @param {CaseFileDefinitionDefinition} data 
+     *
+     * @param {CaseFileDefinitionDefinition} data
      */
     show(data) {
         Util.clearHTML(this.tableDiv);
@@ -49,8 +52,8 @@ class CFIDefinitionUnspecified {
     }
 
     /**
-     * 
-     * @param {PropertyDefinition} property 
+     *
+     * @param {PropertyDefinition} property
      */
     addProperty(property = undefined) {
         if (property === undefined) {

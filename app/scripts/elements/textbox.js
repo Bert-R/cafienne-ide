@@ -1,9 +1,13 @@
-﻿class TextBox extends CMMNElement {
+import {CMMNElement} from "./cmmnelement";
+import {TextBoxShape} from "../definition/cmmn/dimensions/shape";
+import {TextBoxProperties} from "./properties/textboxproperties";
+
+export ﻿class TextBox extends CMMNElement {
     /**
-     * 
-     * @param {Stage} stage 
-     * @param {Number} x 
-     * @param {Number} y 
+     *
+     * @param {Stage} stage
+     * @param {Number} x
+     * @param {Number} y
      */
     static create(stage, x, y) {
         const shape = TextBoxShape.create(stage.definition, x, y);
@@ -12,8 +16,8 @@
 
     /**
      * Creates a new TextBox element
-     * @param {Stage} parent 
-     * @param {TextBoxShape} definition 
+     * @param {Stage} parent
+     * @param {TextBoxShape} definition
      */
     constructor(parent, definition) {
         super(parent, definition);
@@ -43,4 +47,5 @@
         };
     }
 }
+
 CMMNElement.registerType(TextBox, 'Text Box', 'images/svg/textbox.svg');

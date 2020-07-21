@@ -1,5 +1,17 @@
-﻿class CaseFileItemDefinitionEditor {
-    /** 
+import {CFIDefinitionUnspecified} from "./cfidefinitionunspecified";
+import {CFIDefinitionXMLElement} from "./cfidefinitionxmlelement";
+import {CFIDefinitionUnknown} from "./cfidefinitionunknown";
+import {ServerFile} from "../../repository/serverfile";
+import {XML} from "../../util/xml";
+import {UNSPECIFIED} from "../../definition/cfid/casefileitemdefinitiondefinition";
+import {UNSPECIFIED_URI} from "../../definition/cfid/casefileitemdefinitiondefinition";
+import {XMLELEMENT} from "../../definition/cfid/casefileitemdefinitiondefinition";
+import {XMLELEMENT_URI} from "../../definition/cfid/casefileitemdefinitiondefinition";
+import {UNKNOWN} from "../../definition/cfid/casefileitemdefinitiondefinition";
+import {UNKNOWN_URI} from "../../definition/cfid/casefileitemdefinitiondefinition";
+
+﻿export class CaseFileItemDefinitionEditor {
+    /**
      * This object handles the case file items definition (cfidef) form.
      * with a case file item.
      * @param {CaseFileItemsEditor} caseFileItemsEditor
@@ -161,8 +173,8 @@
     }
 
     /**
-     * 
-     * @param {CaseFileDefinitionDefinition} definition 
+     *
+     * @param {CaseFileDefinitionDefinition} definition
      */
     renderDefinition(definition) {
         this.activeDefinition = definition;

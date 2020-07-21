@@ -1,4 +1,5 @@
-class XML {
+
+export class XML {
     /**
      * Parses the given xml string into a Document object
      * @param {String|Node} xml
@@ -20,7 +21,7 @@ class XML {
 
     /**
      * returns an xml document based on the passed string
-     * @param {String} txt 
+     * @param {String} txt
      * @returns {Document}
      */
     static loadXMLString(txt) {
@@ -37,8 +38,8 @@ class XML {
 
     /**
      * returns true when the xmlDef has no errors, false when there are errors during parsing of XML
-     * @param {Document} xmlDef 
-     * @param {Boolean} bSuppressErrorMessage 
+     * @param {Document} xmlDef
+     * @param {Boolean} bSuppressErrorMessage
      * @returns {Boolean}
      */
     static isValidXMLImport(xmlDef, bSuppressErrorMessage = false) {
@@ -57,8 +58,8 @@ class XML {
 
     /**
      * Creates a child element with the specified tagName and appends it to the parentNode
-     * @param {Node} parentNode 
-     * @param {String} tagName 
+     * @param {Node} parentNode
+     * @param {String} tagName
      * @returns {Element} The newly created element
      */
     static createChildElement(parentNode, tagName) {
@@ -67,8 +68,8 @@ class XML {
 
     /**
      * Creates a text node with the specified text and appends it to the parentNode
-     * @param {Node} parentNode 
-     * @param {String} text 
+     * @param {Node} parentNode
+     * @param {String} text
      * @returns {Text} The newly created element
      */
     static createTextChild(parentNode, text) {
@@ -76,9 +77,9 @@ class XML {
     }
 
     /**
-     * Returns the first element child of xmlNode that has the corresponding tagName, or undefined. 
-     * @param {Element | Document} xmlNode 
-     * @param {String} tagName 
+     * Returns the first element child of xmlNode that has the corresponding tagName, or undefined.
+     * @param {Element | Document} xmlNode
+     * @param {String} tagName
      * @returns {Element}
      */
     static getChildByTagName(xmlNode, tagName) {
@@ -89,8 +90,8 @@ class XML {
     /**
      * Wrapper function around DOM.getElementsByTagName, but yielding only direct children of XML node.
      * Returns an Array.
-     * @param {Element | Document} xmlNode 
-     * @param {String} tagName 
+     * @param {Element | Document} xmlNode
+     * @param {String} tagName
      * @returns {Array<Element>}
      */
     static getChildrenByTagName(xmlNode, tagName) {
@@ -103,7 +104,7 @@ class XML {
 
     /**
      * Returns an array with all elements under the given XML node
-     * @param {Document | Element | Node} xmlNode 
+     * @param {Document | Element | Node} xmlNode
      * @param {Array<Element>} array Optionally provide an array to which the elements will be added, or one will be created
      */
     static allElements(xmlNode, array = []) {
@@ -117,10 +118,10 @@ class XML {
     }
 
     /**
-     * Wrapper function around DOM.getElementsByTagName, returning an array that can be 
+     * Wrapper function around DOM.getElementsByTagName, returning an array that can be
      * looped over with a forEach function. If the xmlNode is undefined, an empty array will be returned.
-     * @param {Element | Document} xmlNode 
-     * @param {String} tagName 
+     * @param {Element | Document} xmlNode
+     * @param {String} tagName
      * @returns {Array<Element>}
      */
     static getElementsByTagName(xmlNode, tagName) {
@@ -137,7 +138,7 @@ class XML {
      * returns the <![CDATA[..]]> node which is a child of the parentNode. If there is no such node
      * then the parentNode will be returned.
      * For most browsers the CDATA node is the second child of the parentNode, but not always. So look for 'cdata' in the nodename
-     * @param {*} parentNode 
+     * @param {*} parentNode
      */
     static getCDATANodeOrSelf(parentNode) {
         for (let i = 0; i < parentNode.childNodes.length; i++) {
@@ -151,14 +152,14 @@ class XML {
 
     /**
      * Pretty prints an XML string or node, based on regular expressions.
-     * @param {*} object 
+     * @param {*} object
      */
     static prettyPrint(object) {
         if (! object) return '';
         // Algorithm below takes a string and formats it; if an XML node is passed, we first serialize it to string.
         const text = typeof (object) == 'string' ? object : new XMLSerializer().serializeToString(object);
         //  This code is based on jquery.format.js by Zach Shelton
-        //  https://github.com/zachofalltrades/jquery.format        
+        //  https://github.com/zachofalltrades/jquery.format
         const shift = createShiftArr('    '); // 4 spaces
         const ar = text.replace(/>\s{0,}</g, '><')
             .replace(/</g, '~::~<')

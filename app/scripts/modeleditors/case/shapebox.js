@@ -1,8 +1,22 @@
-class ShapeBox {
+import {HumanTask} from "../../elements/humantask";
+import {CaseTask} from "../../elements/casetask";
+import {ProcessTask} from "../../elements/processtask";
+import {Milestone} from "../../elements/milestone";
+import {TimerEvent} from "../../elements/timerevent";
+import {UserEvent} from "../../elements/userevent";
+import {Stage} from "../../elements/stage";
+import {EntryCriterion} from "../../elements/sentry";
+import {ExitCriterion} from "../../elements/sentry";
+import {CasePlanModel} from "../../elements/caseplanmodel";
+import {CaseFileItem} from "../../elements/casefileitem";
+import {TextBox} from "../../elements/textbox";
+import {DragData} from "../../ide/dragdata";
+
+export class ShapeBox {
     /**
-     * 
-     * @param {Case} cs 
-     * @param {JQuery<HTMLElement>} htmlElement 
+     *
+     * @param {Case} cs
+     * @param {JQuery<HTMLElement>} htmlElement
      */
     constructor(cs, htmlElement) {
         this.case = cs;

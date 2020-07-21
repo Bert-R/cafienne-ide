@@ -1,4 +1,7 @@
-class Validator {
+import {Util} from "../util/util";
+import {ProblemType} from "./problemtype";
+
+export class Validator {
     constructor(cs) {
         this.case = cs;
         /** @type{Array<Problem>} */
@@ -9,7 +12,7 @@ class Validator {
 
     /**
      * Adds a listener
-     * @param {Function} listener 
+     * @param {Function} listener
      */
     addListener(listener) {
         this.listeners.push(listener);
@@ -17,7 +20,7 @@ class Validator {
 
     /**
      * Adds a listener
-     * @param {Function} listener 
+     * @param {Function} listener
      */
     removeListener(listener) {
         Util.removeFromArray(this.listeners, listener);
@@ -50,7 +53,7 @@ class Validator {
 
         //validate the case with its' properties
         this.case.validate();
-        
+
         // Inform all listeners that we have a whole new set of problems.
         this.listeners.forEach(listener => listener(this));
     }

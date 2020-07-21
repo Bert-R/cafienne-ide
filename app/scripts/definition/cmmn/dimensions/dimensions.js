@@ -1,18 +1,27 @@
-const DIMENSIONS = 'dimensions';
-const CMMNDI = 'CMMNDI';
-const CMMNDIAGRAM = 'CMMNDiagram';
-const CMMNSHAPE = 'CMMNShape';
-const CMMNEDGE = 'CMMNEdge';
-const BOUNDS = 'Bounds';
-const WAYPOINT = 'waypoint';
-const CMMNELEMENTREF = 'cmmnElementRef';
-const SOURCECMMNELEMENTREF = 'sourceCMMNElementRef';
-const TARGETCMMNELEMENTREF = 'targetCMMNElementRef';
+import {ModelDefinition} from "../../modeldefinition";
+import {ShapeDefinition} from "./shape";
+import {TextBoxShape} from "./shape";
+import {CaseFileItemShape} from "./shape";
+import {Edge} from "./edge";
+import {CustomShape} from "./shape";
+import {Util} from "../../../util/util";
+import {XML} from "../../../util/xml";
 
-class Dimensions extends ModelDefinition {
+export const DIMENSIONS = 'dimensions';
+export const CMMNDI = 'CMMNDI';
+export const CMMNDIAGRAM = 'CMMNDiagram';
+export const CMMNSHAPE = 'CMMNShape';
+export const CMMNEDGE = 'CMMNEdge';
+export const BOUNDS = 'Bounds';
+export const WAYPOINT = 'waypoint';
+export const CMMNELEMENTREF = 'cmmnElementRef';
+export const SOURCECMMNELEMENTREF = 'sourceCMMNElementRef';
+export const TARGETCMMNELEMENTREF = 'targetCMMNElementRef';
+
+export class Dimensions extends ModelDefinition {
     /**
      * Parses the content of the XML document into dimension structures that can be accessed via this class.
-     * @param {Element} importNode 
+     * @param {Element} importNode
      * @param {DefinitionDocument} definitionDocument
      */
     constructor(importNode, definitionDocument) {
@@ -36,7 +45,7 @@ class Dimensions extends ModelDefinition {
 
     /**
      * While parsing the XML, an error may occur. This is stored in the overall list of parse errors.
-     * @param {String} msg 
+     * @param {String} msg
      */
     addParseError(msg) {
         this.errors.push(msg);
@@ -44,7 +53,7 @@ class Dimensions extends ModelDefinition {
 
     /**
      * While parsing the XML, we may encounter valid but incomplete content, for which a warning will be generated.
-     * @param {String} msg 
+     * @param {String} msg
      */
     addParseWarning(msg) {
         this.errors.push(msg);
@@ -61,7 +70,7 @@ class Dimensions extends ModelDefinition {
 
     /**
      * Adds a shape to the dimensions list.
-     * @param {ShapeDefinition} shape 
+     * @param {ShapeDefinition} shape
      */
     addShape(shape) {
         this.shapes.push(shape);
@@ -69,7 +78,7 @@ class Dimensions extends ModelDefinition {
 
     /**
      * Removes the shape
-     * @param {ShapeDefinition} shape 
+     * @param {ShapeDefinition} shape
      */
     removeShape(shape) {
         Util.removeFromArray(this.shapes, shape);

@@ -1,8 +1,10 @@
-class Action {
+import {DefinitionDocument} from "../../definition/definitiondocument";
+
+export class Action {
     /**
-     * 
-     * @param {UndoManager} undoManager 
-     * @param {DefinitionDocument} definition 
+     *
+     * @param {UndoManager} undoManager
+     * @param {DefinitionDocument} definition
      * @param {Action} previousAction
      */
     constructor(undoManager, definition, previousAction) {
@@ -82,10 +84,10 @@ class Action {
      * corresponding with this action, and also invokes the save logic on the action.
      * Note that the save logic depends on the direction of the perform: for undo, the save flags
      * has to be taken from the current action, for redo it has to be taken from the next action.
-     * (See the actual implementations of undo and redo above) 
-     * @param {String} direction 
-     * @param {Boolean} caseChanged 
-     * @param {Boolean} dimensionsChanged 
+     * (See the actual implementations of undo and redo above)
+     * @param {String} direction
+     * @param {Boolean} caseChanged
+     * @param {Boolean} dimensionsChanged
      */
     perform(direction, caseChanged = this.caseChanged, dimensionsChanged = this.dimensionsChanged) {
         // console.log("Performing "+direction+" on action "+this.undoCount )
@@ -104,8 +106,8 @@ class Action {
      * Trigger save logic on the action. Executes two independent save actions,
      * one on the case definition and one on the dimensions file; but only if they changed.
      * The flags indicate whether they have changed, and take the values of the Action itself by default.
-     * @param {Boolean} caseChanged 
-     * @param {Boolean} dimensionsChanged 
+     * @param {Boolean} caseChanged
+     * @param {Boolean} dimensionsChanged
      */
     save(caseChanged = this.caseChanged, dimensionsChanged = this.dimensionsChanged) {
         if (this.saved) {

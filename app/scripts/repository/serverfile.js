@@ -1,3 +1,6 @@
+import {ModelDocument} from "../definition/modeldocument";
+import {XML} from "../util/xml";
+
 export class ServerFile {
     /**
      * Creates a new local reference of the server file, based on the json structure given

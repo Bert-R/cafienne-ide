@@ -1,7 +1,7 @@
-class ModelEditorMetadata {
+export class ModelEditorMetadata {
     /**
      * Creates metadata for a type of ModelEditor within the IDE
-     * @param {IDE} ide 
+     * @param {IDE} ide
      */
     constructor(ide) {
         this.ide = ide;
@@ -43,7 +43,7 @@ class ModelEditorMetadata {
 
     /**
      * Creates a new instance of the editor for the model.
-     * @param {ServerFile} model 
+     * @param {ServerFile} model
      * @returns {ModelEditor} editor
      */
     createEditor(ide, fileName, modelName, modelType) {
@@ -54,8 +54,8 @@ class ModelEditorMetadata {
 
     /**
      * Create a new model with the specified model name.
-     * @param {*} newModelName 
-     * @param {*} newModelDescription 
+     * @param {*} newModelName
+     * @param {*} newModelDescription
      * @returns {String} fileName of the new model
      */
     createNewModel(newModelName, newModelDescription) {

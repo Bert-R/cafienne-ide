@@ -1,4 +1,36 @@
-﻿class Stage extends TaskStage {
+import {TaskStage} from "./taskstage";
+import {StageDefinition} from "../definition/cmmn/definitions/caseplan/stagedefinition";
+import {CaseFileItem} from "./casefileitem";
+import {PlanningTable} from "./planningtable";
+import {Sentry} from "./sentry";
+import {StageProperties} from "./properties/stageproperties";
+import {HumanTask} from "./humantask";
+import {CaseTaskDefinition} from "../definition/cmmn/definitions/caseplan/task/casetaskdefinition";
+import {CaseTask} from "./casetask";
+import {ProcessTaskDefinition} from "../definition/cmmn/definitions/caseplan/task/processtaskdefinition";
+import {ProcessTask} from "./processtask";
+import {MilestoneDefinition} from "../definition/cmmn/definitions/caseplan/milestonedefinition";
+import {Milestone} from "./milestone";
+import {UserEventDefinition} from "../definition/cmmn/definitions/caseplan/usereventdefinition";
+import {UserEvent} from "./userevent";
+import {TimerEventDefinition} from "../definition/cmmn/definitions/caseplan/timereventdefinition";
+import {TimerEvent} from "./timerevent";
+import {PlanItemView} from "./planitemview";
+import {Util} from "../util/util";
+import {TextBox} from "./textbox";
+import {CaseFileItemShape} from "../definition/cmmn/dimensions/shape";
+import {TextBoxShape} from "../definition/cmmn/dimensions/shape";
+import {Decorator} from "./planitemview";
+import {EntryCriterion} from "./sentry";
+import {ExitCriterion} from "./sentry";
+import {CMMNElement} from "./cmmnelement";
+import {MANUALACTIVATION_IMG} from "./elements";
+import {REQUIRED_IMG} from "./elements";
+import {MINUS_IMG} from "./elements";
+import {AUTOCOMPLETE_IMG} from "./elements";
+import {REPETITION_IMG} from "./elements";
+
+export ﻿class Stage extends TaskStage {
     static get definitionClass() {
         return StageDefinition;
     }
@@ -34,8 +66,8 @@
 
     /**
      * Add a 'drag-dropped' case file item
-     * @param {DragData} dragData 
-     * @param {JQuery<Event>} e 
+     * @param {DragData} dragData
+     * @param {JQuery<Event>} e
      */
     addCaseFileItem(dragData, e) {
         const cfiDefinition = this.case.caseDefinition.getElement(dragData.fileName);
@@ -50,8 +82,8 @@
 
     /**
      * Add a 'drag-dropped' task implementation
-     * @param {DragData} dragData 
-     * @param {*} e 
+     * @param {DragData} dragData
+     * @param {*} e
      */
     addTaskModel(dragData, e) {
         /** @type {Task} */
@@ -80,7 +112,7 @@
 
     /**
      * Determines whether this stage visually surrounds the cmmn element.
-     * @param {CMMNElement} other 
+     * @param {CMMNElement} other
      */
     surrounds(other) {
         // Note: this method is added here instead of directly invoking shape.surrounds because logic is different at caseplan level, so caseplan can override.
@@ -96,8 +128,8 @@
     }
 
     /**
-     * 
-     * @param {PlanItem} definition 
+     *
+     * @param {PlanItem} definition
      */
     addPlanItem(definition) {
         if (!definition.definition) {
@@ -114,7 +146,7 @@
     /**
      * Creates a new view (either HumanTask, CaseTask, ProcessTask, CasePlanModel, Milestone, Stage, UserEvent, TimerEvent),
      * based on the given plan item. It will look for the planItemDefinition inside the plan item and take it's type to determine the view.
-     * @param {PlanItem} definition 
+     * @param {PlanItem} definition
      */
     createPlanItemView(definition) {
         const planItemDefinition = definition.definition;
@@ -140,7 +172,7 @@
 
     /**
      * Method invoked when a child is moved into this element from a different parent.
-     * @param {CMMNElement} childElement 
+     * @param {CMMNElement} childElement
      */
     adoptItem(childElement) {
         const previousParent = childElement.parent;
@@ -167,7 +199,7 @@
 
     /**
      * Adds a discretionary item definition (that is, a PlanItem with .isDiscretionary set to true)
-     * @param {PlanItem} definition 
+     * @param {PlanItem} definition
      */
     addDiscretionaryItem(definition) {
         this.addPlanItem(definition);
@@ -308,7 +340,7 @@
 
     /**
      * returns true when an element of type 'elementType' can be added as a child to this element
-     * @param {*} elementType 
+     * @param {*} elementType
      */
     __canHaveAsChild(elementType) {
         if (elementType == EntryCriterion.name ||

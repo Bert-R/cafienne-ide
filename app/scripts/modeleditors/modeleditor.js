@@ -1,9 +1,9 @@
 ﻿'use strict';
 
-class ModelEditor {
+export class ModelEditor {
     /**
      * Basic model editor
-     * @param {IDE} ide 
+     * @param {IDE} ide
      * @param {String} fileName The full file name to be loaded, e.g. 'helloworld.case', 'sendresponse.humantask'
      * @param {String} modelName The file name without the extension, e.g. 'helloworld'
      * @param {String} modelType  The extension of the filename, e.g. 'case', 'process', 'humantask'
@@ -95,9 +95,9 @@ class ModelEditor {
 
     /**
      * Create a new model with given name and description and return the filename of the model.
-     * @param {IDE} ide 
-     * @param {String} name 
-     * @param {String} description 
+     * @param {IDE} ide
+     * @param {String} name
+     * @param {String} description
      * @returns {String} fileName of the new model
      */
     static createNewModel(ide, name, description) {

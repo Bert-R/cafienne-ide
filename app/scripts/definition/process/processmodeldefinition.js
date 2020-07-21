@@ -1,8 +1,13 @@
-class ProcessModelDefinition extends ModelDefinition {
+import {ModelDefinition} from "../modeldefinition";
+import {ImplementationParameterDefinition} from "../cmmn/definitions/parameterdefinition";
+import {ProcessImplementationDefinition} from "./processimplementationdefinition";
+import {XML} from "../../util/xml";
+
+export class ProcessModelDefinition extends ModelDefinition {
     /**
      * Imports an XML element and parses it into a in-memory definition structure.
-     * @param {Element} importNode 
-     * @param {ModelDocument} definitionDocument 
+     * @param {Element} importNode
+     * @param {ModelDocument} definitionDocument
      */
     constructor(importNode, definitionDocument) {
         super(importNode, definitionDocument);

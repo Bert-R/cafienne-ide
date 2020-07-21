@@ -1,6 +1,10 @@
-class TaskStageProperties extends PlanItemProperties {
+import {PlanItemProperties} from "./planitemproperties";
+import {Util} from "../../util/util";
+import {EXPANDEDPLANNINGTABLE_IMG} from "../elements";
+
+export class TaskStageProperties extends PlanItemProperties {
     /**
-     * @param {TaskStage} taskStage 
+     * @param {TaskStage} taskStage
      */
     constructor(taskStage) {
         super(taskStage);
@@ -61,7 +65,7 @@ class TaskStageProperties extends PlanItemProperties {
     /**
      * Adds a role. Can be undefined, in which case an empty row is added.
      * Also adds the required event handlers to the html.
-     * @param {ApplicabilityRuleDefinition} rule 
+     * @param {ApplicabilityRuleDefinition} rule
      */
     addApplicabilityRuleField(rule) {
         const isSelected = this.cmmnElement.definition.applicabilityRules.find(r => r == rule) ? true : false;

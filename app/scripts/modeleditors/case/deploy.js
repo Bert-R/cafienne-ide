@@ -1,11 +1,13 @@
 ﻿'use strict';
 
+import {StandardForm} from "../../editors/standardform";
+
 /**
  * This class implements the logic to call the repository REST service to deploy a CMMN model.
  *
  * @constructor
  */
-class Deploy extends StandardForm {
+export class Deploy extends StandardForm {
     constructor(cs) {
         super(cs, 'Deploy CMMN Model - ' + cs.name, 'deployform');
     }

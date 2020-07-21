@@ -1,4 +1,6 @@
-class TableRenderer {
+import {Util} from "../../util/util";
+
+export class TableRenderer {
     /**
      * Defines a generic control for collections of CMMNElementDefinition, to select and edit data in a table
      * @param {Case} cs
@@ -52,11 +54,11 @@ class TableRenderer {
      */
     renderTable() {
         if (! this._html) {
-            this.renderHead();            
+            this.renderHead();
         }
         this.renderData();
     }
- 
+
     renderHead() {
         //create the html element of the editor form
         this.html = $(`<table>
@@ -76,7 +78,7 @@ class TableRenderer {
     }
 
     /**
-     * Removes current data content (and event handlers), 
+     * Removes current data content (and event handlers),
      * and freshly renders the data again.
      */
     renderData() {
@@ -97,8 +99,8 @@ class TableRenderer {
     }
 
     /**
-     * 
-     * @param {CMMNElementDefinition} element 
+     *
+     * @param {CMMNElementDefinition} element
      * @returns {RowRenderer}
      */
     addRenderer(element = undefined) {
@@ -130,10 +132,10 @@ class TableRenderer {
     }
 
     /**
-     * 
-     * @param {CMMNElementDefinition} element 
-     * @param {String} field 
-     * @param {*} value 
+     *
+     * @param {CMMNElementDefinition} element
+     * @param {String} field
+     * @param {*} value
      */
     change(element, field, value) {
         console.log("Changing field '" + field + "' in element " + element.constructor.name + " into " + value)
@@ -143,7 +145,7 @@ class TableRenderer {
 
     /**
      * when the description of a case file item is changed the zoom fields must be updated
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {
         this.rows.forEach(row => row.refreshReferencingFields(definitionElement));

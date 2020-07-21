@@ -1,7 +1,10 @@
-class Properties extends MovableEditor {
+import {MovableEditor} from "../../editors/movableeditor";
+import {Util} from "../../util/util";
+
+export class Properties extends MovableEditor {
     /**
      * Renderer for the properties of the element
-     * @param {CMMNElement} cmmnElement 
+     * @param {CMMNElement} cmmnElement
      */
     constructor(cmmnElement) {
         super(cmmnElement.case);
@@ -96,7 +99,7 @@ class Properties extends MovableEditor {
     /**
      * Shows the properties of the element.
      * Optionally sets the focus on the description property of the element (typically used for new elements)
-     * @param {Boolean} focusNameField 
+     * @param {Boolean} focusNameField
      */
     show(focusNameField = false) {
         this.clear();
@@ -156,10 +159,10 @@ class Properties extends MovableEditor {
     }
 
     /**
-     * 
-     * @param {CMMNElementDefinition} element 
-     * @param {String} field 
-     * @param {*} value 
+     *
+     * @param {CMMNElementDefinition} element
+     * @param {String} field
+     * @param {*} value
      */
     change(element, field, value) {
         console.log("Changing field '" + field + "' in element " + element.constructor.name + " into " + value)
@@ -169,9 +172,9 @@ class Properties extends MovableEditor {
 
     /**
      * Adds a plain input field to show the property
-     * @param {String} label 
-     * @param {String} propertyType 
-     * @param {*} element 
+     * @param {String} label
+     * @param {String} propertyType
+     * @param {*} element
      * @returns {JQuery<HTMLElement>}
      */
     addInputField(label, propertyType, element = this.cmmnElement.definition) {
@@ -228,9 +231,9 @@ class Properties extends MovableEditor {
 
     /**
      * Adds a text area to show the property
-     * @param {String} label 
-     * @param {String} propertyType 
-     * @param {*} element 
+     * @param {String} label
+     * @param {String} propertyType
+     * @param {*} element
      * @returns {JQuery<HTMLElement>}
      */
     addTextField(label, propertyType, element = this.cmmnElement.definition) {
@@ -245,10 +248,10 @@ class Properties extends MovableEditor {
 
     /**
      * Adds a checkbox property
-     * @param {String} label 
-     * @param {String} imageURL 
-     * @param {String} propertyType 
-     * @param {*} element 
+     * @param {String} label
+     * @param {String} imageURL
+     * @param {String} propertyType
+     * @param {*} element
      * @returns {JQuery<HTMLElement>}
      */
     addCheckField(label, imageURL, propertyType, element = this.cmmnElement.definition) {
@@ -274,7 +277,7 @@ class Properties extends MovableEditor {
 
     /**
      * Method invoked after a role or case file item has changed
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {
         if (this.visible) {

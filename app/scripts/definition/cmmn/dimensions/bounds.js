@@ -1,4 +1,7 @@
-class Bounds extends DiagramElement {
+import {DiagramElement} from "./diagramelement";
+import {BOUNDS} from "./dimensions";
+
+export class Bounds extends DiagramElement {
     /**
      * Indicates the bounds (x, y, width, height) of a shape.
      */
@@ -13,10 +16,10 @@ class Bounds extends DiagramElement {
 
     /**
      * Parses the attribute with the specified name from the node, and sets it in the bounds object.
-     * @param {String} name 
-     * @param {Number} minValue 
-     * @param {String} errorMsg 
-     * @param {String} cmmnElementRef 
+     * @param {String} name
+     * @param {Number} minValue
+     * @param {String} errorMsg
+     * @param {String} cmmnElementRef
      */
     parseIntAttribute(name, minValue, errorMsg) {
         const attributeValue = this.parseNumberAttribute(name);

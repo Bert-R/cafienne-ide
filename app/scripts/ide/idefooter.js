@@ -1,7 +1,7 @@
-class IDEFooter {
+export class IDEFooter {
     /**
      * Constructs the footer of the IDE element.
-     * @param {IDE} ide 
+     * @param {IDE} ide
      */
     constructor(ide) {
         this.ide = ide;
@@ -23,7 +23,7 @@ class IDEFooter {
                 <img src="images/settings_128.png" />
                 <label>Settings</label>
             </button>
-        </div>            
+        </div>
     </div>
 </div>`);
         this.ide.html.append(this.html);
@@ -53,7 +53,7 @@ class IDEFooter {
             isOpera === false &&
             isIEedge === false)) {
             // is Google Chrome
-        } else { 
+        } else {
             this.setGlobalWarning('This application is tested only in Chrome browsers');
         }
 
@@ -68,7 +68,7 @@ class IDEFooter {
 
     /**
      * Sets a global warning message in the footer
-     * @param {String} msg 
+     * @param {String} msg
      */
     setGlobalWarning(msg) {
         this.divGlobalWarning.html(msg);

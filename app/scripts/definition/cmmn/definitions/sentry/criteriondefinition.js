@@ -1,4 +1,7 @@
-class CriterionDefinition extends CMMNElementDefinition {
+import {CMMNElementDefinition} from "../cmmnelementdefinition";
+import {SentryDefinition} from "./sentrydefinition";
+
+export class CriterionDefinition extends CMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.sentryRef = this.parseAttribute('sentryRef');
@@ -66,8 +69,8 @@ class CriterionDefinition extends CMMNElementDefinition {
     }
 
     /**
-     * @param {Element} parentNode 
-     * @param {String} tagName 
+     * @param {Element} parentNode
+     * @param {String} tagName
      */
     createExportNode(parentNode, tagName) {
         super.createExportNode(parentNode, tagName, 'sentryRef');

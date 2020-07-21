@@ -1,7 +1,9 @@
-﻿class EventListener extends PlanItemView {
+import {PlanItemView} from "./planitemview";
+
+export ﻿class EventListener extends PlanItemView {
     /**
      * Creates a new EventListener
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {

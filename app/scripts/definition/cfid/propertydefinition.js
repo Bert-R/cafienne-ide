@@ -1,4 +1,7 @@
-class PropertyDefinition extends XMLElementDefinition {
+import {XMLElementDefinition} from "../xmlelementdefinition";
+import {CafienneExtension} from "../cmmn/definitions/cafienneextension";
+
+export class PropertyDefinition extends XMLElementDefinition {
     constructor(importNode, modelDefinition, parent) {
         super(importNode, modelDefinition, parent);
         this.name = this.parseAttribute('name', '');

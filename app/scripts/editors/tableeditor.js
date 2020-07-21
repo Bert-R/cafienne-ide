@@ -1,8 +1,11 @@
-class TableEditor extends MovableEditor {
+import {MovableEditor} from "./movableeditor";
+import {Util} from "../util/util";
+
+export class TableEditor extends MovableEditor {
     /**
      * Defines a generic editor for collections of CMMNElementDefinition, to select and edit data in a table
      * Defines a generic TableEditor, to select and edit data in a table
-     * @param {Case} cs 
+     * @param {Case} cs
      */
     constructor(cs) {
         super(cs);
@@ -30,11 +33,11 @@ class TableEditor extends MovableEditor {
      */
     renderForm() {
         if (! this._html) {
-            this.renderHead();            
+            this.renderHead();
         }
         this.renderData();
     }
- 
+
     renderHead() {
         //create the html element of the editor form
         this.html = $(`<div id='${this.id}' class='tableeditorform basicbox basicform'>
@@ -81,7 +84,7 @@ class TableEditor extends MovableEditor {
     }
 
     /**
-     * Removes current data content (and event handlers), 
+     * Removes current data content (and event handlers),
      * and freshly renders the data again.
      */
     renderData() {
@@ -91,8 +94,8 @@ class TableEditor extends MovableEditor {
     }
 
     /**
-     * 
-     * @param {CMMNElementDefinition} element 
+     *
+     * @param {CMMNElementDefinition} element
      * @returns {RowEditor}
      */
     addRenderer(element = undefined) {
@@ -141,15 +144,15 @@ class TableEditor extends MovableEditor {
     /**
      * Indicates whether this TableEditor must be marked/unmarked because a case
      * file item refers to it. Is implemented for ParametersEditor only.
-     * @param {Boolean} bMark 
+     * @param {Boolean} bMark
      */
     __mark(bMark) {}
 
     /**
-     * 
-     * @param {CMMNElementDefinition} element 
-     * @param {String} field 
-     * @param {*} value 
+     *
+     * @param {CMMNElementDefinition} element
+     * @param {String} field
+     * @param {*} value
      */
     change(element, field, value) {
         console.log("Changing field '" + field + "' in element " + element.constructor.name + " into " + value);
@@ -158,11 +161,11 @@ class TableEditor extends MovableEditor {
     }
 
     /**
-     * Raises an issue found during validation. The context in which the issue has occured and the issue number must be passed, 
+     * Raises an issue found during validation. The context in which the issue has occured and the issue number must be passed,
      * along with some parameters that are used to provide a meaningful description of the issue
      * @param {*} context
-     * @param {Number} number 
-     * @param {Array<String>} parameters 
+     * @param {Number} number
+     * @param {Array<String>} parameters
      */
     raiseEditorIssue(context, number, parameters) {
         this.case.validator.raiseProblem(context.id, number, parameters);
@@ -170,20 +173,20 @@ class TableEditor extends MovableEditor {
 
     /**
      * when the description of a case file item is changed the zoom fields must be updated
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {
         this.rows.forEach(row => row.refreshReferencingFields(definitionElement));
     }
 }
 
-class TableEditorColumn {
+export class TableEditorColumn {
     /**
      * Base class for describing a column in a row in the table editor
-     * @param {String} label 
-     * @param {String} width 
-     * @param {String} title 
-     * @param {String} classNames 
+     * @param {String} label
+     * @param {String} width
+     * @param {String} title
+     * @param {String} classNames
      */
     constructor(label, width, title = label, classNames = '') {
         this.width = width;
@@ -201,11 +204,11 @@ class TableEditorColumn {
     }
 }
 
-class RowEditor {
+export class RowEditor {
     /**
      * Base class for rendering a row in the table editor
-     * @param {TableEditor} editor 
-     * @param {CMMNElementDefinition} element 
+     * @param {TableEditor} editor
+     * @param {CMMNElementDefinition} element
      */
     constructor(editor, element = undefined) {
         this.editor = editor;
@@ -222,7 +225,7 @@ class RowEditor {
     }
 
     /**
-     * Setting the html will also add it to the table  
+     * Setting the html will also add it to the table
      * @returns {JQuery<HTMLElement>}
      */
     set html(html) {
@@ -249,8 +252,8 @@ class RowEditor {
 
     /**
      * Change a property of the element into the new value
-     * @param {String} propertyName 
-     * @param {*} propertyValue 
+     * @param {String} propertyName
+     * @param {*} propertyValue
      */
     change(propertyName, propertyValue) {
         this.editor.change(this.element, propertyName, propertyValue);
@@ -258,7 +261,7 @@ class RowEditor {
 
     /**
      * Deletes this row and the associated definition.
-     * @param {*} e 
+     * @param {*} e
      */
     delete(e) {
         e.stopPropagation();
@@ -307,7 +310,7 @@ class RowEditor {
 
     /**
      * Refreshes the visualizers relating to the definition element
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {}
 }

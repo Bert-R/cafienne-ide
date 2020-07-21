@@ -1,9 +1,15 @@
-class Halo {
+import {HaloBar} from "./halobar";
+import {ConnectorHaloItem} from "./item/halodragitems";
+import {PropertiesHaloItem} from "./item/haloclickitems";
+import {DeleteHaloItem} from "./item/haloclickitems";
+import {Util} from "../../util/util";
+
+export class Halo {
     /**
      * Creates a halo for the cmmn element.
      * The content of the halo need not be set it in the constructor, but rather
      * in the implementation of the createContent() method. This is invoked right after constructor invocation.
-     * @param {CMMNElement} element 
+     * @param {CMMNElement} element
      */
     constructor(element) {
         this.element = element;
@@ -99,7 +105,7 @@ class Halo {
     /**
      * Adds halo items according to their default location (right, top, left, bottom) to this halo.
      * It is sufficient to pass a comma separated list of the HaloItem constructors.
-     * @param {Array<Function>} haloItemConstructors 
+     * @param {Array<Function>} haloItemConstructors
      * @returns {Array<HaloItem>}
      */
     addItems(...haloItemConstructors) {

@@ -1,4 +1,8 @@
-class TimerEventDefinition extends EventListenerDefinition {
+import {EventListenerDefinition} from "./eventlistenerdefinition";
+import {ExpressionDefinition} from "../constraintdefinition";
+import {OnPartDefinition} from "../sentry/onpartdefinition";
+
+export class TimerEventDefinition extends EventListenerDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.timerExpression = this.parseElement('timerExpression', ExpressionDefinition);

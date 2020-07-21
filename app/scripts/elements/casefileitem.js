@@ -1,9 +1,14 @@
-﻿class CaseFileItem extends CMMNElement {
+import {CMMNElement} from "./cmmnelement";
+import {CaseFileItemShape} from "../definition/cmmn/dimensions/shape";
+import {CaseFileItemProperties} from "./properties/casefileitemproperties";
+import {CaseFileItemHalo} from "./halo/casefileitemhalo";
+
+export ﻿class CaseFileItem extends CMMNElement {
     /**
-     * 
-     * @param {Stage} stage 
-     * @param {Number} x 
-     * @param {Number} y 
+     *
+     * @param {Stage} stage
+     * @param {Number} x
+     * @param {Number} y
      */
     static create(stage, x, y) {
         const shape = CaseFileItemShape.create(stage.definition, x, y);
@@ -12,8 +17,8 @@
 
     /**
      * Creates a new CaseFileItem
-     * @param {Stage} parent 
-     * @param {CaseFileItemShape} definition 
+     * @param {Stage} parent
+     * @param {CaseFileItemShape} definition
      */
     constructor(parent, definition) {
         super(parent, definition);
@@ -55,4 +60,5 @@
         return definitionId == this.shape.contextRef;
     }
 }
+
 CMMNElement.registerType(CaseFileItem, 'Case File Item', 'images/svg/casefileitem.svg');

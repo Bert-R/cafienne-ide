@@ -1,4 +1,6 @@
-class SplitterSettings {
+import {Settings} from "../../settings/settings";
+
+export class SplitterSettings {
     constructor() {
         this.splitters = {};
     }
@@ -20,7 +22,7 @@ class SplitterSettings {
     }
 }
 
-class AnonymousSplitterSettings {
+export class AnonymousSplitterSettings {
     constructor() {
         // console.log("Creating anonymous splitter")
     }

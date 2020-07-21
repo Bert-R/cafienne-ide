@@ -1,9 +1,13 @@
-class ParameterMappingDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "./unnamedcmmnelementdefinition";
+import {ExpressionDefinition} from "./constraintdefinition";
+import {ParameterDefinition} from "./parameterdefinition";
+
+export class ParameterMappingDefinition extends UnnamedCMMNElementDefinition {
     /**
-     * 
-     * @param {Element} importNode 
-     * @param {CaseDefinition} caseDefinition 
-     * @param {TaskDefinition} parent 
+     *
+     * @param {Element} importNode
+     * @param {CaseDefinition} caseDefinition
+     * @param {TaskDefinition} parent
      */
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
@@ -28,7 +32,7 @@ class ParameterMappingDefinition extends UnnamedCMMNElementDefinition {
 
     /**
      * Creates a new input or output parameter (depending on the type of mapping)
-     * @param {String} name 
+     * @param {String} name
      * @returns {ParameterDefinition}
      */
     createTaskParameter(name) {

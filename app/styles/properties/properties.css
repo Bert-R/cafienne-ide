@@ -30,11 +30,6 @@
     width: 100%;
 }
 
-/* .properties-container div {
-    width: 100%;
-    /*position:relative;*/
-} */
-
 .properties-container .disabled {
     opacity: 0.4;
 }

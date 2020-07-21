@@ -1,9 +1,18 @@
-class XMLElementDefinition {
+import {ModelDefinition} from "./modeldefinition";
+import {CafienneExtension} from "./cmmn/definitions/cafienneextension";
+import {Util} from "../util/util";
+import {CMMNElementDefinition} from "./cmmn/definitions/cmmnelementdefinition";
+import {XML} from "../util/xml";
+import {IMPLEMENTATION_TAG} from "../elements/elements";
+import {IMPLEMENTATION_PREFIX} from "../elements/elements";
+import {IMPLEMENTATION_NAMESPACE} from "../elements/elements";
+
+export class XMLElementDefinition {
     /**
      * Creates a new XMLElementDefinition that belongs to the Definition object.
-     * @param {Element} importNode 
-     * @param {ModelDefinition} modelDefinition 
-     * @param {XMLElementDefinition} parent 
+     * @param {Element} importNode
+     * @param {ModelDefinition} modelDefinition
+     * @param {XMLElementDefinition} parent
      */
     constructor(importNode, modelDefinition, parent = undefined) {
         this.importNode = importNode;
@@ -37,9 +46,9 @@ class XMLElementDefinition {
     }
 
     /**
-     * 
-     * @param {String} name 
-     * @param {Number} defaultValue 
+     *
+     * @param {String} name
+     * @param {Number} defaultValue
      */
     parseNumberAttribute(name, defaultValue = undefined) {
         const value = this.parseAttribute(name, defaultValue);
@@ -53,8 +62,8 @@ class XMLElementDefinition {
 
     /**
      * Parses the attribute with the given name. If it does not exist, returns the defaultValue
-     * @param {String} name 
-     * @param {*} defaultValue 
+     * @param {String} name
+     * @param {*} defaultValue
      * @returns {String}
      */
     parseAttribute(name, defaultValue = undefined) {
@@ -69,7 +78,7 @@ class XMLElementDefinition {
 
     /**
      * Searches for the first child element with the given tag name, and, if found, returns it's text content as string.
-     * @param {String} childName 
+     * @param {String} childName
      * @param {String} defaultValue
      */
     parseElementText(childName, defaultValue) {
@@ -82,8 +91,8 @@ class XMLElementDefinition {
 
     /**
      * Searches for the first child element with the given tag name, and, if found, instantiates it with the constructor and returns it.
-     * @param {String} childName 
-     * @param {Function} constructor 
+     * @param {String} childName
+     * @param {Function} constructor
      */
     parseElement(childName, constructor) {
         return this.instantiateChild(XML.getChildByTagName(this.importNode, childName), constructor);
@@ -91,9 +100,9 @@ class XMLElementDefinition {
 
     /**
      * Searches for all child elements with the given name, instantiates them with the constructor and adds them to the collection.
-     * @param {String} childName 
-     * @param {Function} constructor 
-     * @param {*} collection 
+     * @param {String} childName
+     * @param {Function} constructor
+     * @param {*} collection
      */
     parseElements(childName, constructor, collection = [], node = this.importNode) {
         XML.getChildrenByTagName(node, childName).forEach(childNode => this.instantiateChild(childNode, constructor, collection));
@@ -103,7 +112,7 @@ class XMLElementDefinition {
     /**
      * Searches for the first child element with the given tag name, and, if found, instantiates it with the constructor and returns it.
      * @param {String} childName The name of the xml element inside the extensionElements
-     * @param {Function} constructor 
+     * @param {Function} constructor
      * @param {Function} extensionType
      */
     parseExtensionElement(constructor, childName = constructor.TAG, extensionType = CafienneExtension) {
@@ -114,8 +123,8 @@ class XMLElementDefinition {
 
     /**
      * Parses the <cafienne:implementation> node from <extensionElements>. If present, then an instance of the constructor is returned for it.
-      * 
-      * @param {Function} constructor 
+      *
+      * @param {Function} constructor
       * @param {String} tagName
       * @returns {*} an instance of the given constructor if the extension element is found.
       */
@@ -129,9 +138,9 @@ class XMLElementDefinition {
      * Instantiates a new XMLElementDefinition based on the child node, or undefined if the childNode is undefined.
      * The new cmmn element will be optionally added to the collection, which can either be an Array or an Object.
      * In an Object it will be placed with the value of it's 'id' attribute.
-     * @param {Node} childNode 
-     * @param {Function} constructor 
-     * @param {*} collection 
+     * @param {Node} childNode
+     * @param {Function} constructor
+     * @param {*} collection
      */
     instantiateChild(childNode, constructor, collection = undefined) {
         if (!childNode) {
@@ -152,11 +161,11 @@ class XMLElementDefinition {
     /**
      * Creates a new XMLElementDefinition instance with the specified start position (x, y).
      * The start position is used to generate a default shape once the element is being rendered.
-     * @param {Function} constructor 
-     * @param {Number} x 
-     * @param {Number} y 
-     * @param {String} id 
-     * @param {String} name 
+     * @param {Function} constructor
+     * @param {Number} x
+     * @param {Number} y
+     * @param {String} id
+     * @param {String} name
      */
     createShapedDefinition(constructor, x, y, id = undefined, name = undefined) {
         const element = this.createDefinition(constructor, id, name);
@@ -168,9 +177,9 @@ class XMLElementDefinition {
      * Creates a new instance of the constructor with an optional id and name
      * attribute. If these are not given, the logic will generate id and name for it based
      * on the type of element and the other content inside the case definition.
-     * @param {Function} constructor 
-     * @param {String} id 
-     * @param {String} name 
+     * @param {Function} constructor
+     * @param {String} id
+     * @param {String} name
      * @returns {*} an instance of the constructor that is expected to extend CMMNElementDefinition
      */
     createDefinition(constructor, id = undefined, name = undefined) {
@@ -189,7 +198,7 @@ class XMLElementDefinition {
     /**
      * Method invoked after deletion of some other definition element
      * Can be used to remove references to that other definition element.
-     * @param {XMLElementDefinition} removedElement 
+     * @param {XMLElementDefinition} removedElement
      */
     removeDefinitionReference(removedElement) {
         for (const key in this) {
@@ -219,7 +228,7 @@ class XMLElementDefinition {
 
     /**
      * Invoked right before the property is being deleted from this object
-     * @param {String} propertyName 
+     * @param {String} propertyName
      */
     removeProperty(propertyName) {
     }
@@ -241,7 +250,7 @@ class XMLElementDefinition {
 
     /**
      * Introspects the properties by name and exports them to XML based on their type.
-     * @param {Array} propertyNames 
+     * @param {Array} propertyNames
      */
     exportProperties(...propertyNames) {
         propertyNames.forEach(propertyName => {
@@ -264,8 +273,8 @@ class XMLElementDefinition {
      * If it is an instanceof CMMNElementDefinition (i.e., if it is a child property), then the createExportNode of that child is invoked with
      * this.exportNode as the parentNode.
      * If it is something else, then it is exported as an xml attribute.
-     * @param {String} propertyName 
-     * @param {*} propertyValue 
+     * @param {String} propertyName
+     * @param {*} propertyValue
      */
     exportProperty(propertyName, propertyValue) {
         // Do not write '' or 'undefined' attributes.
@@ -295,7 +304,7 @@ class XMLElementDefinition {
             // Convert all values to string
             const stringifiedValue = propertyValue.toString()
             // If the "toString" version of the property still has a value, then write it into the attribute
-            if (stringifiedValue) { 
+            if (stringifiedValue) {
                 this.exportNode.setAttribute(propertyName, propertyValue);
             }
         }
@@ -305,8 +314,8 @@ class XMLElementDefinition {
      * Exports this element with its properties to an XML element and appends it to the parentNode.
      * If first creates the .exportNode XML element, then exports id, name and description attributes to it
      * and finally introspects each of the given property names and invokes the appropriate export logic on it.
-     * @param {Node} parentNode 
-     * @param {String} tagName 
+     * @param {Node} parentNode
+     * @param {String} tagName
      * @param {Array} propertyNames
      */
     createExportNode(parentNode, tagName, ...propertyNames) {
@@ -318,7 +327,7 @@ class XMLElementDefinition {
      * Creates and returns an extension element with a custom tag inside having the given tagName (it defaults to <cafienne:implementation>).
      * Sets the namespace attribute to 'org.cafienne'
      * Does NOT set the class attribute on it (e.g. for WorkflowTaskDefinition)
-     * @param {String} tagName 
+     * @param {String} tagName
      */
     exportExtensionElement(tagName = IMPLEMENTATION_TAG) {
         const extensionElements = XML.createChildElement(this.exportNode, 'extensionElements');
@@ -344,7 +353,7 @@ class XMLElementDefinition {
 
     /**
      * Exports the IDs of all elements in the list (that have an id) into a space-separated string
-     * @param {Array} list 
+     * @param {Array} list
      */
     flattenListToString(list) {
         return list && list.length > 0 ? list.filter(item => item.id).map(item => item.id).join(' ') : undefined;

@@ -1,7 +1,11 @@
-class TaskProperties extends TaskStageProperties {
+import {TaskStageProperties} from "./taskstageproperties";
+import {ISBLOCKING_IMG} from "../elements";
+import {DISCRETIONARYTASK_IMG} from "../elements";
+
+export class TaskProperties extends TaskStageProperties {
     /**
-     * 
-     * @param {Task} task 
+     *
+     * @param {Task} task
      */
     constructor(task) {
         super(task);

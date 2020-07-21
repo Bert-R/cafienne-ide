@@ -1,8 +1,8 @@
-class ExpressionChanger {
+export class ExpressionChanger {
     /**
-     * 
-     * @param {ParameterRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {ParameterRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         const div = column.html(

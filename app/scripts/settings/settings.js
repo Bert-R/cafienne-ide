@@ -1,13 +1,15 @@
 'use strict';
 
-const FILEPANEL_STATE = 'filepanel_state';
-const GRID_SIZE = 'grid_size';
-const GRID_VISIBILITY = 'grid_visible';
-const VALIDATION_SETTINGS = 'validation_settings';
-const SPLITTER_SETTINGS = 'splitter_settings';
-const STORAGE = 'cmmn-modeler-settings';
+import {SettingsStorage} from "./settingsstorage";
 
-class Settings {
+export const FILEPANEL_STATE = 'filepanel_state';
+export const GRID_SIZE = 'grid_size';
+export const GRID_VISIBILITY = 'grid_visible';
+export const VALIDATION_SETTINGS = 'validation_settings';
+export const SPLITTER_SETTINGS = 'splitter_settings';
+export const STORAGE = 'cmmn-modeler-settings';
+
+export class Settings {
 
     constructor() {
     }

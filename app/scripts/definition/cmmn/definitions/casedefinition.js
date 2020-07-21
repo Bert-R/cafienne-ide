@@ -1,9 +1,17 @@
-class CaseDefinition extends ModelDefinition {
+import {ModelDefinition} from "../../modeldefinition";
+import {CaseFileDefinition} from "./casefile/casefiledefinition";
+import {CasePlanDefinition} from "./caseplan/caseplandefinition";
+import {CaseRoleDefinition} from "./caseteam/caseroledefinition";
+import {ParameterDefinition} from "./parameterdefinition";
+import {XML} from "../../../util/xml";
+import {STARTCASEMODEL_TAG} from "../../../elements/elements";
+
+export class CaseDefinition extends ModelDefinition {
     /**
      * Imports an XML element and parses it into a in-memory definition structure.
-     * @param {Element} importNode 
-     * @param {DefinitionDocument} definitionDocument 
-     * @param {Dimensions} dimensions 
+     * @param {Element} importNode
+     * @param {DefinitionDocument} definitionDocument
+     * @param {Dimensions} dimensions
      */
     constructor(importNode, definitionDocument, dimensions) {
         super(importNode, definitionDocument);
@@ -26,7 +34,7 @@ class CaseDefinition extends ModelDefinition {
     /**
      * Returns the element that has the specified identifier, or undefined.
      * If the constructor argument is specified, the element is checked against the constructor with 'instanceof'
-     * @param {String} id 
+     * @param {String} id
      * @param {Function} constructor
      * @returns {CMMNElementDefinition}
      */

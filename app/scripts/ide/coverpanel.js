@@ -1,10 +1,10 @@
 /**
  * Showing/hiding status messages on top of the fixed editors.
  */
-class CoverPanel {
+export class CoverPanel {
     /**
      * This editor handles Case models
-     * @param {IDE} ide 
+     * @param {IDE} ide
      */
     constructor(ide) {
         this.ide = ide;
@@ -21,7 +21,7 @@ class CoverPanel {
 
     /**
      * Show a message on the cover panel and make it visible
-     * @param {String} msg 
+     * @param {String} msg
      */
     show(msg) {
         this.visible = true;

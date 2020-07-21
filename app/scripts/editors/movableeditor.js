@@ -1,9 +1,11 @@
-class MovableEditor {
+import {Util} from "../util/util";
+
+export class MovableEditor {
     /**
      * A movable editor resides typically within the context of a case.
      * Usually it is something that pops up upon button click (e.g., Properties of an element, Roles Editor, Parameters Editor, etc)
      * It can be moved around and resized.
-     * @param {Case} cs 
+     * @param {Case} cs
      */
     constructor(cs) {
         this.case = cs;
@@ -119,8 +121,8 @@ class MovableEditor {
 
     /**
      * Move the editor x pixels to the right, and y pixels down. Negative numbers move it in the opposite direction.
-     * @param {Number} x 
-     * @param {Number} y 
+     * @param {Number} x
+     * @param {Number} y
      */
     move(x, y) {
         const top = parseInt(this.html.css('top'));
@@ -131,7 +133,7 @@ class MovableEditor {
 
     /**
      * Method invoked after a role or case file item has changed
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {}
 

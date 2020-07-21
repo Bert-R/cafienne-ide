@@ -1,4 +1,6 @@
-﻿class MessageBox {
+import {Util} from "../util/util";
+
+export ﻿class MessageBox {
     /**
      * handles showing of alerts, confirms etc to user
      * @param {IDE} ide
@@ -72,7 +74,7 @@
 </div>`
 
         this.messageBoxBody.append(htmlString);
-        
+
 
         //attach onclick to close button
         this.messageBoxBody.find('.alert > button').on('click', () => {

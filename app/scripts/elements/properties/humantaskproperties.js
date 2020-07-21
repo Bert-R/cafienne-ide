@@ -1,7 +1,13 @@
-class HumanTaskProperties extends TaskProperties {
+import {TaskProperties} from "./taskproperties";
+import {Util} from "../../util/util";
+import {AssignmentDefinition} from "../../definition/cmmn/definitions/caseplan/task/assignmentdefinition";
+import {DueDateDefinition} from "../../definition/cmmn/definitions/caseplan/task/duedatedefinition";
+import {DISCRETIONARYTASK_IMG} from "../elements";
+
+export class HumanTaskProperties extends TaskProperties {
     /**
-     * 
-     * @param {HumanTask} task 
+     *
+     * @param {HumanTask} task
      */
     constructor(task) {
         super(task);

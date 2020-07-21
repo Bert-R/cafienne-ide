@@ -1,4 +1,9 @@
-﻿class RolesEditor extends TableEditor {
+import {TableEditor} from "./tableeditor";
+import {TableEditorColumn} from "./tableeditor";
+import {RowEditor} from "./tableeditor";
+import {CaseRoleDefinition} from "../definition/cmmn/definitions/caseteam/caseroledefinition";
+
+export ﻿class RolesEditor extends TableEditor {
     get label() {
         return 'Roles';
     }
@@ -18,8 +23,8 @@
     }
 
     /**
-     * 
-     * @param {CaseRoleDefinition} role 
+     *
+     * @param {CaseRoleDefinition} role
      * @returns {RoleRenderer}
      */
     addRenderer(role = undefined) {
@@ -37,8 +42,8 @@
 
 class RoleRenderer extends RowEditor {
     /**
-     * @param {RolesEditor} editor 
-     * @param {CaseRoleDefinition} role 
+     * @param {RolesEditor} editor
+     * @param {CaseRoleDefinition} role
      */
     constructor(editor, role = undefined) {
         super(editor, role);

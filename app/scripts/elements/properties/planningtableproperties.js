@@ -1,6 +1,8 @@
-class PlanningTableProperties extends Properties {
+import {Properties} from "./properties";
+
+export class PlanningTableProperties extends Properties {
     /**
-     * @param {PlanningTable} planningTable 
+     * @param {PlanningTable} planningTable
      */
     constructor(planningTable) {
         super(planningTable);
@@ -65,7 +67,7 @@ since these are the items applicable for planning at that moment.`)
     /**
      * Adds a role. Can be undefined, in which case an empty row is added.
      * Also adds the required event handlers to the html.
-     * @param {ApplicabilityRuleDefinition} rule 
+     * @param {ApplicabilityRuleDefinition} rule
      */
     addApplicabilityRuleField(rule = undefined) {
         const ruleViewer = new ApplicabilityRuleProperties(this, rule);
@@ -73,11 +75,11 @@ since these are the items applicable for planning at that moment.`)
     }
 }
 
-class ApplicabilityRuleProperties {
+export class ApplicabilityRuleProperties {
     /**
-     * 
-     * @param {PlanningTableProperties} planningTablePropertiesView 
-     * @param {ApplicabilityRuleDefinition} rule 
+     *
+     * @param {PlanningTableProperties} planningTablePropertiesView
+     * @param {ApplicabilityRuleDefinition} rule
      */
     constructor(planningTablePropertiesView, rule = undefined) {
         this.tableView = planningTablePropertiesView;
@@ -164,5 +166,5 @@ class ApplicabilityRuleProperties {
     done() {
         this.tableView.done();
     }
-    
+
 }

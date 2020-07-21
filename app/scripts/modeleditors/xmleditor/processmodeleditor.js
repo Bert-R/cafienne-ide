@@ -1,9 +1,20 @@
 ﻿'use strict';
 
-class ProcessModelEditor extends XMLModelEditor {
-    /** 
+import {XMLModelEditor} from "./xmlmodeleditor";
+import {ProcessModelDefinition} from "../../definition/process/processmodeldefinition";
+import {ModelEditorMetadata} from "../modeleditormetadata";
+import {ProcessTask} from "../../elements/processtask";
+import {IDE} from "../../ide/ide";
+import {XML} from "../../util/xml";
+import {EXTENSIONELEMENTS} from "../../elements/elements";
+import {IMPLEMENTATION_TAG} from "../../elements/elements";
+import {IMPLEMENTATION_PREFIX} from "../../elements/elements";
+import {IMPLEMENTATION_NAMESPACE} from "../../elements/elements";
+
+export class ProcessModelEditor extends XMLModelEditor {
+    /**
      * This editor handles process models; only validates the xml
-     * @param {IDE} ide 
+     * @param {IDE} ide
      * @param {String} fileName The full file name to be loaded, e.g. 'helloworld.case', 'sendresponse.humantask'
      * @param {String} modelName The file name without the extension, e.g. 'helloworld'
      * @param {String} modelType  The extension of the filename, e.g. 'case', 'process', 'humantask'
@@ -55,10 +66,10 @@ class ProcessModelEditor extends XMLModelEditor {
     }
 
     /**
-     * Create a new Process model with given name and description 
-     * @param {IDE} ide 
-     * @param {String} name 
-     * @param {String} description 
+     * Create a new Process model with given name and description
+     * @param {IDE} ide
+     * @param {String} name
+     * @param {String} description
      * @returns {String} fileName of the new model
      */
     static createNewModel(ide, name, description) {
@@ -71,11 +82,11 @@ class ProcessModelEditor extends XMLModelEditor {
 </process>`;
         const fileName = name + '.process';
         ide.repository.saveXMLFile(fileName, newModelContent);
-        return fileName;        
+        return fileName;
     }
 }
 
-class ProcessModelEditorMetadata extends ModelEditorMetadata {
+export class ProcessModelEditorMetadata extends ModelEditorMetadata {
     /** @returns {Array<ServerFile>} */
     get modelList() {
         return this.ide.repository.getProcesses();

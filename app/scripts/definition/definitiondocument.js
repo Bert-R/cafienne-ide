@@ -1,4 +1,15 @@
-class DefinitionDocument extends DefinitionParser {
+import {DefinitionParser} from "./definitionparser";
+import {Util} from "../util/util";
+import {Dimensions} from "./cmmn/dimensions/dimensions";
+import {CaseDefinition} from "./cmmn/definitions/casedefinition";
+import {XML} from "../util/xml";
+import {CMMNDI} from "./cmmn/dimensions/dimensions";
+import {CMMNDIAGRAM} from "./cmmn/dimensions/dimensions";
+import {CMMNSHAPE} from "./cmmn/dimensions/dimensions";
+import {CMMNELEMENTREF} from "./cmmn/dimensions/dimensions";
+import {BOUNDS} from "./cmmn/dimensions/dimensions";
+
+export class DefinitionDocument extends DefinitionParser {
     /**
      * @returns {DefinitionDocument}
      * returns a empty cmmn model
@@ -14,17 +25,17 @@ class DefinitionDocument extends DefinitionParser {
         const guid = Util.createID();
 
         const casePlanId = `cm_${guid}_0`;
-        const caseString = 
+        const caseString =
 `<case id="${caseID}" name="${caseName}" description="${caseDescription}" guid="${guid}">
     <caseFileModel/>
     <casePlanModel id="${casePlanId}" name="${caseName}"/>
 </case>`;
-                
-        const dimensionsString = 
+
+        const dimensionsString =
 `<${CMMNDI}>
     <${CMMNDIAGRAM}>
         <${CMMNSHAPE} ${CMMNELEMENTREF}="${casePlanId}" name="${caseName}">
-            <${BOUNDS} x="${x}" y="${y}" width="${width}" height="${height}" />                    
+            <${BOUNDS} x="${x}" y="${y}" width="${width}" height="${height}" />
         </${CMMNSHAPE}>
     </${CMMNDIAGRAM}>
     <validation>
@@ -32,15 +43,15 @@ class DefinitionDocument extends DefinitionParser {
         <hiddenproblems />
     </validation>
 </${CMMNDI}>`;
-        
+
         return new DefinitionDocument(ide, caseString, dimensionsString, caseName + '.case', caseName + '.dimensions');
     }
 
     /**
-     * 
-     * @param {IDE} ide 
-     * @param {String} caseString 
-     * @param {String} dimensionsString 
+     *
+     * @param {IDE} ide
+     * @param {String} caseString
+     * @param {String} dimensionsString
      */
     constructor(ide, caseString, dimensionsString, caseFileName, dimensionsFileName) {
         super(ide);
@@ -54,7 +65,7 @@ class DefinitionDocument extends DefinitionParser {
         this.dimensionsDocument = XML.parseXML(dimensionsString);
 
         this.caseNode = this.caseDocument && XML.getChildByTagName(this.caseDocument, 'case');
-        const diagramNodes = this.dimensionsDocument && this.dimensionsDocument.getElementsByTagName(CMMNDIAGRAM) || [];        
+        const diagramNodes = this.dimensionsDocument && this.dimensionsDocument.getElementsByTagName(CMMNDIAGRAM) || [];
         this.dimensionsNode = diagramNodes.length > 0 ? diagramNodes[0] : undefined;
     }
 
@@ -84,7 +95,7 @@ class DefinitionDocument extends DefinitionParser {
 
     /**
      * @returns {Dimensions}
-     */    
+     */
     get dimensions() {
         if (!this._dimensions) {
             this._dimensions = new Dimensions(this.dimensionsNode, this);
@@ -94,7 +105,7 @@ class DefinitionDocument extends DefinitionParser {
 
     /**
      * @returns {CaseDefinition}
-     */    
+     */
     get caseDefinition() {
         if (!this._caseDefinition) {
             this._caseDefinition = new CaseDefinition(this.caseNode, this, this.dimensions);

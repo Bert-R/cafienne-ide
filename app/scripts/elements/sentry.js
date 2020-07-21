@@ -1,11 +1,18 @@
-﻿
+﻿import {CMMNElement} from "./cmmnelement";
+import {SentryProperties} from "./properties/sentryproperties";
+import {TaskStage} from "./taskstage";
+import {PlanItemView} from "./planitemview";
+import {CasePlanModel} from "./caseplanmodel";
+import {CaseFileItem} from "./casefileitem";
+import {EntryCriterionHalo} from "./halo/sentryhalo";
+import {ExitCriterionHalo} from "./halo/sentryhalo";
 
-class Sentry extends CMMNElement {
+export class Sentry extends CMMNElement {
     /**
      * Creates a new Sentry element.
      * Is an abstract sub class for EntryCriterion and ExitCriterion.
-     * @param {PlanItemView|CasePlanModel} planItem 
-     * @param {SentryDefinition} definition 
+     * @param {PlanItemView|CasePlanModel} planItem
+     * @param {SentryDefinition} definition
      */
     constructor(planItem, definition) {
         super(planItem, definition);
@@ -17,7 +24,7 @@ class Sentry extends CMMNElement {
 
     /**
      * Override select in both planningtable and sentry to immediately show properties.
-     * @param {Boolean} selected 
+     * @param {Boolean} selected
      */
     __select(selected) {
         super.__select(selected);
@@ -35,10 +42,10 @@ class Sentry extends CMMNElement {
      * When the dataNode exists for the element, look up and set standardEvent
      * When the dataNode does not exist (no entry for the element yet)-> create
      * Return the dataNode
-     * 
-     * @param {CMMNElement} source 
-     * @param {String} defaultEvent 
-     * @param {ExitCriterion} exitCriterion 
+     *
+     * @param {CMMNElement} source
+     * @param {String} defaultEvent
+     * @param {ExitCriterion} exitCriterion
      */
     setPlanItemOnPart(source, defaultEvent, exitCriterion = undefined) {
         const sourceRef = source.definition.id;
@@ -56,7 +63,7 @@ class Sentry extends CMMNElement {
     /**
      * sets the properties of the case file item onpart of a sentry,
      * when manually linking a case file item element with a sentry
-     * @param {CaseFileItem} source 
+     * @param {CaseFileItem} source
      */
     setCaseFileItemOnPart(source, defaultEvent) {
         const sourceRef = source.definition.contextRef; // CaseFileItem stores it's value in the contextRef property
@@ -121,7 +128,7 @@ class Sentry extends CMMNElement {
         });
     }
 
-    /** 
+    /**
      * A sentry ifPart expression cannot be empty
      */
     ifPartExpression() {
@@ -155,7 +162,7 @@ class Sentry extends CMMNElement {
         });
     }
 
-    /** 
+    /**
      * Check if the onPart planItem reference in sentry of discretionary element refers to a plan item inside the
      * parent stage (required). PlanItem reference must be inside parent stage
      * @param {Sentry} this
@@ -301,8 +308,8 @@ class Sentry extends CMMNElement {
     }
 
     /**
-     * 
-     * @param {Connector} connector 
+     *
+     * @param {Connector} connector
      * @returns {OnPartDefinition}
      */
     __getOnPart(connector) {
@@ -327,7 +334,7 @@ class Sentry extends CMMNElement {
 }
 
 
-class EntryCriterion extends Sentry {
+export class EntryCriterion extends Sentry {
     __connectSentry(target) {
         if (target instanceof ExitCriterion) {
             // Then we need to connect to the exit of the parent of the target;
@@ -345,11 +352,11 @@ class EntryCriterion extends Sentry {
     }
 }
 
-class ExitCriterion extends Sentry {
+export class ExitCriterion extends Sentry {
     createHalo() {
         return new ExitCriterionHalo(this);
     }
 }
+
 CMMNElement.registerType(EntryCriterion, 'Entry Criterion', 'images/svg/entrycriterion.svg');
 CMMNElement.registerType(ExitCriterion, 'Exit Criterion', 'images/svg/exitcriterion.svg');
-

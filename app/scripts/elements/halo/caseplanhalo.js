@@ -1,7 +1,13 @@
-class CasePlanHalo extends Halo {
+import {Halo} from "./halo";
+import {PropertiesHaloItem} from "./item/haloclickitems";
+import {DeleteHaloItem} from "./item/haloclickitems";
+import {HaloClickItem} from "./item/haloclickitems";
+import {HaloItem} from "./item/haloitem";
+
+export class CasePlanHalo extends Halo {
     /**
      * Create the halo for the caseplan model. This halo is situated next to the top tab of the case plan model
-     * @param {CasePlanModel} element 
+     * @param {CasePlanModel} element
      */
     constructor(element) {
         super(element);
@@ -37,49 +43,49 @@ class CasePlanHalo extends Halo {
 
 // Below a series of caseplan specific halo items
 
-class CaseInputParametersHaloItem extends HaloClickItem {
+export class CaseInputParametersHaloItem extends HaloClickItem {
     constructor(halo) {
         super(halo, 'images/input_128.png', 'Edit case input parameters', e => this.halo.element.case.caseParametersEditor.open());
     }
 }
 
-class CaseOutputParametersHaloItem extends HaloClickItem {
+export class CaseOutputParametersHaloItem extends HaloClickItem {
     constructor(halo) {
         super(halo, 'images/output_128.png', 'Edit case output parameters', e => this.halo.element.case.caseParametersEditor.open());
     }
 }
 
-class CaseRolesHaloItem extends HaloClickItem {
+export class CaseRolesHaloItem extends HaloClickItem {
     constructor(halo) {
         super(halo, 'images/roles_128.png', 'Edit case team', e => this.halo.element.case.rolesEditor.open());
     }
 }
 
-class StartCaseSchemaHaloItem extends HaloClickItem {
+export class StartCaseSchemaHaloItem extends HaloClickItem {
     constructor(halo) {
         super(halo, 'images/startcaseschema_128.png', 'Edit start case schema', e => this.halo.element.case.startCaseEditor.open());
     }
 }
 
-class DeployHaloItem extends HaloClickItem {
+export class DeployHaloItem extends HaloClickItem {
     constructor(halo) {
         super(halo, 'images/deploy_128.png', 'Deploy this case', e => this.halo.element.case.deployForm.open());
     }
 }
 
-class ViewSourceHaloItem extends HaloClickItem {
+export class ViewSourceHaloItem extends HaloClickItem {
     constructor(halo) {
         super(halo, 'images/viewsource_128.png', 'View source of this case', e => this.halo.element.case.viewSource());
     }
 }
 
-class DebuggerHaloItem extends HaloClickItem {
+export class DebuggerHaloItem extends HaloClickItem {
     constructor(halo) {
         super(halo, 'images/debug.png', 'Debug cases of this type', e => this.halo.element.case.openDebugger());
     }
 }
 
-class SeparatorHaloItem extends HaloItem {
+export class SeparatorHaloItem extends HaloItem {
     constructor(halo) {
         super(halo, '', '');
     }

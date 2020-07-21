@@ -1,10 +1,13 @@
-class OnPartDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "../unnamedcmmnelementdefinition";
+import {XML} from "../../../../util/xml";
+
+export class OnPartDefinition extends UnnamedCMMNElementDefinition {
     /**
-     * 
-     * @param {Element} importNode 
-     * @param {SentryDefinition} parent 
-     * @param {ModelDefinition} caseDefinition 
-     * @param {Function} sourceConstructor 
+     *
+     * @param {Element} importNode
+     * @param {SentryDefinition} parent
+     * @param {ModelDefinition} caseDefinition
+     * @param {Function} sourceConstructor
      */
     constructor(importNode, caseDefinition, parent, sourceConstructor) {
         super(importNode, caseDefinition, parent);
@@ -41,4 +44,3 @@ class OnPartDefinition extends UnnamedCMMNElementDefinition {
         XML.createTextChild(XML.createChildElement(this.exportNode, 'standardEvent'), this.standardEvent);
     }
 }
-

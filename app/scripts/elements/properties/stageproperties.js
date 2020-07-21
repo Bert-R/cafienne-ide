@@ -1,6 +1,10 @@
-class StageProperties extends TaskStageProperties {
+import {TaskStageProperties} from "./taskstageproperties";
+import {DISCRETIONARYTASK_IMG} from "../elements";
+import {AUTOCOMPLETE_IMG} from "../elements";
+
+export class StageProperties extends TaskStageProperties {
     /**
-     * @param {Stage} stage 
+     * @param {Stage} stage
      */
     constructor(stage) {
         super(stage);
@@ -44,7 +48,7 @@ class StageProperties extends TaskStageProperties {
             html.find('.planitems-table').css('display', visible ? 'none' : 'block');
             html.find('.togglePlanItemsButton').html(visible ? '&nbsp;&nbsp;+' : '');
         });
-        
+
         this.cmmnElement.planItemDefinition.planItems.forEach(item => {
             const itemHTML = $(`<div>
                                     <span title="Move plan item up (affects instantiation order)" class="upButton"><img src="images/doubleup_32.png" /></span>
@@ -59,9 +63,9 @@ class StageProperties extends TaskStageProperties {
 
     /**
      * Moves the item and it's corresponding HTML up in the list (if it is not the first one)
-     * @param {JQuery.ClickEvent} e 
-     * @param {JQuery<HTMLElement>} html 
-     * @param {PlanItem} item 
+     * @param {JQuery.ClickEvent} e
+     * @param {JQuery<HTMLElement>} html
+     * @param {PlanItem} item
      * @param {Array<PlanItem>} collection
      */
     up(e, html, item, collection) {
@@ -77,9 +81,9 @@ class StageProperties extends TaskStageProperties {
 
     /**
      * Moves the item and it's corresponding HTML down in the list (if it is not the last one)
-     * @param {JQuery.ClickEvent} e 
-     * @param {JQuery<HTMLElement>} html 
-     * @param {PlanItem} item 
+     * @param {JQuery.ClickEvent} e
+     * @param {JQuery<HTMLElement>} html
+     * @param {PlanItem} item
      * @param {Array<PlanItem>} collection
      */
     down(e, html, item, collection) {

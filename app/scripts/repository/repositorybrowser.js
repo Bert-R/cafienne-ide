@@ -1,8 +1,11 @@
-class RepositoryBrowser {
+import {ModelListPanel} from "./modellistpanel";
+import {DragData} from "../ide/dragdata";
+
+export class RepositoryBrowser {
     /**
      * This object handles the model browser pane on the left
-     * @param {IDE} ide 
-     * @param {JQuery<HTMLElement>} html 
+     * @param {IDE} ide
+     * @param {JQuery<HTMLElement>} html
      */
     constructor(ide, html) {
         this.ide = ide;
@@ -85,8 +88,8 @@ class RepositoryBrowser {
     }
 
     /**
-     * 
-     * @param {ModelEditorMetadata} type 
+     *
+     * @param {ModelEditorMetadata} type
      */
     createModelListPanel(type) {
         return new ModelListPanel(this, this.accordion, type);
@@ -205,8 +208,8 @@ class RepositoryBrowser {
 
     /**
      * Determines recursively whether each character of text1 is available in text2
-     * @param {String} searchFor 
-     * @param {String} searchIn 
+     * @param {String} searchFor
+     * @param {String} searchIn
      */
     hasSearchText(searchFor, searchIn) {
         if (!searchFor) { // Nothing left to search for, so found a hit
@@ -230,7 +233,7 @@ class RepositoryBrowser {
      * On tab, select the first model.
      * On enter, open the first model.
      * On escape, remove the search filter.
-     * @param {JQuery.KeyDownEvent} e 
+     * @param {JQuery.KeyDownEvent} e
      */
     executeSearchFilter(e) {
         const first = this.accordion.find('a').toArray().find(element => $(element).parent().css('display') == 'block')

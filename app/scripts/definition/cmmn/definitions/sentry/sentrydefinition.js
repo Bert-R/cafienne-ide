@@ -1,9 +1,15 @@
-class SentryDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "../unnamedcmmnelementdefinition";
+import {IfPartDefinition} from "./ifpartdefinition";
+import {CaseFileItemOnPartDefinition} from "./casefileitemonpartdefinition";
+import {PlanItemOnPartDefinition} from "./planitemonpartdefinition";
+import {Util} from "../../../../util/util";
+
+export class SentryDefinition extends UnnamedCMMNElementDefinition {
     /**
-     * 
-     * @param {Element} importNode 
-     * @param {CaseDefinition} caseDefinition 
-     * @param {StageDefinition} parent 
+     *
+     * @param {Element} importNode
+     * @param {CaseDefinition} caseDefinition
+     * @param {StageDefinition} parent
      */
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
@@ -19,7 +25,7 @@ class SentryDefinition extends UnnamedCMMNElementDefinition {
 
     /**
      * Move the sentry from one stage to another (typically when it's associated Criterion's plan item is moved to another stage as well)
-     * @param {StageDefinition} newParent 
+     * @param {StageDefinition} newParent
      */
     switchParent(newParent) {
         const currentParentStage = this.parent;

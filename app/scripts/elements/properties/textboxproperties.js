@@ -1,7 +1,9 @@
-class TextBoxProperties extends Properties {
+import {Properties} from "./properties";
+
+export class TextBoxProperties extends Properties {
     /**
-     * 
-     * @param {TextBox} textbox 
+     *
+     * @param {TextBox} textbox
      */
     constructor(textbox) {
         super(textbox);

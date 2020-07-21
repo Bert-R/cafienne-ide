@@ -1,9 +1,18 @@
 ﻿'use strict';
 
-class HumantaskModelEditor extends XMLModelEditor {
+import {XMLModelEditor} from "./xmlmodeleditor";
+import {HumanTaskModelDefinition} from "../../definition/humantask/humantaskmodeldefinition";
+import {ModelEditorMetadata} from "../modeleditormetadata";
+import {HumanTask} from "../../elements/humantask";
+import {IDE} from "../../ide/ide";
+import {IMPLEMENTATION_TAG} from "../../elements/elements";
+import {IMPLEMENTATION_PREFIX} from "../../elements/elements";
+import {IMPLEMENTATION_NAMESPACE} from "../../elements/elements";
+
+export class HumantaskModelEditor extends XMLModelEditor {
     /**
      * This object handles human task models, includes ui-editor and source editor
-     * @param {IDE} ide 
+     * @param {IDE} ide
      * @param {String} fileName The full file name to be loaded, e.g. 'helloworld.case', 'sendresponse.humantask'
      * @param {String} modelName The file name without the extension, e.g. 'helloworld'
      * @param {String} modelType  The extension of the filename, e.g. 'case', 'process', 'humantask'
@@ -50,26 +59,26 @@ class HumantaskModelEditor extends XMLModelEditor {
     }
 
     /**
-     * Create a new HumanTask model with given name and description 
-     * @param {IDE} ide 
-     * @param {String} name 
-     * @param {String} description 
+     * Create a new HumanTask model with given name and description
+     * @param {IDE} ide
+     * @param {String} name
+     * @param {String} description
      * @returns {String} fileName of the new model
      */
     static createNewModel(ide, name, description) {
-        const newModelContent = 
+        const newModelContent =
             `<humantask>
                 <${IMPLEMENTATION_TAG} name="${name}" description="${description}" ${IMPLEMENTATION_PREFIX}="${IMPLEMENTATION_NAMESPACE}" class="org.cafienne.cmmn.definition.task.WorkflowTaskDefinition">
                     <task-model></task-model>
                 </${IMPLEMENTATION_TAG}>
             </humantask>`;
         const fileName = name + '.humantask';
-        ide.repository.saveXMLFile(fileName, newModelContent);        
+        ide.repository.saveXMLFile(fileName, newModelContent);
         return fileName;
     }
 }
 
-class HumantaskModelEditorMetadata extends ModelEditorMetadata {
+export class HumantaskModelEditorMetadata extends ModelEditorMetadata {
     /** @returns {Array<ServerFile>} */
     get modelList() {
         return this.ide.repository.getHumanTasks();
@@ -90,7 +99,7 @@ class HumantaskModelEditorMetadata extends ModelEditorMetadata {
 
     get description() {
         return 'Human Task Models';
-    }    
+    }
 }
 
 IDE.registerEditorType(HumantaskModelEditorMetadata);

@@ -1,11 +1,18 @@
-const DECORATORFROMBOTTOM = 4;
-const DECORATORSIZE = 12;
+import {CMMNElement} from "./cmmnelement";
+import {EntryCriterion} from "./sentry";
+import {ExitCriterion} from "./sentry";
+import {PlanItemProperties} from "./properties/planitemproperties";
+import {PlanItemHalo} from "./halo/planitemhalo";
+import {Sentry} from "./sentry";
 
-class Decorator {
+export const DECORATORFROMBOTTOM = 4;
+export const DECORATORSIZE = 12;
+
+export class Decorator {
     /**
      * Simple helper class to visualize Decorator images on a PlanItem (like AutoComplete, RequiredRule, etc.)
-     * @param {String} imgURL 
-     * @param {Function} visibilityCondition 
+     * @param {String} imgURL
+     * @param {Function} visibilityCondition
      */
     constructor(imgURL, visibilityCondition) {
         this.imgURL = imgURL;
@@ -14,7 +21,7 @@ class Decorator {
     }
 }
 
-class PlanItemView extends CMMNElement {
+export class PlanItemView extends CMMNElement {
 
     /**
      * Returns the class that defines this plan item. E.g., for a HumanTask this is HumanTaskDefinition,
@@ -28,7 +35,7 @@ class PlanItemView extends CMMNElement {
     /**
      * This is a generic class for plan item rendering; it takes default properties of the definition
      * It holds a reference both to the PlanItem definition AND to the PlanItemDefinition definition (e.g., HumanTask, Stage, Milestone).
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {
@@ -180,8 +187,8 @@ class PlanItemView extends CMMNElement {
     }
 
     /**
-     * @param {ConstraintDefinition} rule 
-     * @param {String} ruleType 
+     * @param {ConstraintDefinition} rule
+     * @param {String} ruleType
      */
     validateRule(rule, ruleType) {
         //the rule exists for this element and is used

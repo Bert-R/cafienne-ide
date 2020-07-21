@@ -1,4 +1,7 @@
-class ConstraintDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "./unnamedcmmnelementdefinition";
+import {XML} from "../../../util/xml";
+
+export class ConstraintDefinition extends UnnamedCMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.expression = this.parseElement('condition', ExpressionDefinition);
@@ -44,7 +47,7 @@ class ConstraintDefinition extends UnnamedCMMNElementDefinition {
     }
 }
 
-class ExpressionDefinition extends UnnamedCMMNElementDefinition {
+export class ExpressionDefinition extends UnnamedCMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.language = this.parseAttribute('language', 'spel');
@@ -58,6 +61,6 @@ class ExpressionDefinition extends UnnamedCMMNElementDefinition {
         const bodyElement = XML.createChildElement(this.exportNode, 'body');
         const bodyCDataNode = this.exportNode.ownerDocument.createCDATASection(this.body);
         bodyElement.appendChild(bodyCDataNode);
-        
+
     }
 }

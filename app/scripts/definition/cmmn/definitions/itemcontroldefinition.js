@@ -1,4 +1,7 @@
-class ItemControlDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "./unnamedcmmnelementdefinition";
+import {ConstraintDefinition} from "./constraintdefinition";
+
+export class ItemControlDefinition extends UnnamedCMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.repetitionRule = this.parseElement('repetitionRule', ConstraintDefinition);
@@ -8,7 +11,7 @@ class ItemControlDefinition extends UnnamedCMMNElementDefinition {
 
     /**
      * Gets or creates one of 'repetitionRule', 'requiredRule' or 'manualActivationRule'.
-     * @param {String} ruleName 
+     * @param {String} ruleName
      * @returns {ConstraintDefinition}
      */
     getRule(ruleName) {
@@ -20,7 +23,7 @@ class ItemControlDefinition extends UnnamedCMMNElementDefinition {
 
     /**
      * Removes one of 'repetitionRule', 'requiredRule' or 'manualActivationRule'.
-     * @param {String} ruleName 
+     * @param {String} ruleName
      */
     removeRule(ruleName) {
         delete this[ruleName];

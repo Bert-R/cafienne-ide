@@ -1,8 +1,8 @@
-class NameChanger {
+export class NameChanger {
     /**
-     * 
-     * @param {ParameterRow} row 
-     * @param {JQuery<HTMLTableCellElement>} column 
+     *
+     * @param {ParameterRow} row
+     * @param {JQuery<HTMLTableCellElement>} column
      */
     constructor(row, column) {
         const input = column.html(`<input class="parameter-name" type="text" value="${row.parameterName}" />`);

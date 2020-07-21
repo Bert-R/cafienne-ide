@@ -1,9 +1,31 @@
-﻿class Case {
+import {Deploy} from "../modeleditors/case/deploy";
+import {CaseSourceEditor} from "../modeleditors/case/casesourceeditor";
+import {CaseFileItemsEditor} from "../editors/casefileitemseditor";
+import {UndoRedoBox} from "../modeleditors/case/undoredo";
+import {ShapeBox} from "../modeleditors/case/shapebox";
+import {RightSplitter} from "../ide/splitter/rightsplitter";
+import {RolesEditor} from "../editors/roleseditor";
+import {CaseParametersEditor} from "../editors/case/caseparameterseditor";
+import {StartCaseEditor} from "../editors/startcaseeditor";
+import {Debugger} from "../debugger/debugger";
+import {CasePlanModel} from "./caseplanmodel";
+import {Stage} from "./stage";
+import {Connector} from "./connector";
+import {Validator} from "../validate/validator";
+import {ValidateForm} from "../validate/validateform";
+import {CMMNElement} from "./cmmnelement";
+import {Util} from "../util/util";
+import {CaseFileItem} from "./casefileitem";
+import {Grid} from "../modeleditors/case/grid";
+import {Sentry} from "./sentry";
+import {PlanningTable} from "./planningtable";
+
+export ﻿class Case {
     /**
      * Creates a new Case object based on the definition and dimensions
      * @param {CaseModelEditor} editor
      * @param {JQuery<HTMLElement>} htmlParent
-     * @param {DefinitionDocument} definitionDocument 
+     * @param {DefinitionDocument} definitionDocument
      */
     constructor(editor, htmlParent, definitionDocument) {
         const now = new Date();
@@ -228,7 +250,7 @@
     viewSource() {
         this.clearSelection();
         this.hideMovableEditors();
-        
+
         this.runValidation();
         if (this.validator.problems.length > 0) {
             this.validateForm.show();
@@ -246,7 +268,7 @@
 
     /**
      * Method invoked after a role or case file item has changed
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {
         // First tell all items to update their properties, if they refer to this element.
@@ -313,8 +335,8 @@
     /**
      * Returns the deepest cmmn element under cursor. If that is equal to self, then
      * parent of self is returned.
-     * @param {*} e 
-     * @param {CMMNElement} self 
+     * @param {*} e
+     * @param {CMMNElement} self
      * @returns {CMMNElement}
      */
     getItemUnderMouse(e, self = undefined) {
@@ -381,11 +403,11 @@
     };
 
     /**
-     * Raises an issue found during validation. The context in which the issue has occured and the issue number must be passed, 
+     * Raises an issue found during validation. The context in which the issue has occured and the issue number must be passed,
      * along with some parameters that are used to provide a meaningful description of the issue
      * @param {*} context
-     * @param {Number} number 
-     * @param {Array<String>} parameters 
+     * @param {Number} number
+     * @param {Array<String>} parameters
      */
     raiseEditorIssue(context, number, parameters) {
         this.validator.raiseProblem(context.id, number, parameters);
@@ -398,7 +420,7 @@
 
     /**
      * Returns the coordinates of the mouse pointer, relative with respect to the top left of the case canvas
-     * @param {*} e 
+     * @param {*} e
      */
     getCursorCoordinates(e = event) {
         const x = e.clientX;
@@ -417,8 +439,8 @@
 
     /**
      * Creates a case plan model (if that is the expected type)
-     * @param {Function} cmmnType 
-     * @param {*} e 
+     * @param {Function} cmmnType
+     * @param {*} e
      */
     createCasePlan(cmmnType, e) {
         if (cmmnType == CasePlanModel) {
@@ -435,7 +457,7 @@
 
     /**
      * Add an element to the drawing canvas.
-     * @param {CMMNElement|CaseFileItem|TextBox} cmmnElement 
+     * @param {CMMNElement|CaseFileItem|TextBox} cmmnElement
      */
     __addElement(cmmnElement) {
         // Only add the element if we're not loading the entire case. Because then all elements are presented to the joint graphs in one shot.
@@ -455,7 +477,7 @@
 
     /**
      * Add a connector to the canvas
-     * @param {Connector} connector 
+     * @param {Connector} connector
      */
     __addConnector(connector) {
         this.connectors.push(connector);
@@ -467,7 +489,7 @@
     /**
      * Remove a connector from the registration. This method is invoked when the connector
      * is already removed from the canvas.
-     * @param {Connector} connector 
+     * @param {Connector} connector
      */
     __removeConnector(connector) {
         connector.edge.removeDefinition();
@@ -476,7 +498,7 @@
 
     /**
      * Remove an element from the canvas, including it's children.
-     * @param {CMMNElement} cmmnElement 
+     * @param {CMMNElement} cmmnElement
      */
     __removeElement(cmmnElement) {
         // if (cmmnElement instanceof PlanningTable) return; // Cannot delete planning table images.
@@ -493,7 +515,7 @@
 
     /**
      * Finds the CMMNElement with the specified ID or undefined.
-     * @param {String} id 
+     * @param {String} id
      * @returns {CMMNElement}
      */
     getItem(id) {
@@ -502,7 +524,7 @@
 
     /**
      * returns a case file item element referencing the caseFileItemID
-     * @param {String} caseFileItemID 
+     * @param {String} caseFileItemID
      */
     getCaseFileItemElement(caseFileItemID) {
         return this.items.find(item => item instanceof CaseFileItem && item.definition.contextRef == caseFileItemID);

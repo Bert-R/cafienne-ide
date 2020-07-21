@@ -1,10 +1,10 @@
 ﻿'use strict';
 
-class ModelSourceEditor {
+export class ModelSourceEditor {
     /**
-     * 
-     * @param {JQuery<HTMLElement>} html 
-     * @param {XMLModelEditor} editor 
+     *
+     * @param {JQuery<HTMLElement>} html
+     * @param {XMLModelEditor} editor
      */
     constructor(html, editor) {
         this.editor = editor;

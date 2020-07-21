@@ -1,10 +1,12 @@
+import {Util} from "../util/util";
+
 /**
  * Helper class for creating new names and/or IDs within a given ModelDefinition.
  */
-class TypeCounter {
+export class TypeCounter {
     /**
      * Simple type counter class for counting types of cmmn element definitions
-     * @param {ModelDefinition} modelDefinition 
+     * @param {ModelDefinition} modelDefinition
      */
     constructor(modelDefinition) {
         this.modelDefinition = modelDefinition;

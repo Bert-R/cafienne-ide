@@ -1,6 +1,9 @@
-class ProcessImplementationDefinition extends XMLElementDefinition {
+import {XMLElementDefinition} from "../xmlelementdefinition";
+import {XML} from "../../util/xml";
+
+export class ProcessImplementationDefinition extends XMLElementDefinition {
     /**
-    * @param {Element} importNode 
+    * @param {Element} importNode
     * @param {CaseDefinition} caseDefinition
     * @param {CMMNElementDefinition} parent optional
     */
@@ -19,8 +22,8 @@ class ProcessImplementationDefinition extends XMLElementDefinition {
     }
 
     /**
-     * 
-     * @param {Element} parent 
+     *
+     * @param {Element} parent
      */
     createExportNode(parent) {
         this.exportNode = XML.loadXMLString('<extensionElements>'+this._xml+'</extensionElements>').documentElement;

@@ -1,4 +1,7 @@
-class CaseFileItemCollection extends CMMNElementDefinition {
+import {CMMNElementDefinition} from "../cmmnelementdefinition";
+import {CaseFileItemDef} from "./casefileitemdefinition";
+
+export class CaseFileItemCollection extends CMMNElementDefinition {
     /**
      * Helper class to share logic across CaseFile and CaseFileItem (mostly the 'children' array)
      */

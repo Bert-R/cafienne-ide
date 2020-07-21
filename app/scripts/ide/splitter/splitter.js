@@ -1,4 +1,8 @@
-class Splitter {
+import {SplitterSettings} from "./splittersettings";
+import {Settings} from "../../settings/settings";
+import {Util} from "../../util/util";
+
+export class Splitter {
     /** @returns {SplitterSettings} */
     static get Settings() {
         if (!Splitter._settings) {
@@ -9,8 +13,8 @@ class Splitter {
 
     /**
      * Creates a new Splitter object for the container.
-     * @param {JQuery<HTMLElement>} container 
-     * @param {String|Number} defaultPosition 
+     * @param {JQuery<HTMLElement>} container
+     * @param {String|Number} defaultPosition
      * @param {Number} minimumSize
      */
     constructor(container, defaultPosition, minimumSize = 0) {
@@ -24,7 +28,7 @@ class Splitter {
             this.settings.position = defaultPosition;
         }
         this.minimumSize = minimumSize;
-        
+
         this.connectParent();
         this.createBar();
         this.startSize = this.getSize();
@@ -203,7 +207,7 @@ class Splitter {
     /**
      * Moves the splitter by the number of pixels indicated relative to it's current position.
      * Also validates against the minimum size setting.
-     * @param {Number} numPixels 
+     * @param {Number} numPixels
      */
     moveSplitter(numPixels) {
         const currentPosition = this.getBarPixels();
@@ -223,14 +227,14 @@ class Splitter {
 
     /**
      * Moves the splitter to the absolute location.
-     * @param {Number} proposedPosition 
+     * @param {Number} proposedPosition
      */
     repositionSplitter(proposedPosition) {
         const newPosition = this.validateNewPosition(proposedPosition);
 
         // Place the splitter bar into the right position
         this.bar.css(this.positionAttribute, newPosition);
-        
+
         // First, give both contained div's all space.
         this.div1.css('left', '0px');
         this.div1.css('right', '0px');
@@ -248,7 +252,7 @@ class Splitter {
 
         // Save the settings
         this.position = newPosition;
-        
+
         if (this.child) {
             // Inform child about it's new container size (since we have shifted the splitter, and child is either in div1 or div2, and both have changed size)
             this.child.align();

@@ -1,7 +1,10 @@
-class IDEMain {
+import {RepositoryBrowser} from "../repository/repositorybrowser";
+import {LeftSplitter} from "./splitter/leftsplitter";
+
+export class IDEMain {
     /**
      * Constructs the footer of the IDE element.
-     * @param {IDE} ide 
+     * @param {IDE} ide
      */
     constructor(ide) {
         this.ide = ide;

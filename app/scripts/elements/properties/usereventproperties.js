@@ -1,7 +1,9 @@
-class UserEventProperties extends PlanItemProperties {
+import {PlanItemProperties} from "./planitemproperties";
+
+export class UserEventProperties extends PlanItemProperties {
     /**
-     * 
-     * @param {UserEvent} userEvent 
+     *
+     * @param {UserEvent} userEvent
      */
     constructor(userEvent) {
         super(userEvent);

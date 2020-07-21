@@ -1,4 +1,7 @@
-class SettingsEditor extends StandardForm {
+import {StandardForm} from "../editors/standardform";
+import {SettingsStorage} from "./settingsstorage";
+
+export class SettingsEditor extends StandardForm {
     static show() {
         if (!this._editor) {
             this._editor = new SettingsEditor();

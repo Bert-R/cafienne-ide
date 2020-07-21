@@ -1,4 +1,8 @@
-class PlanningTableDefinition extends UnnamedCMMNElementDefinition {
+import {UnnamedCMMNElementDefinition} from "./unnamedcmmnelementdefinition";
+import {PlanItem} from "./caseplan/planitem";
+import {ConstraintDefinition} from "./constraintdefinition";
+
+export class PlanningTableDefinition extends UnnamedCMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         /** @type{Array<PlanItem>} */
@@ -27,7 +31,7 @@ class PlanningTableDefinition extends UnnamedCMMNElementDefinition {
     }
 }
 
-class ApplicabilityRuleDefinition extends ConstraintDefinition {
+export class ApplicabilityRuleDefinition extends ConstraintDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
     }

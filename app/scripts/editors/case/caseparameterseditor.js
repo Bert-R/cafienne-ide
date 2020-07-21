@@ -1,7 +1,18 @@
-class CaseParametersEditor extends StandardForm {
+import {StandardForm} from "../standardform";
+import {BottomSplitter} from "../../ide/splitter/verticalsplitter";
+import {TableRenderer} from "../table/tablerenderer";
+import {RowRenderer} from "../table/rowrenderer";
+import {ColumnRenderer} from "../table/columnrenderer";
+import {ParameterDeleter} from "./parameterdeleter";
+import {NameChanger} from "./namechanger";
+import {ExpressionChanger} from "./expressionchanger";
+import {CFIZoom} from "./cfizoom";
+import {ParameterDefinition} from "../../definition/cmmn/definitions/parameterdefinition";
+
+export class CaseParametersEditor extends StandardForm {
     /**
-     * 
-     * @param {Case} cs 
+     *
+     * @param {Case} cs
      */
     constructor(cs) {
         super(cs, 'Edit case parameters', 'caseparameters');
@@ -49,36 +60,36 @@ class CaseParametersEditor extends StandardForm {
         }
     }
 
-    /** 
+    /**
      * validates this
      */
     validate() {
         if (this.inputParameters) {
             // TODO: validation belongs in the definition side of the house.
             this.inputParameters.validate();
-            this.outputParameters.validate();    
+            this.outputParameters.validate();
         }
     }
 
     __mark(bMark) {
         if (this.case.casePlanModel) {
-            this.case.casePlanModel.__mark(bMark);            
+            this.case.casePlanModel.__mark(bMark);
         }
     }
 }
 
-class ParametersControl extends TableRenderer {
+export class ParametersControl extends TableRenderer {
     /**
      * Creates a table to render parameters
-     * @param {CaseParametersEditor} editor 
-     * @param {JQuery<HTMLElement>} htmlParent 
+     * @param {CaseParametersEditor} editor
+     * @param {JQuery<HTMLElement>} htmlParent
      */
     constructor(editor, htmlParent) {
         super(editor.case, htmlParent);
         this.editor = editor;
     }
 
-    /** 
+    /**
      * validates this
      */
     validate() {
@@ -99,15 +110,15 @@ class ParametersControl extends TableRenderer {
     }
 
     /**
-     * 
-     * @param {ParameterDefinition} parameter 
+     *
+     * @param {ParameterDefinition} parameter
      */
     addRenderer(parameter = undefined) {
         return new ParameterRow(this, parameter);
     }
 }
 
-class InputParametersControl extends ParametersControl {
+export class InputParametersControl extends ParametersControl {
     constructor(editor, htmlParent) {
         super(editor, htmlParent);
     }
@@ -169,8 +180,8 @@ class ParameterRow extends RowRenderer {
     }
 
     /**
-     * 
-     * @param {CaseFileItemDef} cfi 
+     *
+     * @param {CaseFileItemDef} cfi
      */
     changeBindingRef(cfi) {
         if (! this.parameterName) {
@@ -184,7 +195,7 @@ class ParameterRow extends RowRenderer {
 
     /**
      * Name of the parameter
-     * @param {String} newName 
+     * @param {String} newName
      */
     changeName(newName) {
         if (!this.parameter.bindingRef) {
@@ -200,7 +211,7 @@ class ParameterRow extends RowRenderer {
 
     /**
      * Refreshes the case file item label if we render it
-     * @param {CMMNElementDefinition} cfi 
+     * @param {CMMNElementDefinition} cfi
      */
     refreshReferencingFields(cfi) {
         super.refreshReferencingFields(cfi);

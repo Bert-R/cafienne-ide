@@ -1,4 +1,6 @@
-class ProcessTaskDefinition extends TaskDefinition {
+import {TaskDefinition} from "./taskdefinition";
+
+export class ProcessTaskDefinition extends TaskDefinition {
     static get prefix() {
         return 'pt';
     }

@@ -1,10 +1,23 @@
-﻿const NEWDEF = '__new__';
+import {CaseFileItemDefinitionEditor} from "../modeleditors/cfid/casefileitemdefinitioneditor";
+import {BottomSplitter} from "../ide/splitter/verticalsplitter";
+import {Util} from "../util/util";
+import {CaseParametersEditor} from "./case/caseparameterseditor";
+import {Task} from "../elements/task";
+import {Stage} from "../elements/stage";
+import {Milestone} from "../elements/milestone";
+import {EventListener} from "../elements/eventlistener";
+import {Sentry} from "../elements/sentry";
+import {PlanningTable} from "../elements/planningtable";
+import {CaseFileItem} from "../elements/casefileitem";
+import {DragData} from "../ide/dragdata";
 
-class CaseFileItemsEditor {
+﻿export const NEWDEF = '__new__';
+
+export class CaseFileItemsEditor {
     /**
      * Renders the CaseFile definition through fancytree
-     * @param {Case} cs 
-     * @param {JQuery<HTMLElement>} htmlParent 
+     * @param {Case} cs
+     * @param {JQuery<HTMLElement>} htmlParent
      */
     constructor(cs, htmlParent) {
         this.case = cs;
@@ -14,8 +27,8 @@ class CaseFileItemsEditor {
 
         this.divCaseFileDefinitions = this.html.find('.divCaseFileDefinitions');
         this.caseFileItemDefinitionEditor = new CaseFileItemDefinitionEditor(this, this.divCaseFileDefinitions);
-        this.splitter = new BottomSplitter(htmlParent, '70%', 175);        
-        
+        this.splitter = new BottomSplitter(htmlParent, '70%', 175);
+
         //get the tree table which will contain the data from the html
         this.tree = this.html.find('table');
         //render the treetable. Add the data from the treeEditor object to the tree
@@ -149,11 +162,11 @@ class CaseFileItemsEditor {
 
 
     /**
-     * Raises an issue found during validation. The context in which the issue has occured and the issue number must be passed, 
+     * Raises an issue found during validation. The context in which the issue has occured and the issue number must be passed,
      * along with some parameters that are used to provide a meaningful description of the issue
      * @param {*} context
-     * @param {Number} number 
-     * @param {Array<String>} parameters 
+     * @param {Number} number
+     * @param {Array<String>} parameters
      */
     raiseEditorIssue(context, number, parameters) {
         this.case.validator.raiseProblem(context.id, number, parameters);
@@ -179,7 +192,7 @@ class CaseFileItemsEditor {
 
     /**
      * Opens the editor form.
-     * @param {Function} callback 
+     * @param {Function} callback
      */
     open(callback = undefined) {
         this.enterSelectionMode(callback);
@@ -187,17 +200,17 @@ class CaseFileItemsEditor {
 
     /**
      * Opens the editor in selection modus; This allows for selecting a case file item on dbl click or on OK click to be set on the object that invoked this function (through the callback method)
-     * @param {Function} callback 
+     * @param {Function} callback
      */
     enterSelectionMode(callback) {
         //set the callback function for when a tree item has been selected
-        this.callback = callback;        
-        this.html.find('.dialogButtons').css('display', 'block');        
+        this.callback = callback;
+        this.html.find('.dialogButtons').css('display', 'block');
     }
 
     /**
      * Both pressing OK and Cancel make us leave selection mode.
-     * @param {*} e 
+     * @param {*} e
      */
     leaveSelectionMode(e) {
         e.stopPropagation();
@@ -286,7 +299,7 @@ class CaseFileItemsEditor {
         }
         const newNode = anchorNode.addNode(newDataNode, position);
         this.editStart(newNode);
-        this.case.editor.completeUserAction();                
+        this.case.editor.completeUserAction();
     }
 
     clickRemoveButton(e) {
@@ -306,7 +319,7 @@ class CaseFileItemsEditor {
         } else {
             ide.warning('Select a node to be removed', 1000);
         }
-        this.case.editor.completeUserAction();        
+        this.case.editor.completeUserAction();
     }
 
     /**
@@ -359,8 +372,8 @@ class CaseFileItemsEditor {
 
     /**
      * Changes the definitionRef of the case file item, and loads the new definition ref
-     * @param {CaseFileItemDef} caseFileItem 
-     * @param {Element} cfidefField 
+     * @param {CaseFileItemDef} caseFileItem
+     * @param {Element} cfidefField
      */
     changeCaseFileItemDefinition(caseFileItem, cfidefField) {
         const newValue = cfidefField.value;
@@ -410,7 +423,7 @@ class CaseFileItemsEditor {
 
     /**
      * Gets all elements and editors that refer to the definition element
-     * @param {CaseFileItemDef} definitionElement 
+     * @param {CaseFileItemDef} definitionElement
      * @returns {Array<*>}
      */
     getReferences(definitionElement) {
@@ -426,7 +439,7 @@ class CaseFileItemsEditor {
         return references;
     }
 
-    /** 
+    /**
      * returns a string of characters, these represent the object types used by a dataNode
      * sTEMSPOCIO
      */
@@ -480,7 +493,7 @@ class CaseFileItemsEditor {
             this.setDropHandler(dragData => {
                 const cfi = this.case.caseDefinition.getElement(dragData.fileName);
                 handler(cfi);
-            });                
+            });
         }
     }
 

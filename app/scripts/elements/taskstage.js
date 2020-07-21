@@ -1,8 +1,12 @@
-class TaskStage extends PlanItemView {
+import {PlanItemView} from "./planitemview";
+import {PlanningTable} from "./planningtable";
+import {HumanTask} from "./humantask";
+
+export class TaskStage extends PlanItemView {
     /**
      * Simple class to share some logic from Task and Stage.
-     * @param {CMMNElement} parent 
-     * @param {PlanItem} definition 
+     * @param {CMMNElement} parent
+     * @param {PlanItem} definition
      */
     constructor(parent, definition) {
         super(parent, definition);
@@ -23,7 +27,7 @@ class TaskStage extends PlanItemView {
     }
 
     /**
-     * @param {PlanItem} definition 
+     * @param {PlanItem} definition
      */
     addDiscretionaryItem(planItem) {
         throw new Error('This method must be implemented in subclasses');

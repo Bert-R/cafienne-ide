@@ -1,10 +1,10 @@
 ﻿'use strict';
 
-class CFIDefinitionUnknown{
+export class CFIDefinitionUnknown{
     /**
-     * 
-     * @param {CaseFileItemDefinitionEditor} editor 
-     * @param {JQuery<HTMLElement>} container 
+     *
+     * @param {CaseFileItemDefinitionEditor} editor
+     * @param {JQuery<HTMLElement>} container
      */
     constructor(editor, container) {
         this.editor = editor;
@@ -14,8 +14,8 @@ class CFIDefinitionUnknown{
     }
 
     /**
-     * 
-     * @param {CaseFileDefinitionDefinition} data 
+     *
+     * @param {CaseFileDefinitionDefinition} data
      */
     show(data) {
         // Nothing todo here.

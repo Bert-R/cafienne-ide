@@ -1,4 +1,11 @@
-class HumanTaskImplementationDefinition extends HumanTaskModelElementDefinition {
+import {HumanTaskModelElementDefinition} from "./humantaskmodelelementdefinition";
+import {ImplementationParameterDefinition} from "../cmmn/definitions/parameterdefinition";
+import {TaskModelDefinition} from "./taskmodeldefinition";
+import {IMPLEMENTATION_TAG} from "../../elements/elements";
+import {IMPLEMENTATION_PREFIX} from "../../elements/elements";
+import {IMPLEMENTATION_NAMESPACE} from "../../elements/elements";
+
+export class HumanTaskImplementationDefinition extends HumanTaskModelElementDefinition {
     constructor(importNode, modelDefinition, parent) {
         super(importNode, modelDefinition, parent);
         /** @type {Array<ImplementationParameterDefinition>} */

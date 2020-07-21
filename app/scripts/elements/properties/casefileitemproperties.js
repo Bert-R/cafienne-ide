@@ -1,7 +1,9 @@
-class CaseFileItemProperties extends Properties {
+import {Properties} from "./properties";
+
+export class CaseFileItemProperties extends Properties {
     /**
-     * 
-     * @param {CaseFileItem} caseFileItem 
+     *
+     * @param {CaseFileItem} caseFileItem
      */
     constructor(caseFileItem) {
         super(caseFileItem);
@@ -21,7 +23,7 @@ class CaseFileItemProperties extends Properties {
                             <button class="removeReferenceButton" title="remove the reference to the case file item" />
                         </div>`);
         this.htmlContainer.append(html);
-                        
+
         html.find('.zoombt').on('click', e => this.cmmnElement.case.cfiEditor.open(cfi => this.changeContextRef(html, cfi)));
         html.find('.removeReferenceButton').on('click', e => this.changeContextRef(html));
         html.on('pointerover', e => {

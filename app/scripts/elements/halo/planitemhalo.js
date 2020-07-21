@@ -1,7 +1,14 @@
-class PlanItemHalo extends Halo {
+import {Halo} from "./halo";
+import {ConnectorHaloItem} from "./item/halodragitems";
+import {PropertiesHaloItem} from "./item/haloclickitems";
+import {DeleteHaloItem} from "./item/haloclickitems";
+import {EntryCriterionHaloItem} from "./item/halodragitems";
+import {ExitCriterionHaloItem} from "./item/halodragitems";
+
+export class PlanItemHalo extends Halo {
     /**
      * Create the halo for the plan item.
-     * @param {PlanItemView} element 
+     * @param {PlanItemView} element
      */
     constructor(element) {
         super(element);

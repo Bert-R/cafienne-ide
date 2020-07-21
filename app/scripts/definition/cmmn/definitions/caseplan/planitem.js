@@ -1,4 +1,18 @@
-class PlanItem extends CMMNElementDefinition {
+import {CMMNElementDefinition} from "../cmmnelementdefinition";
+import {ItemControlDefinition} from "../itemcontroldefinition";
+import {EntryCriterionDefinition} from "../sentry/entrycriteriondefinition";
+import {PlanningTableDefinition} from "../planningtabledefinition";
+import {MilestoneEventListenerDefinition} from "./planitemdefinitiondefinition";
+import {TaskDefinition} from "./task/taskdefinition";
+import {ExitCriterionDefinition} from "../sentry/exitcriteriondefinition";
+import {StageDefinition} from "./stagedefinition";
+import {Util} from "../../../../util/util";
+import {SentryDefinition} from "../sentry/sentrydefinition";
+import {CaseRoleDefinition} from "../caseteam/caseroledefinition";
+import {CaseRoleReference} from "../caseteam/caserolereference";
+import {ApplicabilityRuleDefinition} from "../planningtabledefinition";
+
+export class PlanItem extends CMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.definitionRef = this.parseAttribute('definitionRef');
@@ -19,9 +33,9 @@ class PlanItem extends CMMNElementDefinition {
     }
 
     /**
-     * Gets or creates one of 'repetitionRule', 'requiredRule' or 'manualActivationRule' from 
+     * Gets or creates one of 'repetitionRule', 'requiredRule' or 'manualActivationRule' from
      * the planItemControl of this element. Also creates the plan item control if it does not yet exist.
-     * @param {String} ruleName 
+     * @param {String} ruleName
      * @returns {ConstraintDefinition}
      */
     getRule(ruleName) {
@@ -53,7 +67,7 @@ class PlanItem extends CMMNElementDefinition {
     /**
      * Removes one of 'repetitionRule', 'requiredRule' or 'manualActivationRule' from the planItemControl of this element.
      * Checks if any of these rules are still defined on the ItemControl, and if not, deletes the item control as well.
-     * @param {String} ruleName 
+     * @param {String} ruleName
      */
     removeRule(ruleName) {
         this.itemControl.removeRule(ruleName);
@@ -77,11 +91,11 @@ class PlanItem extends CMMNElementDefinition {
     }
 
     /**
-     * 
-     * @param {Number} x 
-     * @param {Number} y 
-     * @param {Function} criterionConstructor 
-     * @param {Array<CriterionDefinition>} criterionCollection 
+     *
+     * @param {Number} x
+     * @param {Number} y
+     * @param {Function} criterionConstructor
+     * @param {Array<CriterionDefinition>} criterionCollection
      */
     createSentry(x, y, criterionConstructor, criterionCollection) {
         const sentry = this.getStage().createSentry();
@@ -101,7 +115,7 @@ class PlanItem extends CMMNElementDefinition {
 
     /**
      * Method invoked when this plan item is getting a new parent (typically a stage or, if it is discretionary it can also be a human task).
-     * @param {TaskStageDefinition} newParent 
+     * @param {TaskStageDefinition} newParent
      */
     switchParent(newParent) {
         if (this.isDiscretionary) {
@@ -130,7 +144,7 @@ class PlanItem extends CMMNElementDefinition {
             this.parent = newParent;
             newParent.planItems.push(this);
             newParent.childDefinitions.push(this);
-            
+
             // Finally make sure that the sentries of our entry and exit criteria also move to the new parent
             this.entryCriteria.forEach(c => c.sentry.switchParent(newParent));
             this.exitCriteria.forEach(c => c.sentry.switchParent(newParent));
@@ -168,7 +182,7 @@ class PlanItem extends CMMNElementDefinition {
         }
         return this;
     }
-    
+
     resolveReferences() {
         super.resolveReferences();
 
@@ -197,7 +211,7 @@ class PlanItem extends CMMNElementDefinition {
 
         /** @type {PlanItemDefinitionDefinition} */
         this.definition = this.caseDefinition.getElement(this.definitionRef);
-        // Resolve discretionary properties        
+        // Resolve discretionary properties
         /** @type {Array<CaseRoleReference>} */
         this.authorizedRoles = this.caseDefinition.findElements(this.authorizedRoleRefs, [], CaseRoleDefinition).map(role => new CaseRoleReference(role, this));
         /** @type {Array<ApplicabilityRuleDefinition>} */

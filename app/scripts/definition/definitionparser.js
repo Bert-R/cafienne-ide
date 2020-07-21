@@ -1,7 +1,7 @@
-class DefinitionParser {
+export class DefinitionParser {
     /**
-     * 
-     * @param {IDE} ide 
+     *
+     * @param {IDE} ide
      */
     constructor(ide) {
         this.ide = ide;

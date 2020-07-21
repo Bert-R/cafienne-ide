@@ -1,13 +1,19 @@
-const BLOCKINGHUMANTASK_IMG = 'images/svg/blockinghumantask.svg';
-const NONBLOCKINGHUMANTASK_IMG = 'images/svg/nonblockinghumantask.svg';
-class HumanTask extends Task {
+import {Task} from "./task";
+import {HumanTaskDefinition} from "../definition/cmmn/definitions/caseplan/task/humantaskdefinition";
+import {HumanTaskProperties} from "./properties/humantaskproperties";
+import {CMMNElement} from "./cmmnelement";
+
+export const BLOCKINGHUMANTASK_IMG = 'images/svg/blockinghumantask.svg';
+export const NONBLOCKINGHUMANTASK_IMG = 'images/svg/nonblockinghumantask.svg';
+
+export class HumanTask extends Task {
     static get definitionClass() {
         return HumanTaskDefinition;
     }
-    
+
     /**
      * Creates a new HumanTask element.
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {
@@ -29,7 +35,7 @@ class HumanTask extends Task {
 
     /**
      * This method may only be invoked from within a human task planning table
-     * @param {PlanItem} definition 
+     * @param {PlanItem} definition
      */
     addDiscretionaryItem(definition) {
         this.parent.addDiscretionaryItem(definition);
@@ -53,4 +59,5 @@ class HumanTask extends Task {
         return super.referencesDefinitionElement(definitionId);
     }
 }
+
 CMMNElement.registerType(HumanTask, 'Human Task', 'images/svg/blockinghumantaskmenu.svg', 'images/humantaskmenu_32.png');

@@ -1,12 +1,12 @@
-class DragData {
+export class DragData {
     /**
      * Simple helper class for dragging/dropping elements from either RepositoryBrowser or ShapeBox to the CaseModelEditor canvas.
-     * @param {IDE} ide 
+     * @param {IDE} ide
      * @param {*} owner // If drag data is finished, it will clear the dragData property on the owner object
-     * @param {String} model 
-     * @param {String} shapeType 
-     * @param {String} imgURL 
-     * @param {String} fileName 
+     * @param {String} model
+     * @param {String} shapeType
+     * @param {String} imgURL
+     * @param {String} fileName
      */
     constructor(ide, owner, model, shapeType, imgURL, fileName) {
         this.ide = ide;
@@ -37,7 +37,7 @@ class DragData {
 
     handleMousemoveModel(e) {
         this.ide.dragging = true;
-        
+
         //position the drag image
         this.dragBox.offset({
             top: e.pageY,

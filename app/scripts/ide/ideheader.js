@@ -6,9 +6,12 @@ export class IDEHeader {
     constructor(ide) {
         this.ide = ide;
         this.html = $(
-    `<div class="ide-header basicbox">
-        <div class="btn-group">
-          <label>Cafienne IDE - stripped version for "to-webpack"</label>
+    `<!-- Define the header containing the UI control buttons -->
+    <div class="ide-header basicbox">
+        <div class="btn-toolbar" role="toolbar">
+            <div class="btn-group appname">
+                <label>Cafienne IDE</label>
+            </div>
         </div>
     </div>`);
         this.ide.html.append(this.html);

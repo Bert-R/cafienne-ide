@@ -1,7 +1,14 @@
+import {Case} from "./case";
+import {Grid} from "../modeleditors/case/grid";
+import {Resizer} from "../modeleditors/case/resizer";
+import {Halo} from "./halo/halo";
+import {Util} from "../util/util";
+import {Connector} from "./connector";
+
 /**
  * This file contains basic functions that are available on every CMMNElement in the graph.
  */
-class CMMNElement {
+export class CMMNElement {
     /**
      * Creates a new CMMNElement within the case having the corresponding definition and x, y coordinates
      * @param {CMMNElement} parent
@@ -21,7 +28,7 @@ class CMMNElement {
         /** @type{Array<Connector>} */
         this.__connectors = []; // An array of the connectors this element has with other elements (both incoming and outgoing)
         /** @type{Array<CMMNElement>} */
-        this.__childElements = []; // Create an array to keep track of our children, such that we can render them later on. 
+        this.__childElements = []; // Create an array to keep track of our children, such that we can render them later on.
         if (this.parent.__childElements) { // Register with parent.
             this.parent.__childElements.push(this);
         }
@@ -104,7 +111,7 @@ class CMMNElement {
     /**
      * Determines whether the cursor is near the element, i.e., within a certain range of 5px around this element.
      * Used to show/hide the halo of the element.
-     * @param {*} e 
+     * @param {*} e
      */
     nearElement(e) {
         const offset = this.html.offset();
@@ -124,7 +131,7 @@ class CMMNElement {
     /**
      * Determines whether the cursor is near the border of the element.
      * Used to show/hide the resizer of the element.
-     * @param {*} e 
+     * @param {*} e
      */
     nearElementBorder(e) {
         const borderDistanceOutside = 3;
@@ -175,9 +182,9 @@ class CMMNElement {
 
     /**
      * Creates a cmmn child under this element with the specified type, and renders it at the given position.
-     * @param {Function} cmmnType 
-     * @param {Number} x 
-     * @param {Number} y 
+     * @param {Function} cmmnType
+     * @param {Number} x
+     * @param {Number} y
      * @returns {CMMNElement} the newly created CMMN child
      */
     createCMMNChild(cmmnType, x, y) {
@@ -246,7 +253,7 @@ class CMMNElement {
 
     /**
      * Method invoked after a role or case file item has changed
-     * @param {CMMNElementDefinition} definitionElement 
+     * @param {CMMNElementDefinition} definitionElement
      */
     refreshReferencingFields(definitionElement) {
         this.propertiesView.refreshReferencingFields(definitionElement);
@@ -285,7 +292,7 @@ class CMMNElement {
     /**
      * Invoked when an element is (de)selected.
      * Shows/removes a border, halo, resizer.
-     * @param {Boolean} selected 
+     * @param {Boolean} selected
      */
     __select(selected) {
         if (selected) {
@@ -327,7 +334,7 @@ class CMMNElement {
 
     /**
      * When a item is moved from one stage to another, this method is invoked
-     * @param {CMMNElement} newParent 
+     * @param {CMMNElement} newParent
      */
     changeParent(newParent) {
         const currentParent = this.parent;
@@ -338,7 +345,7 @@ class CMMNElement {
     /**
      * Adds the item to our list of children, and embeds it in the joint structure of this element.
      * It is an existing item in the case.
-     * @param {CMMNElement} childElement 
+     * @param {CMMNElement} childElement
      */
     adoptItem(childElement) {
         childElement.parent = this;
@@ -354,7 +361,7 @@ class CMMNElement {
     /**
      * Removes the imte from our list of children, and also unembeds it from the joint structure.
      * Does not delete the item.
-     * @param {CMMNElement} childElement 
+     * @param {CMMNElement} childElement
      */
     releaseItem(childElement) {
         this.xyz_joint.unembed(childElement.xyz_joint);
@@ -364,7 +371,7 @@ class CMMNElement {
     /**
      * Method invoked on all case elements upon removal of an element.
      * If there are references to the element to be removed, it can be handled here.
-     * @param {CMMNElement} cmmnElement 
+     * @param {CMMNElement} cmmnElement
      */
     __removeReferences(cmmnElement) {
         if (cmmnElement.parent == this) {
@@ -408,7 +415,7 @@ class CMMNElement {
         // Delete us from the case
         Util.removeFromArray(this.case.items, this);
 
-        // Finally remove the UI element as well. 
+        // Finally remove the UI element as well.
         this.xyz_joint.remove();
     }
 
@@ -425,7 +432,7 @@ class CMMNElement {
 
     /**
      * Registers a connector with this element.
-     * @param {Connector} connector 
+     * @param {Connector} connector
      */
     __addConnector(connector) {
         this.__connectors.push(connector);
@@ -433,19 +440,19 @@ class CMMNElement {
 
     /**
      * This method is invoked on the element if it created a connection to the target CMMNElement
-     * @param {CMMNElement} target 
+     * @param {CMMNElement} target
      */
     __connectedTo(target) {}
 
     /**
      * This method is invoked on the element if a connection to it was made from the source CMMNElement
-     * @param {CMMNElement} source 
+     * @param {CMMNElement} source
      */
     __connectedFrom(source) {}
 
     /**
      * Removes a connector from the registration in this element.
-     * @param {Connector} connector 
+     * @param {Connector} connector
      */
     __removeConnector(connector) {
         Util.removeFromArray(this.__connectors, connector);
@@ -468,7 +475,7 @@ class CMMNElement {
     /**
      * Returns the connector between this and the target element with the specified id,
      * or null
-     * @param {String} targetId 
+     * @param {String} targetId
      * @returns {Connector}
      */
     __getConnector(targetId) {
@@ -478,7 +485,7 @@ class CMMNElement {
     /**
      * returns true if this element can contain elements of type 'elementType'.
      * By default it returns false
-     * @param {*} elementType 
+     * @param {*} elementType
      * @returns {Boolean}
      */
     __canHaveAsChild(elementType) {
@@ -492,8 +499,8 @@ class CMMNElement {
 
     /**
      * Raises a validation error/warning with the Case
-     * @param {Number} number 
-     * @param {Array<String>} parameters 
+     * @param {Number} number
+     * @param {Array<String>} parameters
      */
     raiseValidationIssue(number, parameters = []) {
         if (parameters.length == 0) { // Default parameters are element name and case name
@@ -516,8 +523,8 @@ class CMMNElement {
 
     /**
      * Adds the cmmnElement and all its descendants to the array
-     * @param {CMMNElement} cmmnElement 
-     * @param {Array} allDescendents 
+     * @param {CMMNElement} cmmnElement
+     * @param {Array} allDescendents
      */
     addDescendantChild(cmmnElement, allDescendents) {
         allDescendents.push(cmmnElement);
@@ -526,7 +533,7 @@ class CMMNElement {
 
     /**
      * Returns true when this element references the definitionId (typically a casefile item or a role)
-     * @param {String} definitionId 
+     * @param {String} definitionId
      */
     referencesDefinitionElement(definitionId) {
         return false;
@@ -563,14 +570,14 @@ class CMMNElement {
 
     /**
      * Method invoked on an element to enforce move constraints (e.g. sentries cannot be placed in the midst of an element)
-     * @param {Number} x 
-     * @param {Number} y 
+     * @param {Number} x
+     * @param {Number} y
      */
     __moveConstraint(x, y) {}
 
     /**
      * Registers a class that extends CMMNElement by it's name.
-     * @param {Function} cmmnElementType 
+     * @param {Function} cmmnElementType
      * @param {String} typeDescription Friendly description of the type
      * @param {String} smallImageURL url of small image (for drag/drop, shapebox, etc.)
      * @param {String} menuImageURL optional url of image shown in repository browser
@@ -582,4 +589,5 @@ class CMMNElement {
         cmmnElementType.menuImage = menuImageURL;
     }
 }
+
 CMMNElement.constructors = {};

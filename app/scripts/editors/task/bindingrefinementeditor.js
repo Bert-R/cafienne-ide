@@ -1,9 +1,14 @@
 'use strict';
 
-class BindingRefinementEditor extends TableEditor {
+import {TableEditor} from "../tableeditor";
+import {TableEditorColumn} from "../tableeditor";
+import {RowEditor} from "../tableeditor";
+import {ParameterDefinition} from "../../definition/cmmn/definitions/parameterdefinition";
+
+export class BindingRefinementEditor extends TableEditor {
     /**
      * This editor enables manipulation of bindingRef and bindingRefinement of task parameters.
-     * @param {MappingRow} editor 
+     * @param {MappingRow} editor
      */
     constructor(editor) {
         super(editor.case);
@@ -27,7 +32,7 @@ class BindingRefinementEditor extends TableEditor {
                 new TableEditorColumn('Case File Item', '100px', 'Case File Item', ''),
                 new TableEditorColumn('Binding Refinement', '460px', 'Binding Refinement', 'taskparameterbindingrefinementcol'),
                 new TableEditorColumn('Task Parameter', '100px', 'Name of the task input parameter', 'taskparameternamecol')
-            ];    
+            ];
         } else {
             return [
                 new TableEditorColumn('Task Parameter', '100px', 'Name of the task output parameter', 'taskparameternamecol'),
@@ -46,15 +51,15 @@ class BindingRefinementEditor extends TableEditor {
     }
 
     /**
-     * 
-     * @param {ParameterDefinition} parameter 
+     *
+     * @param {ParameterDefinition} parameter
      */
     addRenderer(parameter = undefined) {
         if (parameter != undefined) {
             return new BindingRefinementRenderer(this, parameter);
         }
     }
-    
+
     refresh() {
         if (this._html) {
             this.renderForm();
@@ -62,10 +67,10 @@ class BindingRefinementEditor extends TableEditor {
     }
 }
 
-class BindingRefinementRenderer extends RowEditor {
+export class BindingRefinementRenderer extends RowEditor {
     /**
-     * @param {BindingRefinementEditor} editor 
-     * @param {ParameterDefinition} parameter 
+     * @param {BindingRefinementEditor} editor
+     * @param {ParameterDefinition} parameter
      */
     constructor(editor, parameter) {
         super(editor, parameter);
@@ -93,7 +98,7 @@ class BindingRefinementRenderer extends RowEditor {
 
     /**
      * Refreshes the case file item label if we render it
-     * @param {CMMNElementDefinition} cfi 
+     * @param {CMMNElementDefinition} cfi
      */
     refreshReferencingFields(cfi) {
         if (!this.isEmpty() && this.parameter.bindingRef == cfi.id) {

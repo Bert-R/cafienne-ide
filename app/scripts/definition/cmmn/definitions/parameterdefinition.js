@@ -1,5 +1,11 @@
+import {CMMNElementDefinition} from "./cmmnelementdefinition";
+import {ExpressionDefinition} from "./constraintdefinition";
+import {CafienneExtension} from "./cafienneextension";
+import {CaseFileItemDef} from "./casefile/casefileitemdefinition";
+import {TaskDefinition} from "./caseplan/task/taskdefinition";
+import {XMLElementDefinition} from "../../xmlelementdefinition";
 
-class ParameterDefinition extends CMMNElementDefinition {
+export class ParameterDefinition extends CMMNElementDefinition {
     constructor(importNode, caseDefinition, parent) {
         super(importNode, caseDefinition, parent);
         this.bindingRef = this.parseAttribute('bindingRef');
@@ -69,7 +75,7 @@ class ParameterDefinition extends CMMNElementDefinition {
     }
 }
 
-class ImplementationParameterDefinition extends XMLElementDefinition {
+export class ImplementationParameterDefinition extends XMLElementDefinition {
     constructor(importNode, modelDefinition, parent) {
         super(importNode, modelDefinition, parent);
         this.name = this.parseAttribute('name', '');

@@ -1,9 +1,19 @@
 'use strict';
 
-class CaseModelEditor extends ModelEditor {
+import {ModelEditor} from "../modeleditor";
+import {Grid} from "./grid";
+import {UndoManager} from "./undoredo";
+import {DefinitionDocument} from "../../definition/definitiondocument";
+import {Case} from "../../elements/case";
+import {ModelEditorMetadata} from "../modeleditormetadata";
+import {CaseTask} from "../../elements/casetask";
+import {IDE} from "../../ide/ide";
+import {XML} from "../../util/xml";
+
+export class CaseModelEditor extends ModelEditor {
     /**
      * This editor handles Case models
-     * @param {IDE} ide 
+     * @param {IDE} ide
      * @param {String} fileName The full file name to be loaded, e.g. 'helloworld.case', 'sendresponse.humantask'
      * @param {String} modelName The file name without the extension, e.g. 'helloworld'
      * @param {String} modelType  The extension of the filename, e.g. 'case', 'process', 'humantask'
@@ -31,7 +41,7 @@ class CaseModelEditor extends ModelEditor {
      */
     loadModel() {
         this.dimensionsFileName = this.modelName + '.dimensions';
-        this.ide.repository.readModel(this.fileName, caseDefinition => 
+        this.ide.repository.readModel(this.fileName, caseDefinition =>
             this.ide.repository.readModel(this.dimensionsFileName, dimensions => {
                 this.open(this.modelName, caseDefinition.toXML(), dimensions.toXML());
                 super.visible = true;
@@ -44,8 +54,8 @@ class CaseModelEditor extends ModelEditor {
     }
 
     /**
-     * 
-     * @param {JQuery.KeyDownEvent} e 
+     *
+     * @param {JQuery.KeyDownEvent} e
      */
     keyStrokeHandler(e) {
         if (!this.case) {
@@ -106,13 +116,13 @@ class CaseModelEditor extends ModelEditor {
 
     /**
      * Handles pressing an arrow key. Moves either top editor or selected element around.
-     * @param {Number} keyCode 
-     * @param {MovableEditor} visibleMovableEditor 
-     * @param {CMMNElement} selectedElement 
+     * @param {Number} keyCode
+     * @param {MovableEditor} visibleMovableEditor
+     * @param {CMMNElement} selectedElement
      * @returns {Boolean} false if the event must be canceled, true if the arrow press was not handled.
      */
     handleArrowPress(keyCode, visibleMovableEditor, selectedElement) {
-        // 37: arrow left, 39: arrow right, 38: arrow up, 40: arrow down 
+        // 37: arrow left, 39: arrow right, 38: arrow up, 40: arrow down
         const xMove = (keyCode == 37 ? -1 : keyCode == 39 ? 1 : 0) * Grid.Size;
         const yMove = (keyCode == 38 ? -1 : keyCode == 40 ? 1 : 0) * Grid.Size;
         if (visibleMovableEditor) {
@@ -127,10 +137,10 @@ class CaseModelEditor extends ModelEditor {
     }
 
     /**
-     * 
-     * @param {String} modelName 
-     * @param {Document} caseXML 
-     * @param {Document} dimensionsXML 
+     *
+     * @param {String} modelName
+     * @param {Document} caseXML
+     * @param {Document} dimensionsXML
      */
     open(modelName, caseXML, dimensionsXML) {
         // We serialize the XML in our own style, because undomanager comparison happens against our XML serialization of the case.
@@ -155,7 +165,7 @@ class CaseModelEditor extends ModelEditor {
 
     /**
      * Imports the source and tries to visualize it
-     * @param {DefinitionDocument} definition 
+     * @param {DefinitionDocument} definition
      */
     loadDefinition(definition) {
         // During import no live validation and storage of changes
@@ -250,7 +260,7 @@ class CaseModelEditor extends ModelEditor {
     }
 }
 
-class CaseModelEditorMetadata extends ModelEditorMetadata {
+export class CaseModelEditorMetadata extends ModelEditorMetadata {
     /** @returns {Array<ServerFile>} */
     get modelList() {
         return this.ide.repository.getCases();

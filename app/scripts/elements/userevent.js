@@ -1,11 +1,16 @@
-class UserEvent extends EventListener {
+import {EventListener} from "./eventlistener";
+import {UserEventDefinition} from "../definition/cmmn/definitions/caseplan/usereventdefinition";
+import {UserEventProperties} from "./properties/usereventproperties";
+import {CMMNElement} from "./cmmnelement";
+
+export class UserEvent extends EventListener {
     static get definitionClass() {
         return UserEventDefinition;
     }
 
     /**
      * Creates a new UserEventListener
-     * @param {CMMNElement} parent 
+     * @param {CMMNElement} parent
      * @param {PlanItem} definition
      */
     constructor(parent, definition) {
@@ -42,4 +47,5 @@ class UserEvent extends EventListener {
         return super.referencesDefinitionElement(definitionId);
     }
 }
+
 CMMNElement.registerType(UserEvent, 'User Event', 'images/svg/userevent.svg');

@@ -1,6 +1,8 @@
 ﻿'use strict';
 
-class StartCaseEditor extends StandardForm {
+import {StandardForm} from "./standardform";
+
+export class StartCaseEditor extends StandardForm {
     /**
      * Editor for the content of the extension element <start-case-schema>
      * @param {Case} cs
@@ -88,9 +90,9 @@ class StartCaseEditor extends StandardForm {
         this.case.editor.completeUserAction();
     }
 
-    open() {        
+    open() {
         this.visible = true;
-        const defaultValue = 
+        const defaultValue =
 `{
     "schema":{
         "title": "",

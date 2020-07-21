@@ -1,17 +1,21 @@
-const UNSPECIFIED = 'Unspecified';
-const UNSPECIFIED_URI = 'http://www.omg.org/spec/CMMN/DefinitionType/Unspecified';
+import {ModelDefinition} from "../modeldefinition";
+import {PropertyDefinition} from "./propertydefinition";
+import {XML} from "../../util/xml";
 
-const XMLELEMENT = 'XMLElement';
-const XMLELEMENT_URI = 'http://www.omg.org/spec/CMMN/DefinitionType/XSDElement';
+export const UNSPECIFIED = 'Unspecified';
+export const UNSPECIFIED_URI = 'http://www.omg.org/spec/CMMN/DefinitionType/Unspecified';
 
-const UNKNOWN = 'Unknown';
-const UNKNOWN_URI = 'http://www.omg.org/spec/CMMN/DefinitionType/Unknown';
+export const XMLELEMENT = 'XMLElement';
+export const XMLELEMENT_URI = 'http://www.omg.org/spec/CMMN/DefinitionType/XSDElement';
 
-class CaseFileDefinitionDefinition extends ModelDefinition {
+export const UNKNOWN = 'Unknown';
+export const UNKNOWN_URI = 'http://www.omg.org/spec/CMMN/DefinitionType/Unknown';
+
+export class CaseFileDefinitionDefinition extends ModelDefinition {
     /**
      * Imports an XML element and parses it into a in-memory definition structure.
-     * @param {Element} importNode 
-     * @param {ModelDocument} definitionDocument 
+     * @param {Element} importNode
+     * @param {ModelDocument} definitionDocument
      */
     constructor(importNode, definitionDocument) {
         super(importNode, definitionDocument);
@@ -32,7 +36,7 @@ class CaseFileDefinitionDefinition extends ModelDefinition {
             }
         }
     }
-    
+
     get editor() {
         return;
     }

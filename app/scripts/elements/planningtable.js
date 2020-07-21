@@ -1,9 +1,17 @@
-﻿class PlanningTable extends CMMNElement {
+import {CMMNElement} from "./cmmnelement";
+import {Stage} from "./stage";
+import {PlanningTableProperties} from "./properties/planningtableproperties";
+import {PlanningTableHalo} from "./halo/planningtablehalo";
+import {PlanItemView} from "./planitemview";
+import {Task} from "./task";
+import {EXPANDEDPLANNINGTABLE_IMG} from "./elements";
+
+export ﻿class PlanningTable extends CMMNElement {
 
     /**
-     * 
-     * @param {TaskStage} parent 
-     * @param {PlanningTableDefinition} definition 
+     *
+     * @param {TaskStage} parent
+     * @param {PlanningTableDefinition} definition
      */
     constructor(parent, definition) {
         super(parent, definition);
@@ -20,7 +28,7 @@
 
     /**
      * Override select in both planningtable and sentry to immediately show properties.
-     * @param {Boolean} selected 
+     * @param {Boolean} selected
      */
     __select(selected) {
         super.__select(selected);
@@ -130,4 +138,5 @@
         return super.referencesDefinitionElement(definitionId);
     }
 }
+
 CMMNElement.registerType(PlanningTable, 'Planning Table');

@@ -1,12 +1,15 @@
 ﻿'use strict';
 
-class ModelParameters {
+import {Util} from "../util/util";
+import {ImplementationParameterDefinition} from "../definition/cmmn/definitions/parameterdefinition";
+
+export class ModelParameters {
     /**
      * This object handles the input and output parameters of task model editor.
-     * 
-     * @param {XMLModelEditor} editor 
-     * @param {JQuery<HTMLElement>} htmlContainer 
-     * @param {String} label 
+     *
+     * @param {XMLModelEditor} editor
+     * @param {JQuery<HTMLElement>} htmlContainer
+     * @param {String} label
      */
     constructor(editor, htmlContainer, label) {
         this.editor = editor;
@@ -38,8 +41,8 @@ class ModelParameters {
     }
 
     /**
-     * 
-     * @param {Array<ImplementationParameterDefinition>} parameters 
+     *
+     * @param {Array<ImplementationParameterDefinition>} parameters
      */
     renderParameters(parameters) {
         // First clean the old content
@@ -72,8 +75,8 @@ class ModelParameters {
     }
 
     /**
-     * 
-     * @param {ImplementationParameterDefinition} parameter 
+     *
+     * @param {ImplementationParameterDefinition} parameter
      */
     addParameter(parameter = undefined) {
         if (parameter === undefined) {
