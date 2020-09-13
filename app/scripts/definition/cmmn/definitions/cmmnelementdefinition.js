@@ -104,6 +104,19 @@ export class CMMNElementDefinition extends XMLElementDefinition {
         return this._shape;
     }
 
+    exportProperty(propertyName, propertyValue) {
+      if (propertyName == 'description' && !this.__description) {
+        // Do not write description if it is not specifically set.
+        return;
+      }
+      if (propertyName == 'name' && !this.__name) {
+          // Do not write name either if it is not specifically set.
+          return;
+      }
+      return super.exportProperty(propertyName, propertyValue);
+    }
+
+
     createExportNode(parentNode, tagName, ...propertyNames) {
         super.createExportNode(parentNode, tagName, 'id', 'name', 'description', propertyNames);
     }

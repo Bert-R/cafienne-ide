@@ -11,7 +11,7 @@ export class ModelDefinition extends XMLElementDefinition {
      * @param {DefinitionParser} definitionDocument
      */
     constructor(importNode, definitionDocument) {
-        super(importNode, undefined);
+        super(importNode, undefined, undefined, true);
         this.definitionDocument = definitionDocument;
         this.typeCounters = new TypeCounter(this);
         /** @type {Array<XMLElementDefinition>} */

@@ -1,7 +1,4 @@
-import {ModelDefinition} from "./modeldefinition";
-import {CafienneExtension} from "./cmmn/definitions/cafienneextension";
 import {Util} from "../util/util";
-import {CMMNElementDefinition} from "./cmmn/definitions/cmmnelementdefinition";
 import {XML} from "../util/xml";
 import {IMPLEMENTATION_TAG} from "../elements/elements";
 import {IMPLEMENTATION_PREFIX} from "../elements/elements";
@@ -14,10 +11,10 @@ export class XMLElementDefinition {
      * @param {ModelDefinition} modelDefinition
      * @param {XMLElementDefinition} parent
      */
-    constructor(importNode, modelDefinition, parent = undefined) {
+    constructor(importNode, modelDefinition, parent = undefined, isModelDefinition = false) {
         this.importNode = importNode;
         this.modelDefinition = modelDefinition;
-        if (!modelDefinition && this instanceof ModelDefinition) {
+        if (!modelDefinition && isModelDefinition) {
             this.modelDefinition = this;
         } else {
             this.modelDefinition.elements.push(this);
@@ -115,9 +112,8 @@ export class XMLElementDefinition {
      * @param {Function} constructor
      * @param {Function} extensionType
      */
-    parseExtensionElement(constructor, childName = constructor.TAG, extensionType = CafienneExtension) {
-        const tagname = CafienneExtension.TAG;
-        const cafienneExtension = this.parseExtension(extensionType, extensionType.TAG);
+    parseExtensionElement(constructor, childName = constructor.TAG, extensionType) {
+        const cafienneExtension = this.parseExtension(extensionType, IMPLEMENTATION_TAG);
         return cafienneExtension ? cafienneExtension.parseElement(childName, constructor) : undefined;
     }
 
@@ -128,7 +124,7 @@ export class XMLElementDefinition {
       * @param {String} tagName
       * @returns {*} an instance of the given constructor if the extension element is found.
       */
-    parseExtension(constructor = CafienneExtension, tagName = IMPLEMENTATION_TAG) {
+    parseExtension(constructor, tagName = IMPLEMENTATION_TAG) {
         this.extensionElement = XML.getChildByTagName(this.importNode, 'extensionElements');
         const extensionImplementation = this.instantiateChild(XML.getChildByTagName(this.extensionElement, tagName), constructor);
         return extensionImplementation;
@@ -291,14 +287,6 @@ export class XMLElementDefinition {
         } else {
             if (typeof (propertyValue) == 'object') {
                 console.warn('Writing property ' + propertyName + ' has a value of type object', propertyValue);
-            }
-            if (propertyName == 'description' && this instanceof CMMNElementDefinition && !this.__description) {
-                // Do not write description if it is not specifically set.
-                return;
-            }
-            if (propertyName == 'name' && this instanceof CMMNElementDefinition && !this.__name) {
-                // Do not write name either if it is not specifically set.
-                return;
             }
 
             // Convert all values to string

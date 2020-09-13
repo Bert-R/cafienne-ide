@@ -2,6 +2,7 @@ import {TaskDefinition} from "./taskdefinition";
 import {ParameterMappingDefinition} from "../../parametermappingdefinition";
 import {AssignmentDefinition} from "./assignmentdefinition";
 import {DueDateDefinition} from "./duedatedefinition";
+import {CafienneExtension} from "../../cafienneextension";
 import {XML} from "../../../../../util/xml";
 import {IMPLEMENTATION_TAG} from "../../../../../elements/elements";
 
@@ -19,8 +20,8 @@ export class HumanTaskDefinition extends TaskDefinition {
             this.humanTaskRef = this.extensionImplementation.getAttribute('humanTaskRef');
             this.validatorRef = this.extensionImplementation.getAttribute('validatorRef');
             XML.getChildrenByTagName(this.extensionImplementation, 'parameterMapping').forEach(childNode => this.instantiateChild(childNode, ParameterMappingDefinition, this.mappings));
-            this.assignment = this.parseExtensionElement(AssignmentDefinition);
-            this.dueDate = this.parseExtensionElement(DueDateDefinition);
+            this.assignment = this.parseExtensionElement(AssignmentDefinition, AssignmentDefinition.TAG, CafienneExtension);
+            this.dueDate = this.parseExtensionElement(DueDateDefinition, DueDateDefinition.TAG, CafienneExtension);
         }
     }
 
