@@ -7,7 +7,6 @@ import {DefinitionDocument} from "../../definition/definitiondocument";
 import {Case} from "../../elements/case";
 import {ModelEditorMetadata} from "../modeleditormetadata";
 import {CaseTask} from "../../elements/casetask";
-import {IDE} from "../../ide/ide";
 import {XML} from "../../util/xml";
 
 export class CaseModelEditor extends ModelEditor {
@@ -284,4 +283,4 @@ export class CaseModelEditorMetadata extends ModelEditorMetadata {
     }
 }
 
-IDE.registerEditorType(CaseModelEditorMetadata);
+// IDE.registerEditorType(CaseModelEditorMetadata);

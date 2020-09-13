@@ -5,6 +5,10 @@ import {MessageBox} from "./messagebox";
 import {CoverPanel} from "./coverpanel";
 import {SettingsEditor} from "../settings/settingseditor";
 import {CaseModelEditor} from "../modeleditors/case/casemodeleditor";
+
+// For temp fix (?) of circular references
+import {CaseModelEditorMetadata} from "../modeleditors/case/casemodeleditor";
+
 import {XML} from "../util/xml";
 import {CMMNSHAPE} from "../definition/cmmn/dimensions/dimensions";
 import {CMMNEDGE} from "../definition/cmmn/dimensions/dimensions";
@@ -294,5 +298,9 @@ export class IDE {
 
 // For now create a global IDE pointer.
 const ide = new IDE();
+
+// TEMP FIX?
+IDE.registerEditorType(CaseModelEditorMetadata);
+
 //Start initialization after the entire page is loaded
 $(window).on('load', e => ide.init());
