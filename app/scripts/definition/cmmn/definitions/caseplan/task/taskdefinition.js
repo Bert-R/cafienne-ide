@@ -15,6 +15,10 @@ export class TaskDefinition extends TaskStageDefinition {
         return { w: 140, h: 80 };
     }
 
+    isStage() {
+      return false;
+    }
+
     /**
      * @returns {String}
      */

@@ -3,9 +3,7 @@ import {ItemControlDefinition} from "../itemcontroldefinition";
 import {EntryCriterionDefinition} from "../sentry/entrycriteriondefinition";
 import {PlanningTableDefinition} from "../planningtabledefinition";
 import {MilestoneEventListenerDefinition} from "./planitemdefinitiondefinition";
-import {TaskDefinition} from "./task/taskdefinition";
 import {ExitCriterionDefinition} from "../sentry/exitcriteriondefinition";
-import {StageDefinition} from "./stagedefinition";
 import {Util} from "../../../../util/util";
 import {SentryDefinition} from "../sentry/sentrydefinition";
 import {CaseRoleDefinition} from "../caseteam/caseroledefinition";
@@ -80,10 +78,10 @@ export class PlanItem extends CMMNElementDefinition {
     getStage() {
         if (this.isDiscretionary) {
             const planningTable = this.parent;
-            if (planningTable.parent instanceof TaskDefinition) {
-                return planningTable.parent.parent;
-            } else {
+            if (planningTable.parent.isStage()) {
                 return planningTable.parent;
+            } else {
+                return planningTable.parent.parent;
             }
         } else {
             return this.parent;
@@ -125,7 +123,7 @@ export class PlanItem extends CMMNElementDefinition {
             const formerPlanningTable = currentParent;
             Util.removeFromArray(currentParent.tableItems, this);
             Util.removeFromArray(currentParent.childDefinitions, this);
-            const currentParentStage = currentParent.parent instanceof TaskDefinition ? currentParent.parent.parent : currentParent.parent;
+            const currentParentStage = currentParent.parent.isStage() ? currentParent.parent : currentParent.parent.parent;
             // Add our selves to the new parent's planning table
             const newPlanningTable = newParent.getPlanningTable();
             newPlanningTable.childDefinitions.push(this);
@@ -135,7 +133,7 @@ export class PlanItem extends CMMNElementDefinition {
             //  NOTE: this logic is shifted to the View side of the house... would be better if we can trigger that from here.
             // formerPlanningTable.cleanupIfPossible();
         } else {
-            if (! (newParent instanceof StageDefinition)) {
+            if (!newParent.isStage()) {
                 throw new Error('Cannot change the parent of '+this+', since the new parent is not of type stage definition; instead it is '+newParent);
             }
             const currentParentStage = this.parent;
@@ -165,7 +163,7 @@ export class PlanItem extends CMMNElementDefinition {
             Util.removeFromArray(planningTableDefinition.tableItems, this);
             Util.removeFromArray(planningTableDefinition.childDefinitions, this);
             // Check whether the new parent is a task or a stage. If this item was discretionary to a task, then we need to add the new plan item to the stage that task belongs to
-            const stageDefinition = planningTableDefinition.parent instanceof TaskDefinition ? planningTableDefinition.parent.parent : planningTableDefinition.parent;
+            const stageDefinition = planningTableDefinition.parent.isStage() ? planningTableDefinition.parent : planningTableDefinition.parent.parent;
             this.parent = stageDefinition;
             // And make ourselves known to the stage definition
             stageDefinition.planItems.push(this);

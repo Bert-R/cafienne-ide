@@ -34,6 +34,10 @@ export class TaskStageDefinition extends PlanItemDefinitionDefinition {
         return this.planningTable;
     }
 
+    isStage() {
+      return true;
+    }
+
     get transitions() {
         return ['complete', 'create', 'disable', 'enable', 'exit', 'fault', 'manualStart', 'parentResume', 'parentSuspend', 'reactivate', 'reenable', 'resume', 'start', 'suspend', 'terminate'];
     }
