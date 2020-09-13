@@ -1,6 +1,7 @@
 import {CaseFileItemDefinitionEditor} from "../modeleditors/cfid/casefileitemdefinitioneditor";
 import {BottomSplitter} from "../ide/splitter/verticalsplitter";
 import {Util} from "../util/util";
+import {CaseFileItemDef} from "../definition/cmmn/definitions/casefile/casefileitemdefinition";
 import {CaseParametersEditor} from "./case/caseparameterseditor";
 import {Task} from "../elements/task";
 import {Stage} from "../elements/stage";
@@ -288,7 +289,7 @@ export class CaseFileItemsEditor {
         const parentCaseFileItemID = parentNode && parentNode.data ? parentNode.data.__id : undefined;
         /** @type {CaseFileItemCollection} */
         const parentDefinition = parentCaseFileItemID ? caseDefinition.getElement(parentCaseFileItemID) : caseDefinition.getCaseFile();
-        const newCaseFileItemDefinition = parentDefinition.createChildDefinition()
+        const newCaseFileItemDefinition = parentDefinition.createChildDefinition(CaseFileItemDef)
 
         // Fancy tree likes to get his new nodes in an array...
         const newDataNode = [newCaseFileItemDefinition];

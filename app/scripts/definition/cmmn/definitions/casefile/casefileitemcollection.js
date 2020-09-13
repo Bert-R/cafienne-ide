@@ -1,5 +1,4 @@
 import {CMMNElementDefinition} from "../cmmnelementdefinition";
-import {CaseFileItemDef} from "./casefileitemdefinition";
 
 export class CaseFileItemCollection extends CMMNElementDefinition {
     /**
@@ -15,8 +14,8 @@ export class CaseFileItemCollection extends CMMNElementDefinition {
      * Creates a new CaseFileItemDef child.
      * @returns {CaseFileItemDef}
      */
-    createChildDefinition() {
-        const newCaseFileItem = this.createDefinition(CaseFileItemDef);
+    createChildDefinition(constructor) {
+        const newCaseFileItem = this.createDefinition(constructor);
         this.children.push(newCaseFileItem);
         newCaseFileItem.name = '';
         newCaseFileItem.multiplicity = 'ExactlyOne';
